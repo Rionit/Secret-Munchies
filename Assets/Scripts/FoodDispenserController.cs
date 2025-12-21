@@ -22,13 +22,14 @@ public class FoodDispenserController : MonoBehaviour
                 food.dispenser = dispenser;
                 food.foodDispenserController = this;
 
-                dispenser.foodInstances.Add(foodInstance);
-                
                 Sequence fullSequence = DOTween.Sequence();
 
                 fullSequence
                     .Append(AnimateFoodIn(foodInstance, dispenser.startPosition.position))
                     .Append(AnimateFoodSlide(foodInstance, adjustedEndPosition(dispenser, food, dispenser.foodInstances.Count)));
+                
+                // Has to be last
+                dispenser.foodInstances.Add(foodInstance);
             }
         }
     }
@@ -46,7 +47,12 @@ public class FoodDispenserController : MonoBehaviour
     {
         // BUG: If i click before this finishes animating, DOTween screams at me, fix it
         var foodInstances = food.dispenser.foodInstances;
+        if (foodInstances.IndexOf(food.gameObject) != 0)
+            return;
+        
         foodInstances.Remove(food.gameObject);
+        Destroy(food.gameObject);
+        
         int i = 0;
         foreach (GameObject foodInstance in foodInstances)
         {

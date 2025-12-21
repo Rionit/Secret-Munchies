@@ -14,8 +14,6 @@ public class Food : MonoBehaviour, IPointerClickHandler
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Yessiiirrr");
         foodDispenserController.RemoveFood(this);
-        Destroy(gameObject);
     }
 }
