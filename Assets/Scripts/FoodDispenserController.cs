@@ -5,35 +5,78 @@ using DG.Tweening;
 
 public class FoodDispenserController : MonoBehaviour
 {
-    
-    public GameObject burger;
-
+    public List<GameObject> foodPrefabs;
     public List<Dispenser> dispensers;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        DispenseFood(burger.GetComponent<Food>());
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void DispenseFood(Food food)
+    public void DispenseFood(Food.Types type)
     {
         foreach (Dispenser dispenser in dispensers)
         {
-            if (dispenser.type == food.type)
+            if (dispenser.type == type)
             {
-                Sequence mySequence = DOTween.Sequence();
-                mySequence.Append(burger.transform.DOMove(dispenser.startPosition.position, 5)
-                    .SetEase(Ease.OutQuint));
-                mySequence.Append(burger.transform.DOMove(dispenser.endPosition.position, 5)
-                    .SetEase(Ease.OutQuint));
+                var prefab = foodPrefabs[(int)type];
+                var instancePosition = dispenser.startPosition.position + new Vector3(-2f, -5f);
+                var foodInstance = Instantiate(prefab, instancePosition, Quaternion.identity);
+                Food food =  foodInstance.GetComponent<Food>();
+                food.dispenser = dispenser;
+                food.foodDispenserController = this;
+
+                dispenser.foodInstances.Add(foodInstance);
+                
+                Sequence fullSequence = DOTween.Sequence();
+
+                fullSequence
+                    .Append(AnimateFoodIn(foodInstance, dispenser.startPosition.position))
+                    .Append(AnimateFoodSlide(foodInstance, adjustedEndPosition(dispenser, food, dispenser.foodInstances.Count)));
             }
         }
     }
+
+    private Vector3 adjustedEndPosition(Dispenser dispenser, Food food, int count)
+    {
+        var endPosition = dispenser.endPosition.position;
+        var startPosition = dispenser.startPosition.position;
+        Vector3 direction = (startPosition - endPosition).normalized;
+
+        return endPosition + direction * (food.GetComponent<Food>().spacing * count);
+    }
+
+    public void RemoveFood(Food food)
+    {
+        // BUG: If i click before this finishes animating, DOTween screams at me, fix it
+        var foodInstances = food.dispenser.foodInstances;
+        foodInstances.Remove(food.gameObject);
+        int i = 0;
+        foreach (GameObject foodInstance in foodInstances)
+        {
+            Debug.Log(foodInstance.name);
+            var endPosition = adjustedEndPosition(food.dispenser, food, i);
+            AnimateFoodSlide(foodInstance, endPosition);
+            i++;
+        }
+    }
+
+    private Sequence AnimateFoodIn(GameObject food, Vector3 startPosition)
+    {
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(food.transform.DOMove(startPosition, 1f)
+            .SetEase(Ease.OutQuint));
+        seq.Join(food.transform.DORotate(new Vector3(0, 0, -30f), 0.3f));
+
+        return seq;
+    }
+
+    private Sequence AnimateFoodSlide(GameObject food, Vector3 endPosition)
+    {
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(food.transform.DOMove(endPosition, 2f)
+            .SetEase(Ease.OutBounce));
+        seq.Join(food.transform.DORotate(Vector3.zero, 3f));
+
+        return seq;
+    }
+
 }

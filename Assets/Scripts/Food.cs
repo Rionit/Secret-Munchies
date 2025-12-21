@@ -1,20 +1,21 @@
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Food : MonoBehaviour
+public class Food : MonoBehaviour, IPointerClickHandler
 {
     public enum Types { BURGER, FRIES, COLA }
 
     public Types type;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public float spacing;
+    public FoodDispenserController foodDispenserController;
+    public Dispenser dispenser;
+    
+    public void OnPointerClick(PointerEventData eventData)
     {
-        
+        Debug.Log("Yessiiirrr");
+        foodDispenserController.RemoveFood(this);
+        Destroy(gameObject);
     }
 }
