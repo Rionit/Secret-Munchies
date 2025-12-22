@@ -15,7 +15,7 @@ public class FoodDispenserController : MonoBehaviour
             {
                 var instancePosition = dispenser.startPosition.position + new Vector3(-2f, -5f);
                 var foodInstance = Instantiate(foodData.prefab, instancePosition, Quaternion.identity);
-                foodInstance.GetComponent<Clickable>().SetCallback(RemoveFood);
+                foodInstance.GetComponent<Clickable>().onClick.AddListener(RemoveFood);
                 foodInstance.GetComponent<Food>().foodData = foodData;
                 foodInstance.GetComponent<Food>().dispenser = dispenser;
 

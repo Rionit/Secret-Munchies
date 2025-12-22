@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Burger
   m_EditorClassIdentifier: Assembly-CSharp::FoodScriptableObject
   type: 0
-  spacing: 0
-  prepareTime: 0
-  prefab: {fileID: 0}
-  foodDispenserController: {fileID: 0}
-  dispenser: {fileID: 0}
+  spacing: 0.1
+  prepareTime: 2
+  prefab: {fileID: 6303294973834408532, guid: a19600d28795756eda3f6d774f41bd6a, type: 3}

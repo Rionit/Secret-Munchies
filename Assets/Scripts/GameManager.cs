@@ -9,11 +9,14 @@ public class GameManager : MonoBehaviour
 
     [Header("Cinemachine Cameras (size = 4)")]
     public CinemachineCamera[] virtualCameras;
+    public CinemachineCamera computerCloseupCamera;
+    
     public int currentCustomerId = 0;
     
     private int currentIndex = 0;
     private PlayerInput playerInput; // TODO: Move this to InputManager
-
+    private CinemachineCamera overrideCamera;
+    
     private void Awake()
     {
         // --- Singleton stuff ---
@@ -63,7 +66,7 @@ public class GameManager : MonoBehaviour
         currentIndex = (currentIndex - 1 + virtualCameras.Length) % virtualCameras.Length;
         SetActiveCamera(currentIndex);
     }
-
+    
     private void SetActiveCamera(int index)
     {
         for (int i = 0; i < virtualCameras.Length; i++)
@@ -72,4 +75,25 @@ public class GameManager : MonoBehaviour
             virtualCameras[i].Priority = (i == index) ? 10 : 0;
         }
     }
+
+    public void OnComputerClick(GameObject sender)
+    {
+        if (overrideCamera == null)
+            OverrideActiveCamera(computerCloseupCamera);
+        else
+            ResetOverrideCamera();
+    }
+    
+    public void OverrideActiveCamera(CinemachineCamera camera)
+    {
+        overrideCamera = camera;
+        camera.Priority = 20;
+    }
+
+    public void ResetOverrideCamera()
+    {
+        overrideCamera.Priority = 0;
+        overrideCamera = null;
+    }
+    
 }

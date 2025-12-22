@@ -225,6 +225,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1722123498}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &409494279 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 13009167048299361, guid: 9327153b3558d15419203157ab38a8d6, type: 3}
+  m_PrefabInstance: {fileID: 1289277279}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &409494283
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409494279}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.46602625, y: 0.4660262, z: 0.491992}
+  m_Center: {x: 0, y: 0, z: -0.050927214}
+--- !u!114 &409494284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409494279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5cf7db87d5a11a14a322d2bdea06421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Clickable
+  onClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2051972398}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnComputerClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &477880837
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +309,7 @@ Transform:
   m_Children:
   - {fileID: 793333300}
   - {fileID: 1181328277}
+  - {fileID: 1540640865}
   - {fileID: 146953838}
   - {fileID: 613938781}
   - {fileID: 1691597462}
@@ -290,8 +344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7ca8943012721fc3bc097df2222fa2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  foodPrefabs:
-  - {fileID: 6303294973834408532, guid: a19600d28795756eda3f6d774f41bd6a, type: 3}
   dispensers:
   - {fileID: 1722123499}
 --- !u!4 &597667350
@@ -1301,8 +1353,89 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 13009167048299361, guid: 9327153b3558d15419203157ab38a8d6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 409494284}
+    - targetCorrespondingSourceObject: {fileID: 13009167048299361, guid: 9327153b3558d15419203157ab38a8d6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 409494283}
   m_SourcePrefab: {fileID: 100100000, guid: 9327153b3558d15419203157ab38a8d6, type: 3}
+--- !u!1 &1540640864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1540640865}
+  - component: {fileID: 1540640866}
+  m_Layer: 0
+  m_Name: ComputerCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1540640865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540640864}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -2.228, y: 1.271, z: -0.205}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 477880838}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1540640866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540640864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 0
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 5
+    NearClipPlane: 0.03
+    FarClipPlane: 100
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
 --- !u!1 &1691597460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,6 +1605,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673a6443d0705f1cfa36ce4fc8f754aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoodManager
+  foods:
+  - {fileID: 11400000, guid: 3f673c5fd8bdc2846bc2ca9543645fd8, type: 2}
   foodDispenserController: {fileID: 597667349}
 --- !u!1 &2051972397
 GameObject:
@@ -1510,6 +1645,8 @@ MonoBehaviour:
   - {fileID: 146953837}
   - {fileID: 613938780}
   - {fileID: 1691597461}
+  computerCloseupCamera: {fileID: 1540640866}
+  currentCustomerId: 0
 --- !u!4 &2051972399
 Transform:
   m_ObjectHideFlags: 0
