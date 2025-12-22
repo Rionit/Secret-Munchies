@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 7629709347166049856}
   - component: {fileID: 7723270569593152562}
   - component: {fileID: 3219864201025155053}
-  - component: {fileID: 696931438903197487}
+  - component: {fileID: 3561891964428397400}
+  - component: {fileID: 886483027312813167}
   m_Layer: 0
   m_Name: Burger
   m_TagString: Untagged
@@ -112,7 +113,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &696931438903197487
+--- !u!114 &3561891964428397400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,8 +122,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 6303294973834408532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6904dafb5b8d6a57bb98ec742c3d57ab, type: 3}
+  m_Script: {fileID: 11500000, guid: c5cf7db87d5a11a14a322d2bdea06421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Clickable
+--- !u!114 &886483027312813167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6303294973834408532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a6bfea75b18aaef5b1a81b0536a1b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Food
-  type: 0
-  spacing: 0.1
+  foodData: {fileID: 0}
+  dispenser: {fileID: 0}

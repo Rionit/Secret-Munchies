@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Cinemachine Cameras (size = 4)")]
     public CinemachineCamera[] virtualCameras;
-
+    public int currentCustomerId = 0;
+    
     private int currentIndex = 0;
     private PlayerInput playerInput; // TODO: Move this to InputManager
 

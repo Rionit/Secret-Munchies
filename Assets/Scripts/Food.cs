@@ -1,19 +1,9 @@
-using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Food : MonoBehaviour, IPointerClickHandler
+public class Food : MonoBehaviour
 {
-    public enum Types { BURGER, FRIES, COLA }
-
-    public Types type;
-
-    public float spacing;
-    public FoodDispenserController foodDispenserController;
-    public Dispenser dispenser;
+    public FoodScriptableObject foodData;
     
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        foodDispenserController.RemoveFood(this);
-    }
+    public Dispenser dispenser;
+
 }
