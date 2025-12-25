@@ -11,5 +11,5 @@ public class FoodScriptableObject : ScriptableObject
     public float spacing;
     public float prepareTime;
     public GameObject prefab;
-    
+    public Sprite sprite;
 }

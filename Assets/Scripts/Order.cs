@@ -14,4 +14,13 @@ public class Order
         OrderedFoods = orderedFoods;
         CreationTime = Time.time;
     }
+    
+    public void AddFood(FoodScriptableObject food, int count = 1)
+    {
+        if (count == 0) return;
+        for (int i = 0; i < count; i++)
+        {
+            OrderedFoods.Add(food);
+        }
+    }
 }

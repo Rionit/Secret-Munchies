@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
 
         actions["CameraNext"].performed += _ => NextCamera();
         actions["CameraPrev"].performed += _ => PrevCamera();
-        actions["FoodTest"].performed += _ => FoodManager.Instance.NewOrder();
     }
 
     private void OnDisable()
@@ -52,7 +51,6 @@ public class GameManager : MonoBehaviour
 
         actions["CameraNext"].performed -= _ => NextCamera();
         actions["CameraPrev"].performed -= _ => PrevCamera();
-        actions["FoodTest"].performed -= _ => FoodManager.Instance.NewOrder();
     }
 
     private void NextCamera()

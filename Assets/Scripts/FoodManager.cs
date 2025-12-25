@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,14 @@ public class FoodManager : MonoBehaviour
     public List<FoodScriptableObject> foods;
     
     public FoodDispenserController foodDispenserController;
+
+    public List<FoodGridElement> foodGridElements;
     
-    private int nextOrderId;
+    private int currentOrderId;
+    
+    private List<Order> orders = new List<Order>();
+    
+    private Order currentOrder;
     
     private void Awake()
     {
@@ -24,17 +31,23 @@ public class FoodManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
     }
 
-    public void NewOrder()
-    {   
-        List<FoodScriptableObject> orderedFoods = new List<FoodScriptableObject>();
-        orderedFoods.Add(foods[0]);
-        orderedFoods.Add(foods[0]);
-        Order newOrder = new Order(nextOrderId, orderedFoods);
-        nextOrderId++;
-        StartCoroutine(PrepareOrder(newOrder));
+    private void Start()
+    {
+        currentOrder = new Order(currentOrderId, new List<FoodScriptableObject>());
+    }
+
+    public void StartPreparingOrder()
+    {
+        foreach (FoodGridElement foodGridElement in foodGridElements)
+        {
+            currentOrder.AddFood(foodGridElement.food, foodGridElement.count);
+        }
+        currentOrderId++;
+        orders.Add(currentOrder);
+        StartCoroutine(PrepareOrder(currentOrder));
+        currentOrder = new Order(currentOrderId, new List<FoodScriptableObject>());
     }
     
     private IEnumerator PrepareOrder(Order order) {
