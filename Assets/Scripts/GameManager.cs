@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using Unity.Cinemachine;
 using UnityEngine.InputSystem;
@@ -6,15 +7,16 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public event Action<FoodScriptableObject> onFoodGrabbed;
+    public event Action<GameObject> onFoodGrabbed;
     public event Action onFoodDropped;
     
     [Header("Cinemachine Cameras (size = 4)")]
     public CinemachineCamera[] virtualCameras;
     public CinemachineCamera computerCloseupCamera;
+    public Camera mainCamera;
     
     public int currentCustomerId = 0;
-    public FoodScriptableObject holdingFood {get; private set;}
+    public GameObject holdingFood {get; private set;}
     
     private int currentIndex = 0;
     private PlayerInput playerInput; // TODO: Move this to InputManager
@@ -90,15 +92,21 @@ public class GameManager : MonoBehaviour
         Bag bag = sender.GetComponent<Bag>();
         if (bag == null || holdingFood == null)
             return;
-        bag.foods.Add(holdingFood);
+        bag.foods.Add(holdingFood.GetComponent<Food>().foodData);
+
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(holdingFood.transform.DOMove(bag.transform.position + new Vector3(0, 0.2f, 0), 0.5f));
+        sequence.Append(holdingFood.transform.DOMove(bag.transform.position, 0.5f)).OnComplete(() => Destroy(holdingFood)); 
+        
         holdingFood = null;
         if (onFoodDropped != null)
             onFoodDropped();
     }
 
-    public void HoldFood(FoodScriptableObject food)
+    public void HoldFood(GameObject instance)
     {
-        holdingFood = food;
+        holdingFood = instance;
+        holdingFood.transform.DOMove(mainCamera.transform.position - new Vector3(0, 0.5f, 0), 0.5f);
         if (onFoodGrabbed != null)
             onFoodGrabbed(holdingFood);
     }

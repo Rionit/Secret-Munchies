@@ -3622,8 +3622,8 @@ Canvas:
   m_GameObject: {fileID: 718831709}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 793333299}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -7953,6 +7953,7 @@ MonoBehaviour:
   - {fileID: 613938780}
   - {fileID: 1691597461}
   computerCloseupCamera: {fileID: 1540640866}
+  mainCamera: {fileID: 793333299}
   currentCustomerId: 0
 --- !u!4 &2051972399
 Transform:
