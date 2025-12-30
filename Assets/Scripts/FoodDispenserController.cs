@@ -45,9 +45,10 @@ public class FoodDispenserController : MonoBehaviour
         // BUG: If i click before this finishes animating, DOTween screams at me, fix it
         Food food = foodInstance.GetComponent<Food>();
         var foodInstances = food.dispenser.foodInstances;
-        if (foodInstances.IndexOf(food.gameObject) != 0)
+        if (foodInstances.IndexOf(food.gameObject) != 0 || GameManager.Instance.holdingFood)
             return;
         
+        GameManager.Instance.HoldFood(food.foodData);
         foodInstances.Remove(food.gameObject);
         Destroy(food.gameObject);
         

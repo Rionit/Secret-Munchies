@@ -1,17 +1,20 @@
+using System;
 using UnityEngine;
 using Unity.Cinemachine;
 using UnityEngine.InputSystem;
-using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
+    public event Action<FoodScriptableObject> onFoodGrabbed;
+    public event Action onFoodDropped;
+    
     [Header("Cinemachine Cameras (size = 4)")]
     public CinemachineCamera[] virtualCameras;
     public CinemachineCamera computerCloseupCamera;
     
     public int currentCustomerId = 0;
+    public FoodScriptableObject holdingFood {get; private set;}
     
     private int currentIndex = 0;
     private PlayerInput playerInput; // TODO: Move this to InputManager
@@ -80,6 +83,24 @@ public class GameManager : MonoBehaviour
             OverrideActiveCamera(computerCloseupCamera);
         else
             ResetOverrideCamera();
+    }
+
+    public void OnOrderBagClick(GameObject sender)
+    {
+        Bag bag = sender.GetComponent<Bag>();
+        if (bag == null || holdingFood == null)
+            return;
+        bag.foods.Add(holdingFood);
+        holdingFood = null;
+        if (onFoodDropped != null)
+            onFoodDropped();
+    }
+
+    public void HoldFood(FoodScriptableObject food)
+    {
+        holdingFood = food;
+        if (onFoodGrabbed != null)
+            onFoodGrabbed(holdingFood);
     }
     
     public void OverrideActiveCamera(CinemachineCamera camera)
