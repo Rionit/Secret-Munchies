@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public event Action<GameObject> onFoodGrabbed;
     public event Action onFoodDropped;
+    public event Action onCameraChanged;
     
     [Header("Cinemachine Cameras (size = 4)")]
     public CinemachineCamera[] virtualCameras;
@@ -62,12 +63,14 @@ public class GameManager : MonoBehaviour
     {
         currentIndex = (currentIndex + 1) % virtualCameras.Length;
         SetActiveCamera(currentIndex);
+        onCameraChanged?.Invoke();
     }
 
     private void PrevCamera()
     {
         currentIndex = (currentIndex - 1 + virtualCameras.Length) % virtualCameras.Length;
         SetActiveCamera(currentIndex);
+        onCameraChanged?.Invoke();
     }
     
     private void SetActiveCamera(int index)
@@ -99,16 +102,14 @@ public class GameManager : MonoBehaviour
         sequence.Append(holdingFood.transform.DOMove(bag.transform.position, 0.5f)).OnComplete(() => Destroy(holdingFood)); 
         
         holdingFood = null;
-        if (onFoodDropped != null)
-            onFoodDropped();
+        onFoodDropped?.Invoke();
     }
 
     public void HoldFood(GameObject instance)
     {
         holdingFood = instance;
         holdingFood.transform.DOMove(mainCamera.transform.position - new Vector3(0, 0.5f, 0), 0.5f);
-        if (onFoodGrabbed != null)
-            onFoodGrabbed(holdingFood);
+        onFoodGrabbed?.Invoke(holdingFood);
     }
     
     public void OverrideActiveCamera(CinemachineCamera camera)
