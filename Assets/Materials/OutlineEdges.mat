@@ -116,7 +116,7 @@ Material:
     - _GlossyReflections: 0
     - _Mask_Treshold: 0.348
     - _Metallic: 0
-    - _Normal_Threshold: 0.05
+    - _Normal_Threshold: 1.12
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
