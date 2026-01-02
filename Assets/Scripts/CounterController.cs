@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using DG.Tweening;
+using UnityEngine;
+
+public class CounterController : MonoBehaviour
+{
+    public GameObject[] dropPoints;
+
+    private Dictionary<GameObject, bool> availability = new Dictionary<GameObject, bool>();
+
+    private void Awake()
+    {
+        foreach (GameObject dropPoint in dropPoints)
+        {
+            availability[dropPoint] = false;
+        }
+    }
+
+    public void DropItem()
+    {
+        if (GameManager.Instance.holdingItem == null) return;
+
+        foreach (GameObject dropPoint in dropPoints)
+        {
+            if (!availability[dropPoint])
+            {
+                availability[dropPoint] = true;
+                GameManager.Instance.DropItem(dropPoint.transform.position);
+                break; 
+            }
+        }
+    }
+}

@@ -7,8 +7,8 @@ using UnityEngine.InputSystem;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public event Action<GameObject> onFoodGrabbed;
-    public event Action onFoodDropped;
+    public event Action<GameObject> onItemGrabbed;
+    public event Action onItemDropped;
     public event Action onCameraChanged;
     
     [Header("Cinemachine Cameras (size = 4)")]
@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
     public Camera mainCamera;
     
     public int currentCustomerId = 0;
-    public GameObject holdingFood {get; private set;}
+    public GameObject holdingItem {get; private set;}
+    public GameObject hand;
     
     private int currentIndex = 0;
     private PlayerInput playerInput; // TODO: Move this to InputManager
@@ -93,23 +94,39 @@ public class GameManager : MonoBehaviour
     public void OnOrderBagClick(GameObject sender)
     {
         Bag bag = sender.GetComponent<Bag>();
-        if (bag == null || holdingFood == null)
+        Food food = holdingItem.GetComponent<Food>();
+        if (bag == null || holdingItem == null || food == null)
             return;
-        bag.foods.Add(holdingFood.GetComponent<Food>().foodData);
+        bag.foods.Add(food.foodData);
 
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(holdingFood.transform.DOMove(bag.transform.position + new Vector3(0, 0.2f, 0), 0.5f));
-        sequence.Append(holdingFood.transform.DOMove(bag.transform.position, 0.5f)).OnComplete(() => Destroy(holdingFood)); 
+        sequence.Append(holdingItem.transform.DOMove(bag.transform.position + new Vector3(0, 0.2f, 0), 0.5f));
+        sequence.Append(holdingItem.transform.DOMove(bag.transform.position, 0.5f)).OnComplete(() => Destroy(holdingItem)); 
         
-        holdingFood = null;
-        onFoodDropped?.Invoke();
+        holdingItem = null;
+        onItemDropped?.Invoke();
     }
 
-    public void HoldFood(GameObject instance)
+    public bool GrabItem(GameObject instance)
     {
-        holdingFood = instance;
-        holdingFood.transform.DOMove(mainCamera.transform.position - new Vector3(0, 0.5f, 0), 0.5f);
-        onFoodGrabbed?.Invoke(holdingFood);
+        if (holdingItem != null) return false;
+        
+        holdingItem = instance;
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(holdingItem.transform.DOMoveY(holdingItem.transform.position.y + 0.1f, 0.2f));
+        sequence.Append(holdingItem.transform.DOMove(hand.transform.position, 0.5f));
+        onItemGrabbed?.Invoke(holdingItem);
+        
+        return true;
+    }
+
+    public void DropItem(Vector3 position)
+    {
+        if (holdingItem == null) return;
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(holdingItem.transform.DOMove(position, 0.5f));
+        holdingItem = null;
+        onItemDropped?.Invoke();
     }
     
     public void OverrideActiveCamera(CinemachineCamera camera)

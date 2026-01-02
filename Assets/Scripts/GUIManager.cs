@@ -6,26 +6,32 @@ public class GUIManager : MonoBehaviour
 {
     public Image itemImage;
     public Image itemFrame;
+    public Sprite bagSprite;
     
     private void Start()
     {
-        GameManager.Instance.onFoodGrabbed += OnFoodGrabbed;
-        GameManager.Instance.onFoodDropped += OnFoodDropped;
+        GameManager.Instance.onItemGrabbed += OnItemGrabbed;
+        GameManager.Instance.onItemDropped += OnItemDropped;
     }
 
     private void OnDestroy()
     {
-        GameManager.Instance.onFoodGrabbed -= OnFoodGrabbed;
-        GameManager.Instance.onFoodDropped -= OnFoodDropped;
+        GameManager.Instance.onItemGrabbed -= OnItemGrabbed;
+        GameManager.Instance.onItemDropped -= OnItemDropped;
     }
 
-    private void OnFoodGrabbed(GameObject obj)
+    private void OnItemGrabbed(GameObject obj)
     {
-        itemImage.sprite = obj.GetComponent<Food>().foodData.sprite;
+        Food food = obj.GetComponent<Food>();
+        if (food != null)
+            itemImage.sprite = food.foodData.sprite;
+        else
+            itemImage.sprite = bagSprite;
+        
         itemFrame.gameObject.SetActive(true);
     }
     
-    private void OnFoodDropped()
+    private void OnItemDropped()
     {
         itemImage.sprite = null;
         itemFrame.gameObject.SetActive(false);
