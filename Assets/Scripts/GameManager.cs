@@ -94,14 +94,19 @@ public class GameManager : MonoBehaviour
     public void OnOrderBagClick(GameObject sender)
     {
         Bag bag = sender.GetComponent<Bag>();
-        Food food = holdingItem.GetComponent<Food>();
-        if (bag == null || holdingItem == null || food == null)
+        if (bag == null || holdingItem == null)
             return;
+        Food food = holdingItem.GetComponent<Food>();
+        if (food == null)
+            return;
+        
         bag.foods.Add(food.foodData);
+        
+        GameObject itemToDestroy = holdingItem;
 
         Sequence sequence = DOTween.Sequence();
         sequence.Append(holdingItem.transform.DOMove(bag.transform.position + new Vector3(0, 0.2f, 0), 0.5f));
-        sequence.Append(holdingItem.transform.DOMove(bag.transform.position, 0.5f)).OnComplete(() => Destroy(holdingItem)); 
+        sequence.Append(holdingItem.transform.DOMove(bag.transform.position, 0.5f)).OnComplete(() => Destroy(itemToDestroy)); 
         
         holdingItem = null;
         onItemDropped?.Invoke();
@@ -114,7 +119,7 @@ public class GameManager : MonoBehaviour
         holdingItem = instance;
         Sequence sequence = DOTween.Sequence();
         sequence.Append(holdingItem.transform.DOMoveY(holdingItem.transform.position.y + 0.1f, 0.2f));
-        sequence.Append(holdingItem.transform.DOMove(hand.transform.position, 0.5f));
+        sequence.Append(holdingItem.transform.DOMove(hand.transform.position, 0.5f)).OnComplete(() => holdingItem?.transform.SetParent(mainCamera.transform));
         onItemGrabbed?.Invoke(holdingItem);
         
         return true;
@@ -123,8 +128,9 @@ public class GameManager : MonoBehaviour
     public void DropItem(Vector3 position)
     {
         if (holdingItem == null) return;
+        GameObject droppedItem = holdingItem;
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(holdingItem.transform.DOMove(position, 0.5f));
+        sequence.Append(holdingItem.transform.DOMove(position, 0.5f)).OnComplete(() => droppedItem.transform.SetParent(null));;
         holdingItem = null;
         onItemDropped?.Invoke();
     }
