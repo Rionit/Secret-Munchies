@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 [CreateAssetMenu(fileName = "New Food", menuName = "Food")]
 public class FoodScriptableObject : ScriptableObject
 {
-    public enum Types { BURGER, FRIES, COLA }
+    public enum Types { BURGER, FRIES, COLA, HOTDOG, CUPCAKE }
 
     public Types type;
     public float spacing;

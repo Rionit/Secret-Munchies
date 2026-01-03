@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6904dafb5b8d6a57bb98ec742c3d57ab, type: 3}
-  m_Name: Burger
+  m_Name: Fries
   m_EditorClassIdentifier: Assembly-CSharp::FoodScriptableObject
-  type: 0
+  type: 1
   spacing: 0.1
   prepareTime: 2
-  prefab: {fileID: 6303294973834408532, guid: a19600d28795756eda3f6d774f41bd6a, type: 3}
-  sprite: {fileID: 21300000, guid: 106876492fa8e318f8e0f188384194e4, type: 3}
+  prefab: {fileID: 6303294973834408532, guid: 2f0fe620cb61ec346b63c9f1e0f2c4ab, type: 3}
+  sprite: {fileID: 21300000, guid: ae4fc4ab875f4af4ca23d2939d60b4d3, type: 3}
