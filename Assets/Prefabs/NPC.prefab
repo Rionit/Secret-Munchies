@@ -126,6 +126,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   patrolPoints: []
+  dirChangeChance: 10
+  minSpeed: 0.8
+  maxSpeed: 3.5
+  patrolPriority: 50
+  queuePriority: 10
+  state: 2
 --- !u!195 &5516071749010072704
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -135,7 +141,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 9153608615547845718}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
