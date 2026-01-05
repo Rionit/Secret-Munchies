@@ -77,9 +77,10 @@ public class AIManager : MonoBehaviour
         npc.SetState(NPC.States.ORDER_QUEUE);
     }
 
-    public void ChangeToWaitQueue()
+    public void ChangeToWaitQueue(int orderId)
     {
         NPC npc = orderQueue[0];
+        npc.orderId = orderId;
         orderQueue.Remove(npc);
         waitQueue.Add(npc);
         npc.SetState(NPC.States.WAIT_QUEUE);
@@ -101,7 +102,7 @@ public class AIManager : MonoBehaviour
         int index = queue.IndexOf(npc);
         if (index < 0 || index >= queuePoints.Length)
         {
-            npc.SetState(NPC.States.PATROL);
+            npc.SetState(NPC.States.WAIT_PATROL);
             return npc.transform.position;
         }
 

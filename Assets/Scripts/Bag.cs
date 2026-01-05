@@ -1,51 +1,82 @@
 using System;
 using System.Collections.Generic;
-using DG.Tweening;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Bag : MonoBehaviour
 {
-   public List<FoodScriptableObject> foods = new List<FoodScriptableObject>();
-   public RectTransform progressBar;
-   public float progressBarSpeed = 4f;
+    public GameObject bagOpen;
+    public GameObject bagClosed;
 
-   private bool isMouseDown = false;
-   private bool isPacked = false;
-   
-   private void Start()
-   {
-      GetComponent<Clickable>().onClick.AddListener(GameManager.Instance.OnOrderBagClick);
-      progressBar.parent.gameObject.SetActive(false);
-   }
+    public TextMeshProUGUI orderNumberText;
+    public RectTransform progressBar;
+    public float progressBarSpeed = 4f;
 
-   private void Update()
-   {
-      if (isPacked) return;
-      
-      if (foods.Count != 0)
-         progressBar.parent.gameObject.SetActive(true);
-      
-      // TODO: Remove me
-      progressBar.parent.gameObject.SetActive(true);
-      
-      float x = Mathf.Lerp(progressBar.sizeDelta.x, isMouseDown ? .2f : 0f, Time.deltaTime * progressBarSpeed);
-      progressBar.sizeDelta = new Vector2(x, progressBar.sizeDelta.y);
+    public List<FoodScriptableObject> foods = new List<FoodScriptableObject>();
 
-      if (x >= 0.19f)
-      {
-         isPacked = GameManager.Instance.GrabItem(gameObject);
-         progressBar.parent.gameObject.SetActive(!isPacked);
-      }
-   }
+    [SerializeField] private bool isPacked;
+    private bool isMouseDown;
 
-   public void OnMouseDown()
-   {
-      isMouseDown = true;
-   }
+    private int orderId;
+    private int spawnId;
+    private bool initialized = false;
+    private const float progressBardWidth = 0.1362f;
 
-   public void OnMouseUp()
-   {
-      isMouseDown = false;
-   }
+    public void Initialize(int spawnId, int orderId)
+    {
+        SetPacked(false);
+        GetComponent<Clickable>().onClick.AddListener(GameManager.Instance.OnOrderBagClick);
+        progressBar.parent.gameObject.SetActive(false);
+        this.spawnId = spawnId;
+        this.orderId = orderId;
+        orderNumberText.text = this.orderId.ToString();
+        progressBar.sizeDelta = new Vector2(0.0f, progressBar.sizeDelta.y);
+        initialized = true;
+    }
+
+    private void Update()
+    {
+        if (isPacked || !initialized)
+            return;
+
+        if (foods.Count != 0)
+            progressBar.parent.gameObject.SetActive(true);
+
+        float x = Mathf.Lerp(
+            progressBar.sizeDelta.x,
+            isMouseDown ? progressBardWidth : 0f,
+            Time.deltaTime * progressBarSpeed
+        );
+
+        progressBar.sizeDelta = new Vector2(x, progressBar.sizeDelta.y);
+
+        if (x >= progressBardWidth - 0.01f)
+        {
+            SetPacked(GameManager.Instance.GrabItem(gameObject));
+        }
+    }
+
+    private void SetPacked(bool packed)
+    {
+        if (isPacked == packed)
+            return;
+
+        isPacked = packed;
+        
+        bagOpen.SetActive(!isPacked);
+        bagClosed.SetActive(isPacked);
+        progressBar.parent.gameObject.SetActive(!isPacked);
+        
+        if (isPacked) FoodManager.Instance.FreeSpawnPoint(spawnId);
+    }
+
+    public void OnMouseDown()
+    {
+        isMouseDown = true;
+    }
+
+    public void OnMouseUp()
+    {
+        isMouseDown = false;
+    }
 }

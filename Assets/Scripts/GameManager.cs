@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject holdingItem {get; private set;}
     public GameObject hand;
     
-    private int currentIndex = 0;
+    private int currentCameraIdx = 0;
     private PlayerInput playerInput; // TODO: Move this to InputManager
     private CinemachineCamera overrideCamera;
     
@@ -62,15 +62,15 @@ public class GameManager : MonoBehaviour
 
     private void NextCamera()
     {
-        currentIndex = (currentIndex + 1) % virtualCameras.Length;
-        SetActiveCamera(currentIndex);
+        currentCameraIdx = (currentCameraIdx + 1) % virtualCameras.Length;
+        SetActiveCamera(currentCameraIdx);
         onCameraChanged?.Invoke();
     }
 
     private void PrevCamera()
     {
-        currentIndex = (currentIndex - 1 + virtualCameras.Length) % virtualCameras.Length;
-        SetActiveCamera(currentIndex);
+        currentCameraIdx = (currentCameraIdx - 1 + virtualCameras.Length) % virtualCameras.Length;
+        SetActiveCamera(currentCameraIdx);
         onCameraChanged?.Invoke();
     }
     

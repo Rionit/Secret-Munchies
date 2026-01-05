@@ -6,14 +6,15 @@ using Random = UnityEngine.Random;
 
 public class NPC : MonoBehaviour
 {
-    public enum States { NULL, IDLE, PATROL, ORDER_QUEUE, WAIT_QUEUE }
+    public enum States { NULL, IDLE, PATROL, ORDER_QUEUE, WAIT_QUEUE, WAIT_PATROL }
 
     public int dirChangeChance = 10;
     public float minSpeed = 0.8f;
     public float maxSpeed = 3.5f;
     public int patrolPriority = 50;
     public int queuePriority = 10;
-
+    public int orderId = -1;
+    
     public States state { get; private set; } = States.PATROL;
 
     private NavMeshAgent agent;
@@ -74,7 +75,7 @@ public class NPC : MonoBehaviour
 
     private void UpdateAgentPriority()
     {
-        agent.avoidancePriority = state == States.PATROL
+        agent.avoidancePriority = (state == States.PATROL || state == States.WAIT_PATROL)
             ? Random.Range(queuePriority + 1, patrolPriority)
             : queuePriority;
     }
