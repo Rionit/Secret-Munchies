@@ -6,15 +6,15 @@ using DG.Tweening;
 
 public class FoodManager : MonoBehaviour
 {
-        public static FoodManager Instance { get; private set; }
+    public static FoodManager Instance { get; private set; }
 
     public GameObject bagPrefab;
     public Transform[] bagSpawnPoints;
 
     public List<FoodScriptableObject> foods;
     public FoodDispenserController foodDispenserController;
-    public List<FoodGridElement> foodGridElements;
-
+    public OrderMakerApp orderMakerApp;
+    
     private int currentOrderId;
 
     private List<Order> orders = new List<Order>();
@@ -46,7 +46,7 @@ public class FoodManager : MonoBehaviour
     {
         AIManager.Instance.ChangeToWaitQueue(currentOrderId);
 
-        foreach (FoodGridElement foodGridElement in foodGridElements)
+        foreach (FoodGridElement foodGridElement in orderMakerApp.foodGridElements)
         {
             currentOrder.AddFood(foodGridElement.food, foodGridElement.count);
         }

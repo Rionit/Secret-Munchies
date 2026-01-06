@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public event Action<GameObject> onItemGrabbed;
-    public event Action onItemDropped;
+    public event Action<GameObject> onItemDropped;
     public event Action onCameraChanged;
     
     [Header("Cinemachine Cameras (size = 4)")]
@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public int currentCustomerId = 0;
     public GameObject holdingItem {get; private set;}
     public GameObject hand;
+    public CounterController counterController;
     
     private int currentCameraIdx = 0;
     private PlayerInput playerInput; // TODO: Move this to InputManager
@@ -107,9 +108,9 @@ public class GameManager : MonoBehaviour
         Sequence sequence = DOTween.Sequence();
         sequence.Append(holdingItem.transform.DOMove(bag.transform.position + new Vector3(0, 0.2f, 0), 0.5f));
         sequence.Append(holdingItem.transform.DOMove(bag.transform.position, 0.5f)).OnComplete(() => Destroy(itemToDestroy)); 
+        onItemDropped?.Invoke(holdingItem);
         
         holdingItem = null;
-        onItemDropped?.Invoke();
     }
 
     public bool GrabItem(GameObject instance)
@@ -130,9 +131,12 @@ public class GameManager : MonoBehaviour
         if (holdingItem == null) return;
         GameObject droppedItem = holdingItem;
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(holdingItem.transform.DOMove(position, 0.5f)).OnComplete(() => droppedItem.transform.SetParent(null));;
+        sequence.Append(holdingItem.transform.DOMove(position, 0.5f)).OnComplete(() =>
+        {
+            droppedItem.transform.SetParent(null);
+            onItemDropped?.Invoke(droppedItem);
+        });
         holdingItem = null;
-        onItemDropped?.Invoke();
     }
     
     public void OverrideActiveCamera(CinemachineCamera camera)

@@ -971,6 +971,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3873071467024271274, guid: d869a0326f7eeaa4cb4744ff4579f214, type: 3}
   m_PrefabInstance: {fileID: 157614123}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &164080024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 164080025}
+  m_Layer: 0
+  m_Name: OrderCollectionPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &164080025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164080024}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.539, y: 1, z: 1.635}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 843162691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &186262899
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,7 +1725,7 @@ Transform:
   m_GameObject: {fileID: 297575944}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.138, y: 0.705, z: 0.584}
+  m_LocalPosition: {x: 1.327, y: 0.705, z: 0.584}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3175,7 +3206,7 @@ Transform:
   m_GameObject: {fileID: 488303714}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.851, y: 0.705, z: 0.738}
+  m_LocalPosition: {x: 2.191, y: 0.705, z: 0.738}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4606,7 +4637,7 @@ Transform:
   m_GameObject: {fileID: 711204907}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.418, y: 0.705, z: 0.491}
+  m_LocalPosition: {x: 0.488, y: 0.705, z: 0.491}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4646,7 +4677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   itemImage: {fileID: 245035572}
   itemFrame: {fileID: 1426413094}
-  bagSprite: {fileID: 1753263912, guid: f3f85d1de5b895245b3bebbff665db6e, type: 3}
+  bagSprite: {fileID: 21300000, guid: f3f85d1de5b895245b3bebbff665db6e, type: 3}
 --- !u!114 &718831711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5282,6 +5313,7 @@ Transform:
   - {fileID: 470272526}
   - {fileID: 913179360}
   - {fileID: 1342919083}
+  - {fileID: 164080025}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &849414847
@@ -5495,6 +5527,7 @@ MonoBehaviour:
   - {fileID: 1371112163}
   - {fileID: 1685589337}
   - {fileID: 849414848}
+  orderCollectionPoint: {fileID: 164080025}
 --- !u!4 &863281248
 Transform:
   m_ObjectHideFlags: 0
@@ -9582,12 +9615,7 @@ MonoBehaviour:
   - {fileID: 322401173}
   foods: []
   foodDispenserController: {fileID: 597667349}
-  foodGridElements:
-  - {fileID: 646643565}
-  - {fileID: 1874903463}
-  - {fileID: 1631466512}
-  - {fileID: 1727717669}
-  - {fileID: 2048005376}
+  orderMakerApp: {fileID: 8288089833170326192}
 --- !u!1 &1910956011
 GameObject:
   m_ObjectHideFlags: 0
@@ -10362,6 +10390,7 @@ MonoBehaviour:
   mainCamera: {fileID: 793333299}
   currentCustomerId: 0
   hand: {fileID: 475840909}
+  counterController: {fileID: 850420349}
 --- !u!4 &2051972399
 Transform:
   m_ObjectHideFlags: 0
@@ -12911,6 +12940,7 @@ GameObject:
   - component: {fileID: 2962826065879798218}
   - component: {fileID: 3064110727604890666}
   - component: {fileID: 8288089833170326191}
+  - component: {fileID: 8288089833170326192}
   m_Layer: 5
   m_Name: OrderMakerAppWindow
   m_TagString: Untagged
@@ -12930,6 +12960,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6163f966a6d0f04d49ee27d6dbff8e58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AssetWindow
+--- !u!114 &8288089833170326192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8288089833170326190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e55fcdf4d902cb344a71942023316839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  createOrderButton: {fileID: 8834967273375269702}
+  foodGridElements:
+  - {fileID: 646643565}
+  - {fileID: 1874903463}
+  - {fileID: 1631466512}
+  - {fileID: 1727717669}
+  - {fileID: 2048005376}
 --- !u!224 &8303701785753673757
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13015,6 +13064,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1907054629}
         m_TargetAssemblyTypeName: FoodManager, Assembly-CSharp
         m_MethodName: StartPreparingOrder
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8288089833170326192}
+        m_TargetAssemblyTypeName: OrderMakerApp, Assembly-CSharp
+        m_MethodName: Reset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

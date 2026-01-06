@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -28,6 +29,20 @@ public class CounterController : MonoBehaviour
                 availability[dropPoint] = true;
                 GameManager.Instance.DropItem(dropPoint.transform.position);
                 break; 
+            }
+        }
+    }
+
+    public void PickItem(GameObject item)
+    {
+        foreach (GameObject dropPoint in dropPoints)
+        {
+            if (dropPoint.transform.position == item.transform.position)
+            {
+                Debug.LogWarning("Picked item");
+                availability[dropPoint] = false;
+                Debug.LogWarning(availability);
+                break;
             }
         }
     }

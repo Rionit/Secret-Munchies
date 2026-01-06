@@ -12,7 +12,8 @@ public class AIManager : MonoBehaviour
     public Transform[] patrolPoints;
     public Transform[] orderQueuePoints;
     public Transform[] waitQueuePoints;
-
+    public Transform orderCollectionPoint;
+    
     private List<NPC> allNPCs = new();
     private List<NPC> orderQueue = new();
     private List<NPC> waitQueue = new();
@@ -32,6 +33,12 @@ public class AIManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(MoveToQueue());
+        GameManager.Instance.onItemDropped += obj =>
+        {
+            Bag bag = obj.GetComponent<Bag>();
+            if (bag != null)
+                OrderFinished(bag);
+        };
     }
 
     private IEnumerator MoveToQueue()
@@ -45,18 +52,30 @@ public class AIManager : MonoBehaviour
         */
         while (true)
         {
-            yield return new WaitForSeconds(3f);
-            TryAssignNPCToQueue();
+            yield return new WaitForSeconds(10f);
+            TryAssignNPCToOrderQueue();
         }
     }
     
     public void RegisterNPC(NPC npc)
     {
         if (!allNPCs.Contains(npc))
+        {
             allNPCs.Add(npc);
+            npc.onArrivedAtQueue += OnNPCArrived;
+        }
     }
 
-    public void TryAssignNPCToQueue()
+    private void OnNPCArrived(NPC npc)
+    {
+        Debug.LogWarning(orderQueue.FindIndex(n => n == npc));
+        if (orderQueue.FindIndex(n => n == npc) == 0)
+        {
+            FoodManager.Instance.orderMakerApp.SetNPCReady(true);
+        }
+    }
+    
+    public void TryAssignNPCToOrderQueue()
     {
         if (orderQueue.Count >= MAX_QUEUE_SIZE) return;
 
@@ -72,7 +91,6 @@ public class AIManager : MonoBehaviour
 
     private void AddToOrderQueue(NPC npc)
     {
-        Debug.Log("Adding to queue");
         orderQueue.Add(npc);
         npc.SetState(NPC.States.ORDER_QUEUE);
     }
@@ -84,6 +102,15 @@ public class AIManager : MonoBehaviour
         orderQueue.Remove(npc);
         waitQueue.Add(npc);
         npc.SetState(NPC.States.WAIT_QUEUE);
+        FoodManager.Instance.orderMakerApp.SetNPCReady(false);
+    }
+
+    private void OrderFinished(Bag bag)
+    {
+        NPC npc = allNPCs.Find((npc) => npc.orderId == bag.orderId);
+        npc.bag = bag;
+        npc.SetState(NPC.States.COLLECT_ORDER);
+        waitQueue.Remove(npc);
     }
 
     public Vector3 GetQueueDestination(NPC npc)

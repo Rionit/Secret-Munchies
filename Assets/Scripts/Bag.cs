@@ -13,11 +13,11 @@ public class Bag : MonoBehaviour
     public float progressBarSpeed = 4f;
 
     public List<FoodScriptableObject> foods = new List<FoodScriptableObject>();
-
+    public int orderId;
+    
     [SerializeField] private bool isPacked;
     private bool isMouseDown;
 
-    private int orderId;
     private int spawnId;
     private bool initialized = false;
     private const float progressBardWidth = 0.1362f;

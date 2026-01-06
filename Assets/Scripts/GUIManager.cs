@@ -31,7 +31,7 @@ public class GUIManager : MonoBehaviour
         itemFrame.gameObject.SetActive(true);
     }
     
-    private void OnItemDropped()
+    private void OnItemDropped(GameObject obj)
     {
         itemImage.sprite = null;
         itemFrame.gameObject.SetActive(false);

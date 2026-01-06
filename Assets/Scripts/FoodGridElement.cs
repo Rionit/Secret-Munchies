@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class FoodGridElement : MonoBehaviour
 {
+    public Action<FoodGridElement, int> OnValueChanged;
+    
     public FoodScriptableObject food;
     public TextMeshProUGUI counterLabel;
     public TextMeshProUGUI foodLabel;
@@ -23,12 +25,20 @@ public class FoodGridElement : MonoBehaviour
         count++;
         count = Mathf.Min(count, 10);
         counterLabel.text = count.ToString();
+        OnValueChanged?.Invoke(this, count);
     }
 
     public void Remove()
     {
         count--;
         count = Mathf.Max(count, 0);
+        counterLabel.text = count.ToString();
+        OnValueChanged?.Invoke(this, count);
+    }
+
+    public void Reset()
+    {
+        count = 0;
         counterLabel.text = count.ToString();
     }
 }
