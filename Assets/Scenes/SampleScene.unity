@@ -9607,13 +9607,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673a6443d0705f1cfa36ce4fc8f754aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoodManager
+  foods:
+  - {fileID: 11400000, guid: 3f673c5fd8bdc2846bc2ca9543645fd8, type: 2}
+  - {fileID: 11400000, guid: 47c4bdefd46310c48b0dd549b160ba58, type: 2}
+  - {fileID: 11400000, guid: 235b28ef304bd4d43a2ee253b22730f7, type: 2}
+  - {fileID: 11400000, guid: e439f5ffe4a67ac46b80cde30cd5d14b, type: 2}
+  - {fileID: 11400000, guid: f86557301c70d9b4faf078946750650d, type: 2}
   bagPrefab: {fileID: 9204088669055266381, guid: 3201059da94d7bd40ad4c6a1fdf33998, type: 3}
   bagSpawnPoints:
   - {fileID: 1154769485}
   - {fileID: 863027697}
   - {fileID: 698267641}
   - {fileID: 322401173}
-  foods: []
   foodDispenserController: {fileID: 597667349}
   orderMakerApp: {fileID: 8288089833170326192}
 --- !u!1 &1910956011
