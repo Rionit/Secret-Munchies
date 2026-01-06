@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Random = UnityEngine.Random;
 
 public class FoodManager : MonoBehaviour
 {
     public static FoodManager Instance { get; private set; }
-
+    
+    public List<FoodScriptableObject> foods;
+    
     public GameObject bagPrefab;
     public Transform[] bagSpawnPoints;
 
-    public List<FoodScriptableObject> foods;
     public FoodDispenserController foodDispenserController;
     public OrderMakerApp orderMakerApp;
     
@@ -39,7 +41,7 @@ public class FoodManager : MonoBehaviour
     private void Start()
     {
         spawnOccupied = new bool[bagSpawnPoints.Length];
-        currentOrder = new Order(currentOrderId, new List<FoodScriptableObject>());
+        currentOrder = new Order(currentOrderId);
     }
 
     public void StartPreparingOrder()
@@ -56,7 +58,7 @@ public class FoodManager : MonoBehaviour
         TrySpawnOrder(currentOrder);
 
         currentOrderId++;
-        currentOrder = new Order(currentOrderId, new List<FoodScriptableObject>());
+        currentOrder = new Order(currentOrderId);
     }
 
     private void TrySpawnOrder(Order order)
@@ -110,13 +112,67 @@ public class FoodManager : MonoBehaviour
         }
     }
     
-    private IEnumerator PrepareFood(Order order) {
-        foreach (FoodScriptableObject foodData in order.OrderedFoods)
+    private IEnumerator PrepareFood(Order order)
+    {
+        foreach (FoodAmount foodAmount in order.OrderedFoods)
         {
-            yield return new WaitForSeconds(foodData.prepareTime); //wait 2 seconds
-            foodDispenserController.DispenseFood(foodData);
+            for (int i = 0; i < foodAmount.amount; i++)
+            {
+                yield return new WaitForSeconds(foodAmount.food.prepareTime);
+                foodDispenserController.DispenseFood(foodAmount.food);
+            }
+        }
+    }
+    
+    public static bool Compare(List<FoodAmount> bagFoods, List<FoodAmount> wantedFoods)
+    {
+        if (bagFoods.Count != wantedFoods.Count)
+            return false;
+
+        Dictionary<FoodScriptableObject, int> bagCount = new();
+        Dictionary<FoodScriptableObject, int> wantedCount = new();
+
+        foreach (var f in bagFoods)
+            bagCount[f.food] = f.amount;
+
+        foreach (var f in wantedFoods)
+            wantedCount[f.food] = f.amount;
+
+        foreach (var pair in wantedCount)
+        {
+            if (!bagCount.TryGetValue(pair.Key, out int amount))
+                return false;
+
+            if (amount != pair.Value)
+                return false;
         }
 
-        // TODO: Show the order on the diegetic UI   
+        return true;
+    }
+    
+    public static List<FoodAmount> CreateRandomWantedFoods(
+        List<FoodScriptableObject> availableFoods,
+        int minTypes = 1,
+        int maxTypes = 3,
+        int minAmount = 1,
+        int maxAmount = 3
+    )
+    {
+        List<FoodAmount> result = new();
+        int typeCount = Random.Range(minTypes, maxTypes + 1);
+
+        List<FoodScriptableObject> pool = new List<FoodScriptableObject>(availableFoods);
+
+        for (int i = 0; i < typeCount && pool.Count > 0; i++)
+        {
+            int index = Random.Range(0, pool.Count);
+            FoodScriptableObject food = pool[index];
+            pool.RemoveAt(index);
+
+            int amount = Random.Range(minAmount, maxAmount + 1);
+            result.Add(new FoodAmount(food, amount));
+        }
+
+        return result;
     }
 }

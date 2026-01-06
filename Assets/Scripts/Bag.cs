@@ -12,7 +12,7 @@ public class Bag : MonoBehaviour
     public RectTransform progressBar;
     public float progressBarSpeed = 4f;
 
-    public List<FoodScriptableObject> foods = new List<FoodScriptableObject>();
+    public List<FoodAmount> foods = new List<FoodAmount>();
     public int orderId;
     
     [SerializeField] private bool isPacked;
@@ -68,6 +68,21 @@ public class Bag : MonoBehaviour
         progressBar.parent.gameObject.SetActive(!isPacked);
         
         if (isPacked) FoodManager.Instance.FreeSpawnPoint(spawnId);
+    }
+    
+    public void AddFood(FoodScriptableObject food, int amount = 1)
+    {
+        if (amount <= 0) return;
+
+        FoodAmount existing = foods.Find(f => f.food == food);
+        if (existing != null)
+        {
+            existing.amount += amount;
+        }
+        else
+        {
+            foods.Add(new FoodAmount(food, amount));
+        }
     }
 
     public void OnMouseDown()

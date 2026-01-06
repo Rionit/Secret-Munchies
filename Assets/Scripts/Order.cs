@@ -6,21 +6,18 @@ public class Order
 {
     public int Id { get; private set; }
     public float CreationTime { get; private set; }
-    public List<FoodScriptableObject> OrderedFoods { get; private set; }
+    public List<FoodAmount> OrderedFoods { get; private set; }
 
-    public Order(int id, List<FoodScriptableObject> orderedFoods)
+    public Order(int id)
     {
         Id = id;
-        OrderedFoods = orderedFoods;
         CreationTime = Time.time;
+        OrderedFoods = new List<FoodAmount>();
     }
-    
-    public void AddFood(FoodScriptableObject food, int count = 1)
+
+    public void AddFood(FoodScriptableObject food, int count)
     {
-        if (count == 0) return;
-        for (int i = 0; i < count; i++)
-        {
-            OrderedFoods.Add(food);
-        }
+        if (count <= 0) return;
+        OrderedFoods.Add(new FoodAmount(food, count));
     }
 }

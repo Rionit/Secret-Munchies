@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,7 +22,8 @@ public class NPC : MonoBehaviour
     
     public States state { get; private set; } = States.PATROL;
     public Bag bag;
-
+    public List<FoodAmount> wantedFoods = new List<FoodAmount>();
+    
     private NavMeshAgent agent;
     private int currentPoint;
     private int direction = 1;
@@ -39,6 +41,8 @@ public class NPC : MonoBehaviour
 
         direction *= Random.Range(0, 2) == 0 ? -1 : 1;
         SetState(state);
+        
+        wantedFoods = FoodManager.CreateRandomWantedFoods(FoodManager.Instance.foods);
     }
 
     private void Update()

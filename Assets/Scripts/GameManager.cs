@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
         if (food == null)
             return;
         
-        bag.foods.Add(food.foodData);
+        bag.AddFood(food.foodData);
         
         GameObject itemToDestroy = holdingItem;
 

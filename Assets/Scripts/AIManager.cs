@@ -110,6 +110,7 @@ public class AIManager : MonoBehaviour
         NPC npc = allNPCs.Find((npc) => npc.orderId == bag.orderId);
         npc.bag = bag;
         npc.SetState(NPC.States.COLLECT_ORDER);
+        Debug.LogWarning("Is order good? " + FoodManager.Compare(bag.foods, npc.wantedFoods));
         waitQueue.Remove(npc);
     }
 
