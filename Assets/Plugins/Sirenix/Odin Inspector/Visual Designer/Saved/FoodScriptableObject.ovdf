@@ -1,0 +1,58 @@
+OVDF v1.1
+FoodScriptableObject, Assembly-CSharp
+MetaGuid:6904dafb5b8d6a57bb98ec742c3d57ab
+
+# "Visuals"
+Position: $7zvpaR8ynj5G83izp1GPb9:0
+* [Sirenix.OdinInspector.HorizontalGroupAttribute]
+	Title = ""
+	Gap = 10
+	GroupName = ""
+	PaddingLeft = 0
+	PaddingRight = 0
+	MarginLeft = 0
+	MarginRight = 0
+
+# $7zvpaR8ynj5G83izp1GPb9
+Position: $root
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Visuals"
+	LabelText = "Visuals"
+	HideWhenChildrenAreInvisible = True
+	ShowLabel = True
+	CenterLabel = True
+
+# "Gameplay"
+* [Sirenix.OdinInspector.BoxGroupAttribute]
+	CenterLabel = True
+
+# sprite
+Position: "Visuals":1
+* [Sirenix.OdinInspector.PreviewFieldAttribute]
+	Height = 100
++ [Sirenix.OdinInspector.HideLabelAttribute]
+* [Sirenix.OdinInspector.TitleAttribute]
+	Title = "Sprite"
+	Subtitle = "UI icon sprite"
+	TitleAlignment = Centered
+
+# prefab
+Position: "Visuals":0
++ [Sirenix.OdinInspector.HideLabelAttribute]
+* [Sirenix.OdinInspector.PreviewFieldAttribute]
+	Height = 100
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "Prefab"
+	Subtitle = "Prefab spawned for this food"
+	TitleAlignment = Centered
+
+# type
++ [Sirenix.OdinInspector.HideLabelAttribute]
+
+# spacing
++ [Sirenix.OdinInspector.PropertyTooltipAttribute]
+	Tooltip = "How much is this type of food spaced in food dispenser"
+
+# prepareTime
++ [Sirenix.OdinInspector.PropertyTooltipAttribute]
+	Tooltip = "How much time before the food is ready to be dispensed in food dispenser"

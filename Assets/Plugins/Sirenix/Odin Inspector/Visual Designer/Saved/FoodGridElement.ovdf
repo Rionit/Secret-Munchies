@@ -1,0 +1,77 @@
+OVDF v1.1
+FoodGridElement, Assembly-CSharp
+MetaGuid:f393db61a1ada8bb688e16351bcfdfcf
+
+# $NyBiX8HtYC8MQGEp3vXqzT
+Position: $root:1
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+
+# $K7te9Ev6PgBBvDMfmnnGw1
+Position: $NyBiX8HtYC8MQGEp3vXqzT:3
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $8WdA4vG3fHD7NiDTNWZDjN
+Position: $K7te9Ev6PgBBvDMfmnnGw1:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $5nMafdPsTayWE4o93e7Tic
+Position: $K7te9Ev6PgBBvDMfmnnGw1:2
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $6bANWoxfTGZd9FAKxSZLa3
+Position: $K7te9Ev6PgBBvDMfmnnGw1:3
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $9q7EnYBVzntCofT9eAqGvu
+Position: $NyBiX8HtYC8MQGEp3vXqzT:1
++ [Sirenix.OdinInspector.HorizontalGroupAttribute]
+	GroupName = "UI Elements"
+	Title = "UI Elements"
+	Gap = 10
+
+# $J93ZgydcZoB9sCyHiP4Uu9
+Position: $K7te9Ev6PgBBvDMfmnnGw1:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# food
+Position: $NyBiX8HtYC8MQGEp3vXqzT:0
+
+# counterLabel
+Position: $9q7EnYBVzntCofT9eAqGvu:0
++ [Sirenix.OdinInspector.TitleAttribute]
+	TitleAlignment = Centered
+	Title = "Counter"
+	Subtitle = "How many to be ordered"
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.PreviewFieldAttribute]
+	Height = 80
+
+# foodLabel
+Position: $9q7EnYBVzntCofT9eAqGvu:2
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "Food"
+	Subtitle = "Displayed name of the food"
+	TitleAlignment = Centered
+
+# foodImage
+Position: $9q7EnYBVzntCofT9eAqGvu:3
++ [Sirenix.OdinInspector.PreviewFieldAttribute]
+	Height = 80
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "Image"
+	TitleAlignment = Centered
+	Subtitle = "Displayed image of the food"
+
+# count
+Position: $J93ZgydcZoB9sCyHiP4Uu9:0
+
+# Add()
+Position: $8WdA4vG3fHD7NiDTNWZDjN:0
+
+# Remove()
+Position: $5nMafdPsTayWE4o93e7Tic:0
+
+# Reset()
+Position: $6bANWoxfTGZd9FAKxSZLa3:0

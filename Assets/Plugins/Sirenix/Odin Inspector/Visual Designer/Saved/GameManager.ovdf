@@ -1,0 +1,56 @@
+OVDF v1.1
+GameManager, Assembly-CSharp
+MetaGuid:682856ed889bcfb409b913ed1ad3215b
+
+# $Q9rdnsEY6pdmHVuXToD2Dr
+Position: $root:4
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Cameras"
+	LabelText = "Cameras"
+
+# $BStm6xNKbgQHA12SqpqQgv
+Position: $root:5
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Player Interaction"
+
+# virtualCameras
+Position: $Q9rdnsEY6pdmHVuXToD2Dr:1
+- [Sirenix.OdinInspector.TitleAttribute]
+	TitleAlignment = Centered
+
+# computerCloseupCamera
+Position: $Q9rdnsEY6pdmHVuXToD2Dr:2
+
+# mainCamera
+Position: $Q9rdnsEY6pdmHVuXToD2Dr:3
+
+# currentCustomerId
+Position: $BStm6xNKbgQHA12SqpqQgv:0
+
+# hand
+Position: $BStm6xNKbgQHA12SqpqQgv:1
+
+# counterController
+Position: $BStm6xNKbgQHA12SqpqQgv:2
+
+# currentCameraIdx
+Position: $Q9rdnsEY6pdmHVuXToD2Dr:0
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "Cameras"
+	TitleAlignment = Centered
++ [Sirenix.OdinInspector.ValueDropdownAttribute]
+
+# playerInput
+Position: $BStm6xNKbgQHA12SqpqQgv:4
+
+# overrideCamera
+Position: $Q9rdnsEY6pdmHVuXToD2Dr:4
+
+# holdingItem
+Position: $BStm6xNKbgQHA12SqpqQgv:3
+
+# NextCamera()
+Position: $Q9rdnsEY6pdmHVuXToD2Dr:5
+
+# PrevCamera()
+Position: $Q9rdnsEY6pdmHVuXToD2Dr:6

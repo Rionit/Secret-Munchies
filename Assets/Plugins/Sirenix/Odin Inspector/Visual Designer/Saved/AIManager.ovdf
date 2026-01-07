@@ -1,0 +1,61 @@
+OVDF v1.1
+AIManager, Assembly-CSharp
+MetaGuid:79a0f8a07cb75ab4ebbe088b3c4c0d53
+
+# $NR5gmeHt3hHNimjXjfGNwA
+Position: $root:1
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Settings"
+
+# $2PvbguuVf7NH3sh6MZ13Gp
+Position: $root:2
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Points"
+	LabelText = "Points"
+
+# $8xiFXsMwd9pTjkvMpZMsxq
+Position: $root:3
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+
+# _waitQueueSize
+Position: $NR5gmeHt3hHNimjXjfGNwA:1
+- [Sirenix.OdinInspector.InfoBoxAttribute]
+	Message = ""
++ [Sirenix.OdinInspector.PropertyTooltipAttribute]
+	Tooltip = "Maximum number of NPCs allowed in the wait queue"
+
+# _orderQueueSize
+Position: $NR5gmeHt3hHNimjXjfGNwA:0
+- [Sirenix.OdinInspector.InfoBoxAttribute]
+	Message = ""
++ [Sirenix.OdinInspector.PropertyTooltipAttribute]
+	Tooltip = "Maximum number of NPCs allowed in the order queue"
+* [Sirenix.OdinInspector.TitleAttribute]
+	TitleAlignment = Centered
+
+# patrolPoints
+Position: $2PvbguuVf7NH3sh6MZ13Gp:0
+* [Sirenix.OdinInspector.TitleAttribute]
+	TitleAlignment = Centered
+
+# orderQueuePoints
+Position: $2PvbguuVf7NH3sh6MZ13Gp:1
+
+# waitQueuePoints
+Position: $2PvbguuVf7NH3sh6MZ13Gp:2
+
+# orderCollectionPoint
+Position: $2PvbguuVf7NH3sh6MZ13Gp:3
+
+# allNPCs
+Position: $8xiFXsMwd9pTjkvMpZMsxq:0
+
+# orderQueue
+Position: $8xiFXsMwd9pTjkvMpZMsxq:1
+
+# waitQueue
+Position: $8xiFXsMwd9pTjkvMpZMsxq:2
+
+# TryAssignNPCToOrderQueue()
+* [Sirenix.OdinInspector.ButtonAttribute]
+	Name = "Try To Assign NPC To Order Queue"

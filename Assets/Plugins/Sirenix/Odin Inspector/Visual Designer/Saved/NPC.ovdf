@@ -1,0 +1,72 @@
+OVDF v1.1
+NPC, Assembly-CSharp
+MetaGuid:96d7803d233bd10408460034d6d460c8
+
+# $Bn8oVmmwFJYbQGmkbrR71L
+Position: $root:2
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Settings"
+	ShowLabel = True
+	CenterLabel = True
+
+# $MSHySRAsUcK2jUah2XPHSd
+Position: $root:3
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Properties"
+
+# $HqQFSMgX5dnaeFzsTdZ2gm
+Position: $root:15
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Debug"
+
+# directionChangeChance
+Position: $Bn8oVmmwFJYbQGmkbrR71L:0
+
+# minSpeed
+Position: $Bn8oVmmwFJYbQGmkbrR71L:1
+
+# maxSpeed
+Position: $Bn8oVmmwFJYbQGmkbrR71L:2
+
+# patrolPriority
+Position: $Bn8oVmmwFJYbQGmkbrR71L:3
+
+# queuePriority
+Position: $Bn8oVmmwFJYbQGmkbrR71L:4
+
+# orderId
+Position: $MSHySRAsUcK2jUah2XPHSd:0
+* [Sirenix.OdinInspector.TitleAttribute]
+	TitleAlignment = Left
+
+# bag
+Position: $MSHySRAsUcK2jUah2XPHSd:1
+
+# wantedFoods
+Position: $MSHySRAsUcK2jUah2XPHSd:2
+- [Sirenix.OdinInspector.TitleAttribute]
+
+# agent
+Position: $HqQFSMgX5dnaeFzsTdZ2gm:1
+- [Sirenix.OdinInspector.TitleAttribute]
+	Title = ""
+
+# currentPoint
+Position: $HqQFSMgX5dnaeFzsTdZ2gm:2
+
+# direction
+Position: $HqQFSMgX5dnaeFzsTdZ2gm:3
+* [Sirenix.OdinInspector.LabelTextAttribute]
+	NicifyText = True
+	Icon = None
+
+# hasArrivedAtQueue
+Position: $HqQFSMgX5dnaeFzsTdZ2gm:4
+
+# isPickingBag
+Position: $HqQFSMgX5dnaeFzsTdZ2gm:5
+
+# SetState(NPC.States)
+Position: $HqQFSMgX5dnaeFzsTdZ2gm:0
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "Runtime (Debug)"

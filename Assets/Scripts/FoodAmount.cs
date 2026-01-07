@@ -1,11 +1,19 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [Serializable]
 public class FoodAmount
 {
+    // [InlineEditor(ObjectFieldMode = InlineEditorObjectFieldModes.CompletelyHidden)]
+    [Tooltip("The food type")]
     public FoodScriptableObject food;
-    public int amount;
+
+    [Tooltip("How many of this food")]
+    [Range(1, 10)]
+    public int amount = 1;
+
+    public FoodAmount() { }
 
     public FoodAmount(FoodScriptableObject food, int amount)
     {

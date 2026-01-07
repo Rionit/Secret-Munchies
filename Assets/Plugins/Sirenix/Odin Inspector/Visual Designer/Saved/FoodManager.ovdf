@@ -1,0 +1,72 @@
+OVDF v1.1
+FoodManager, Assembly-CSharp
+MetaGuid:673a6443d0705f1cfa36ce4fc8f754aa
+
+# $Heh9Y6EPqh2PouvQYaeDAC
+Position: $root:1
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+
+# $Kyhnv5rKVQiidVUeg4GaXz
+Position: $root:16
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Debug"
+	ShowLabel = True
+	CenterLabel = True
+
+# $U7NXfHLvvVQAV98x9QoL5L
+Position: $8dW5xMj6F2xAEuKDpksMrQ:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $Jsasz6GGb4iFqqyMraPxkN
+Position: $U7NXfHLvvVQAV98x9QoL5L:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+	Size = Auto
+
+# $4r7m9NeZUJXvfUDLKKjMr2
+Position: $U7NXfHLvvVQAV98x9QoL5L:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $8dW5xMj6F2xAEuKDpksMrQ
+Position: $Kyhnv5rKVQiidVUeg4GaXz:0
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+
+# $FawQDQUerfcFwzBWuptMe1
+Position: $root:15
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+
+# foods
+Position: $Heh9Y6EPqh2PouvQYaeDAC:0
+
+# bagPrefab
+Position: $Heh9Y6EPqh2PouvQYaeDAC:1
+
+# bagSpawnPoints
+Position: $Heh9Y6EPqh2PouvQYaeDAC:2
+
+# StartPreparingOrder()
+Position: $Kyhnv5rKVQiidVUeg4GaXz:5
+
+# currentOrder
+Position: $Jsasz6GGb4iFqqyMraPxkN:0
+
+# spawnOccupied
+Position: $Kyhnv5rKVQiidVUeg4GaXz:4
+
+# waitingOrders
+Position: $Kyhnv5rKVQiidVUeg4GaXz:3
+
+# orders
+Position: $Kyhnv5rKVQiidVUeg4GaXz:2
+
+# currentOrderId
+Position: $4r7m9NeZUJXvfUDLKKjMr2:0
+- [Sirenix.OdinInspector.TitleAttribute]
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.PropertyTooltipAttribute]
+	Tooltip = "Order ID"
+
+# orderMakerApp
+Position: $FawQDQUerfcFwzBWuptMe1:1
+
+# foodDispenserController
+Position: $FawQDQUerfcFwzBWuptMe1:0
