@@ -8,6 +8,8 @@ public class AIManager : MonoBehaviour
 {
     public static AIManager Instance { get; private set; }
 
+    [Required] public Transform guiCanvas;
+    
     [Title("Settings")]
     [InfoBox("Maximum number of NPCs allowed in the order queue")]
     [ShowInInspector]

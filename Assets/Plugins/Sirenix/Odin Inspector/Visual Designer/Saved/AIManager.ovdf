@@ -3,19 +3,27 @@ AIManager, Assembly-CSharp
 MetaGuid:79a0f8a07cb75ab4ebbe088b3c4c0d53
 
 # $NR5gmeHt3hHNimjXjfGNwA
-Position: $root:1
+Position: $root:2
 + [Sirenix.OdinInspector.BoxGroupAttribute]
 	GroupName = "Settings"
 
 # $2PvbguuVf7NH3sh6MZ13Gp
-Position: $root:2
+Position: $root:3
 + [Sirenix.OdinInspector.BoxGroupAttribute]
 	GroupName = "Points"
 	LabelText = "Points"
 
 # $8xiFXsMwd9pTjkvMpZMsxq
-Position: $root:3
+Position: $root:5
 + [Sirenix.OdinInspector.BoxGroupAttribute]
+
+# $XcGiPijSB6ZiecRY2DQera
+Position: $root:1
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "References"
+	LabelText = "References"
+	ShowLabel = True
+	CenterLabel = True
 
 # _waitQueueSize
 Position: $NR5gmeHt3hHNimjXjfGNwA:1
@@ -59,3 +67,6 @@ Position: $8xiFXsMwd9pTjkvMpZMsxq:2
 # TryAssignNPCToOrderQueue()
 * [Sirenix.OdinInspector.ButtonAttribute]
 	Name = "Try To Assign NPC To Order Queue"
+
+# guiCanvas
+Position: $XcGiPijSB6ZiecRY2DQera:0

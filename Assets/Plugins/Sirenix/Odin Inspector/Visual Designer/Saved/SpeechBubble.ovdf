@@ -1,0 +1,29 @@
+OVDF v1.1
+SpeechBubble, Assembly-CSharp
+MetaGuid:ac4e2d97cab2d2545aaa46ed8a4f5c8f
+
+# $SXLT9VNEpgPXUjcaPkw8M4
+Position: $root:0
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+
+# $B6nCUzn37RRzEadUwBMNwZ
+Position: $root:1
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+
+# bubble
+Position: $SXLT9VNEpgPXUjcaPkw8M4:0
+
+# text
+Position: $SXLT9VNEpgPXUjcaPkw8M4:1
+
+# typingSpeed
+Position: $B6nCUzn37RRzEadUwBMNwZ:0
+
+# scaleTweenDuration
+Position: $B6nCUzn37RRzEadUwBMNwZ:1
+
+# scaleEase
+Position: $B6nCUzn37RRzEadUwBMNwZ:2
+
+# ShowText(string)
+Position: $root:6
