@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class BookController : MonoBehaviour
@@ -27,7 +28,7 @@ public class BookController : MonoBehaviour
     
     private void Start()
     {
-        GameManager.Instance.onCameraChanged += PutDown;
+        GameManager.Instance.onCameraChanged += _ => PutDown();
     }
 
     public void Grab()

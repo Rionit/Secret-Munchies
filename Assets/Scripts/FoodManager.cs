@@ -12,7 +12,7 @@ public class FoodManager : MonoBehaviour
     [Title("Food Database")]
     [ListDrawerSettings(ShowFoldout = true, DefaultExpandedState = true)]
     [Tooltip("All available food types in the game")]
-    public List<FoodScriptableObject> foods;
+    public List<FoodSO> foods;
 
     [Title("Bag Spawning")]
     [Required, Tooltip("Prefab used for spawned food bags")]
@@ -150,8 +150,8 @@ public class FoodManager : MonoBehaviour
         if (bagFoods.Count != wantedFoods.Count)
             return false;
 
-        Dictionary<FoodScriptableObject, int> bagCount = new();
-        Dictionary<FoodScriptableObject, int> wantedCount = new();
+        Dictionary<FoodSO, int> bagCount = new();
+        Dictionary<FoodSO, int> wantedCount = new();
 
         foreach (var f in bagFoods)
             bagCount[f.food] = f.amount;
@@ -173,7 +173,7 @@ public class FoodManager : MonoBehaviour
 
     [InfoBox("Creates a randomized food order for NPCs")]
     public static List<FoodAmount> CreateRandomWantedFoods(
-        List<FoodScriptableObject> availableFoods,
+        List<FoodSO> availableFoods,
         int minTypes = 1,
         int maxTypes = 3,
         int minAmount = 1,
@@ -182,12 +182,12 @@ public class FoodManager : MonoBehaviour
         List<FoodAmount> result = new();
         int typeCount = Random.Range(minTypes, maxTypes + 1);
 
-        List<FoodScriptableObject> pool = new(availableFoods);
+        List<FoodSO> pool = new(availableFoods);
 
         for (int i = 0; i < typeCount && pool.Count > 0; i++)
         {
             int index = Random.Range(0, pool.Count);
-            FoodScriptableObject food = pool[index];
+            FoodSO food = pool[index];
             pool.RemoveAt(index);
 
             int amount = Random.Range(minAmount, maxAmount + 1);

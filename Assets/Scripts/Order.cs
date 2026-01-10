@@ -15,7 +15,7 @@ public class Order
         OrderedFoods = new List<FoodAmount>();
     }
 
-    public void AddFood(FoodScriptableObject food, int count)
+    public void AddFood(FoodSO food, int count)
     {
         if (count <= 0) return;
         OrderedFoods.Add(new FoodAmount(food, count));

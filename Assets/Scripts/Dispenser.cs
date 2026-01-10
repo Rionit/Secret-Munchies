@@ -6,7 +6,7 @@ public class Dispenser : MonoBehaviour
     public Transform startPosition;
     public Transform endPosition;
 
-    public FoodScriptableObject.Types type;
+    public FoodSO.Types type;
     
     public List<GameObject> foodInstances;
     

@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Cupcake
   m_EditorClassIdentifier: Assembly-CSharp::FoodScriptableObject
   type: 4
+  textVariations:
+  - Cupcake
+  - Munchcake
   spacing: 0.1
   prepareTime: 2
-  prefab: {fileID: 6303294973834408532, guid: 8c5c93bf6244d544e92a56d12f404b0b, type: 3}
   sprite: {fileID: 21300000, guid: 5747318c24ee33542bdbd52d75a96c5a, type: 3}
+  prefab: {fileID: 6303294973834408532, guid: 8c5c93bf6244d544e92a56d12f404b0b, type: 3}

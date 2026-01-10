@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: Hotdog
   m_EditorClassIdentifier: Assembly-CSharp::FoodScriptableObject
   type: 3
+  textVariations:
+  - Hotdog
+  - Munchie's Hotdog
+  - Munchdog
   spacing: 0.1
   prepareTime: 2
   sprite: {fileID: 21300000, guid: a4a9571f269670344b4c3fdb7018befe, type: 3}

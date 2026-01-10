@@ -7,7 +7,7 @@ public class FoodAmount
 {
     // [InlineEditor(ObjectFieldMode = InlineEditorObjectFieldModes.CompletelyHidden)]
     [Tooltip("The food type")]
-    public FoodScriptableObject food;
+    public FoodSO food;
 
     [Tooltip("How many of this food")]
     [Range(1, 10)]
@@ -15,7 +15,7 @@ public class FoodAmount
 
     public FoodAmount() { }
 
-    public FoodAmount(FoodScriptableObject food, int amount)
+    public FoodAmount(FoodSO food, int amount)
     {
         this.food = food;
         this.amount = amount;

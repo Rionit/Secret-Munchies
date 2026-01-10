@@ -28,6 +28,7 @@ public class OrderMakerApp : MonoBehaviour
             element.Reset();
         }
         isNonzeroOrder = false;
+        TryEnableButton();
     }
 
     public void SetNPCReady(bool isNPCReady)

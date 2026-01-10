@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: Coke
   m_EditorClassIdentifier: Assembly-CSharp::FoodScriptableObject
   type: 2
+  textVariations:
+  - Coke
+  - Cola
+  - Munchie's Cola
+  - Munchie's Coke
   spacing: 0.1
   prepareTime: 2
-  prefab: {fileID: 6303294973834408532, guid: 48b515c4c9cb5584ca30ab4c496f2fb4, type: 3}
   sprite: {fileID: 21300000, guid: 33a045792cd916646abc169b663c3451, type: 3}
+  prefab: {fileID: 6303294973834408532, guid: 48b515c4c9cb5584ca30ab4c496f2fb4, type: 3}

@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Fries
   m_EditorClassIdentifier: Assembly-CSharp::FoodScriptableObject
   type: 1
+  textVariations:
+  - Fries
+  - Munchie's Fries
   spacing: 0.1
   prepareTime: 2
-  prefab: {fileID: 6303294973834408532, guid: 2f0fe620cb61ec346b63c9f1e0f2c4ab, type: 3}
   sprite: {fileID: 21300000, guid: ae4fc4ab875f4af4ca23d2939d60b4d3, type: 3}
+  prefab: {fileID: 6303294973834408532, guid: 2f0fe620cb61ec346b63c9f1e0f2c4ab, type: 3}

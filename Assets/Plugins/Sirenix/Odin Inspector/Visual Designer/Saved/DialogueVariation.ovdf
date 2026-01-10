@@ -1,0 +1,39 @@
+OVDF v1.1
+DialogueVariation, Assembly-CSharp
+
+# $7NLRdZ8eJiLMMS3QuLbsnD
+Position: $root:2
++ [Sirenix.OdinInspector.TitleGroupAttribute]
+	GroupName = "Sequence Variation"
+	Alignment = Centered
+	BoldTitle = True
+	Indent = False
+
+# A_Aliens
+Position: $9rzJ2ENrBKUAPiJ9X5HLYu:0
+* [Sirenix.OdinInspector.InfoBoxAttribute]
+	GUIAlwaysEnabled = True
+- [Sirenix.OdinInspector.TitleAttribute]
+	TitleAlignment = Centered
+
+# D_War
+Position: $9rzJ2ENrBKUAPiJ9X5HLYu:3
+
+# sequence
+Position: $7NLRdZ8eJiLMMS3QuLbsnD:1
+* [Sirenix.OdinInspector.InfoBoxAttribute]
+	InfoMessageType = Error
+* [Sirenix.OdinInspector.ListDrawerSettingsAttribute]
+	AlwaysAddDefaultValue = True
+
+# B_BlackOps
+Position: $9rzJ2ENrBKUAPiJ9X5HLYu:1
+
+# C_Politics
+Position: $9rzJ2ENrBKUAPiJ9X5HLYu:2
+
+# categories
+Position: $7NLRdZ8eJiLMMS3QuLbsnD:0
+- [Sirenix.OdinInspector.TitleAttribute]
+	TitleAlignment = Centered
++ [Sirenix.OdinInspector.HideLabelAttribute]

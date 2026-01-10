@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f25091eb94cf341887f71c2385d2e7, type: 3}
+  m_Name: Opener
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueMessageSO
+  type: 0
+  variations:
+  - parent: {fileID: 11400000}
+    sequence:
+    - "Hey\u2014uh, yeah. Hi."
+    categories: 0
+  - parent: {fileID: 11400000}
+    sequence:
+    - "Morning. Lemme just start with this\u2026"
+    categories: 0
+  - parent: {fileID: 11400000}
+    sequence:
+    - "Okay, don\u2019t judge me, but-"
+    categories: 0
+  - parent: {fileID: 11400000}
+    sequence:
+    - "Hey there. Uh\u2014one sec."
+    categories: 0
+  - parent: {fileID: 11400000}
+    sequence:
+    - "Morning. Or\u2014whatever time it is."
+    categories: 0
+  - parent: {fileID: 11400000}
+    sequence:
+    - Hey there.
+    categories: 0
+  - parent: {fileID: 11400000}
+    sequence:
+    - "Uh\u2014hi."
+    categories: 0
+  - parent: {fileID: 11400000}
+    sequence:
+    - "Hi\u2014sorry."
+    categories: 0

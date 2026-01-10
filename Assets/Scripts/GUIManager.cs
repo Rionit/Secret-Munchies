@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GUIManager : MonoBehaviour
 {
     public Image itemImage;
-    public Image itemFrame;
+    public GameObject itemFrame;
     public Sprite bagSprite;
     
     private void Start()
@@ -34,6 +34,6 @@ public class GUIManager : MonoBehaviour
     private void OnItemDropped(GameObject obj)
     {
         itemImage.sprite = null;
-        itemFrame.gameObject.SetActive(false);
+        itemFrame.SetActive(false);
     }
 }

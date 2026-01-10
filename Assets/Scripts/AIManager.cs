@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,10 @@ public class AIManager : MonoBehaviour
 {
     public static AIManager Instance { get; private set; }
 
+    public Action onNPCOrderCreated;
+
     [Required] public Transform guiCanvas;
+    [Required] public DialogueController dialogueController;
     
     [Title("Settings")]
     [InfoBox("Maximum number of NPCs allowed in the order queue")]
@@ -53,6 +57,9 @@ public class AIManager : MonoBehaviour
     [ReadOnly, ShowInInspector]
     private List<NPC> waitQueue = new();
 
+    [ReadOnly, ShowInInspector] 
+    private bool isDialogueEnded = false;
+
     private bool ValidateOrderQueuePoints(Transform[] points)
     {
         return points != null && points.Length == _orderQueueSize;
@@ -76,12 +83,18 @@ public class AIManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(MoveToQueue());
+        dialogueController.OnDialogueEnded += OnDialogueEnded;
         GameManager.Instance.onItemDropped += obj =>
         {
             Bag bag = obj.GetComponent<Bag>();
             if (bag != null)
                 OrderFinished(bag);
         };
+    }
+
+    private void OnDialogueEnded(TopSecretCategory category)
+    {
+        isDialogueEnded = true;
     }
 
     private IEnumerator MoveToQueue()
@@ -107,6 +120,8 @@ public class AIManager : MonoBehaviour
         if (orderQueue.FindIndex(n => n == npc) == 0)
         {
             FoodManager.Instance.orderMakerApp.SetNPCReady(true);
+            isDialogueEnded = false;
+            dialogueController.StartDialogue(npc);
         }
     }
 
@@ -133,6 +148,16 @@ public class AIManager : MonoBehaviour
 
     public void ChangeToWaitQueue(int orderId)
     {
+        StartCoroutine(ChangeToWaitQueueRoutine(orderId));
+    }
+
+    private IEnumerator ChangeToWaitQueueRoutine(int orderId)
+    {
+        while (!isDialogueEnded)
+        {
+            yield return null; // Wait one frame
+        }
+        
         NPC npc = orderQueue[0];
         npc.orderId = orderId;
 
@@ -141,6 +166,7 @@ public class AIManager : MonoBehaviour
 
         npc.SetState(NPC.States.WAIT_QUEUE);
         FoodManager.Instance.orderMakerApp.SetNPCReady(false);
+        onNPCOrderCreated?.Invoke();
     }
 
     private void OrderFinished(Bag bag)
@@ -150,7 +176,7 @@ public class AIManager : MonoBehaviour
         npc.SetState(NPC.States.COLLECT_ORDER);
         waitQueue.Remove(npc);
     }
-
+    
     public Vector3 GetQueueDestination(NPC npc)
     {
         Transform[] queuePoints = npc.state switch

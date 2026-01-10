@@ -1,0 +1,32 @@
+OVDF v1.1
+FoodSO, Assembly-CSharp
+MetaGuid:6904dafb5b8d6a57bb98ec742c3d57ab
+
+# "Visuals"
+Position: $JyTjzzAf3PUMeP3jkT4uT9:0
+* [Sirenix.OdinInspector.HorizontalGroupAttribute]
+	Title = ""
+
+# $JyTjzzAf3PUMeP3jkT4uT9
+Position: $root
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Visuals"
+	LabelText = "Visuals"
+	CenterLabel = True
+	ShowLabel = True
+
+# sprite
+* [Sirenix.OdinInspector.TitleAttribute]
+	Title = "Sprite"
+	TitleAlignment = Centered
+	Subtitle = "Sprite that will be visible in item UI"
++ [Sirenix.OdinInspector.PropertyTooltipAttribute]
+	Tooltip = "Sprite that will be visible in item UI"
+
+# prefab
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "Prefab"
+	TitleAlignment = Centered
+	Subtitle = "Prefab that will be instantiated in Food Dispenser"
++ [Sirenix.OdinInspector.PropertyTooltipAttribute]
+	Tooltip = "Prefab that will be instantiated in Food Dispenser"

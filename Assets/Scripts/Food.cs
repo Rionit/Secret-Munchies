@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    public FoodScriptableObject foodData;
+    public FoodSO foodData;
     
     public Dispenser dispenser;
 

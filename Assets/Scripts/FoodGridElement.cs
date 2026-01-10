@@ -10,7 +10,7 @@ public class FoodGridElement : MonoBehaviour
 
     [Title("Food Data")]
     [Required, Tooltip("Reference to the ScriptableObject defining this food")]
-    public FoodScriptableObject food;
+    public FoodSO food;
 
     [Title("UI Elements")]
     [Required, Tooltip("Text label showing current count")]

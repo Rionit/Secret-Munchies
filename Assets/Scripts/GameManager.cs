@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -13,7 +14,8 @@ public class GameManager : MonoBehaviour
     [Title("Events")]
     [HideInInspector] public event Action<GameObject> onItemGrabbed;
     [HideInInspector] public event Action<GameObject> onItemDropped;
-    [HideInInspector] public event Action onCameraChanged;
+    [HideInInspector] public event Action<CinemachineCamera> onCameraChanged;
+    [HideInInspector] public event Action<CinemachineCamera> onCameraBlendFinished;
 
     [Title("Cameras")]
     [ValidateInput(nameof(ValidateVirtualCameras),
@@ -56,7 +58,10 @@ public class GameManager : MonoBehaviour
 
     [ReadOnly, ShowInInspector]
     private CinemachineCamera overrideCamera;
-
+    
+    private CinemachineBrain cinemachineBrain;
+    private Coroutine currentBlend;
+    
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -73,7 +78,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        cinemachineBrain = mainCamera.GetComponent<CinemachineBrain>();
+        
         SetActiveCamera(0);
+        onCameraBlendFinished?.Invoke(virtualCameras[0]);
     }
 
     private void OnEnable()
@@ -95,7 +103,9 @@ public class GameManager : MonoBehaviour
     {
         currentCameraIdx = (currentCameraIdx + 1) % virtualCameras.Length;
         SetActiveCamera(currentCameraIdx);
-        onCameraChanged?.Invoke();
+        onCameraChanged?.Invoke(virtualCameras[currentCameraIdx]);
+        StartWaitingForCameraBlendFinish();
+        Debug.LogWarning("Next Camera");
     }
 
     [Button(ButtonSizes.Small)]
@@ -103,7 +113,35 @@ public class GameManager : MonoBehaviour
     {
         currentCameraIdx = (currentCameraIdx - 1 + virtualCameras.Length) % virtualCameras.Length;
         SetActiveCamera(currentCameraIdx);
-        onCameraChanged?.Invoke();
+        onCameraChanged?.Invoke(virtualCameras[currentCameraIdx]);
+        StartWaitingForCameraBlendFinish();
+        Debug.LogWarning("Prev Camera");
+    }
+
+    private void StartWaitingForCameraBlendFinish()
+    {
+        // Stop previous blend if running
+        if (currentBlend != null)
+        {
+            StopCoroutine(currentBlend);
+        }
+        
+        // Start new blend wait
+        currentBlend = StartCoroutine(WaitForCameraBlendFinish());
+    }
+    
+    private IEnumerator WaitForCameraBlendFinish()
+    {
+        Debug.Log("Starting camera switch...");
+        yield return new WaitUntil(() => cinemachineBrain.IsBlending);
+        
+        Debug.Log("Blend in progress...");
+        
+        // Wait for blend to complete
+        yield return new WaitWhile(() => cinemachineBrain.IsBlending);
+        
+        Debug.Log("Blend complete! Camera transition finished.");
+        onCameraBlendFinished?.Invoke(virtualCameras[currentCameraIdx]);
     }
 
     private void SetActiveCamera(int index)

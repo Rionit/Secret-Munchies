@@ -70,7 +70,7 @@ public class Bag : MonoBehaviour
         if (isPacked) FoodManager.Instance.FreeSpawnPoint(spawnId);
     }
     
-    public void AddFood(FoodScriptableObject food, int amount = 1)
+    public void AddFood(FoodSO food, int amount = 1)
     {
         if (amount <= 0) return;
 

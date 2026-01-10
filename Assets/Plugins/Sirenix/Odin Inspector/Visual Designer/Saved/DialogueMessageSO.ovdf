@@ -1,0 +1,55 @@
+OVDF v1.1
+DialogueMessageSO, Assembly-CSharp
+MetaGuid:c3f25091eb94cf341887f71c2385d2e7
+
+# $Wq8gkEiMYrbRdCNmpTCpRH
+Position: $root:0
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+
+# type
+Position: $Wq8gkEiMYrbRdCNmpTCpRH:0
+* [Sirenix.OdinInspector.TitleAttribute]
+	TitleAlignment = Centered
++ [Sirenix.OdinInspector.HideLabelAttribute]
+
+# A_Aliens
+Position: $AQiMiEqsJ3eFRdubdhsu1M:0
++ [Sirenix.OdinInspector.TitleAttribute]
+	TitleAlignment = Left
+	Title = "A - Aliens"
++ [Sirenix.OdinInspector.HideLabelAttribute]
+
+# B_BlackOps
+Position: $ChjPuUmN97GcbVUbsYiVad:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "B - Black Ops"
+	TitleAlignment = Left
+
+# C_Politics
+Position: $LYX8gF7e2XotC9pvgxx5Rp:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "C - Politics"
+	TitleAlignment = Left
+
+# D_War
+Position: $ArAgYmNrBHFNQFm9YQZ1uz:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "War"
+	TitleAlignment = Left
+
+# messages
+Position: $Wq8gkEiMYrbRdCNmpTCpRH:2
+* [Sirenix.OdinInspector.TitleAttribute]
+	TitleAlignment = Centered
+
+# invalidCombinationWarning
+Position: $LiMTE2jJ9M23hbJG2G4A41:1
+- [Sirenix.OdinInspector.HideLabelAttribute]
+
+# variations
+Position: $Wq8gkEiMYrbRdCNmpTCpRH:1
+* [Sirenix.OdinInspector.TitleAttribute]
+	Subtitle = "List of different dialogue sequences of this type"

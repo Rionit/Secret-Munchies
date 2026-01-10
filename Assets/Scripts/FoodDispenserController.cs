@@ -7,7 +7,7 @@ public class FoodDispenserController : MonoBehaviour
 {
     public List<Dispenser> dispensers;
 
-    public void DispenseFood(FoodScriptableObject foodData)
+    public void DispenseFood(FoodSO foodData)
     {
         foreach (Dispenser dispenser in dispensers)
         {

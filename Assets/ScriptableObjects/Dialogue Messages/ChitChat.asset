@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f25091eb94cf341887f71c2385d2e7, type: 3}
+  m_Name: ChitChat
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueMessageSO
+  type: 2
+  variations:
+  - parent: {fileID: 11400000}
+    sequence:
+    - "Yeah\u2026 cool. Appreciate it. "
+    - "Honestly, it\u2019s been one of those mornings, you know?"
+    - " Lots of\u2026 paperwork. But hey, this helps. Definitely helps."
+    categories: 0
+  - parent: {fileID: 11400000}
+    sequence:
+    - 'Alright, sounds good. Thanks. '
+    - "Uh\u2026 so, do you guys\u2026 ever get\u2026 like, a really busy shift? "
+    - "I mean, it\u2019s fine, just curious."
+    categories: 0
+  - parent: {fileID: 11400000}
+    sequence:
+    - "Sweet. Thanks. Honestly, I don\u2019t usually\u2026 stop for lunch, but today\u2026 "
+    - seemed like a good idea. Glad I did.
+    categories: 0
+  - parent: {fileID: 11400000}
+    sequence:
+    - 'Perfect. Appreciate it. '
+    - "You know, I\u2019ve walked past this place a million times and\u2026 yeah,
+      finally came in. "
+    - So, here we are.
+    categories: 0
+  - parent: {fileID: 11400000}
+    sequence:
+    - 'Thanks a lot. '
+    - "Uh\u2026 you\u2019re used to weird orders, right? "
+    - "Because, yeah, this is probably\u2026 not standard."
+    categories: 0

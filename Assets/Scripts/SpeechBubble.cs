@@ -16,13 +16,16 @@ public class SpeechBubble : MonoBehaviour
     [MinValue(0.01f)]
     public float typingSpeed = 0.04f;
 
+    [MinValue(0.1f)]
+    public float sentencePause = 0.4f;
+    
     [Title("Tween Settings")]
     public float scaleTweenDuration = 0.25f;
     public Ease scaleEase = Ease.OutBack;
 
     [Title("Events")]
     public Action<string> OnCharacterTyped;
-    public Action OnTextTyped;
+    public Action<string> OnTextTyped;
 
     private Coroutine typingRoutine;
 
@@ -59,10 +62,10 @@ public class SpeechBubble : MonoBehaviour
         {
             text.text += c;
             OnCharacterTyped?.Invoke(c.ToString());
-            yield return new WaitForSeconds(typingSpeed);
+            yield return new WaitForSeconds(c is '.' or ',' or '?' or '!' ? sentencePause : typingSpeed);
         }
         
-        OnTextTyped?.Invoke();
+        OnTextTyped?.Invoke(message);
     }
 
     private void AnimateIn()

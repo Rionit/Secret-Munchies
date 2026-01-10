@@ -20,10 +20,13 @@ Position: $SXLT9VNEpgPXUjcaPkw8M4:1
 Position: $B6nCUzn37RRzEadUwBMNwZ:0
 
 # scaleTweenDuration
-Position: $B6nCUzn37RRzEadUwBMNwZ:1
-
-# scaleEase
 Position: $B6nCUzn37RRzEadUwBMNwZ:2
 
+# scaleEase
+Position: $B6nCUzn37RRzEadUwBMNwZ:3
+
 # ShowText(string)
-Position: $root:6
+Position: $root:5
+
+# sentencePause
+Position: $B6nCUzn37RRzEadUwBMNwZ:1
