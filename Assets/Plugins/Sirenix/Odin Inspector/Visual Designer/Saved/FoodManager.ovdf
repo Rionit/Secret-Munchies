@@ -27,7 +27,7 @@ Position: $U7NXfHLvvVQAV98x9QoL5L:1
 + [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
 
 # $8dW5xMj6F2xAEuKDpksMrQ
-Position: $Kyhnv5rKVQiidVUeg4GaXz:0
+Position: $Kyhnv5rKVQiidVUeg4GaXz:1
 + [Sirenix.OdinInspector.BoxGroupAttribute]
 
 # $FawQDQUerfcFwzBWuptMe1
@@ -70,3 +70,6 @@ Position: $FawQDQUerfcFwzBWuptMe1:1
 
 # foodDispenserController
 Position: $FawQDQUerfcFwzBWuptMe1:0
+
+# AddFood(FoodAmount)
+Position: $Kyhnv5rKVQiidVUeg4GaXz:0

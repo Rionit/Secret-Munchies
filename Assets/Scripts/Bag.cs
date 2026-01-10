@@ -2,25 +2,43 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
+using Sirenix.OdinInspector;
 
 public class Bag : MonoBehaviour
 {
     public GameObject bagOpen;
     public GameObject bagClosed;
-
+    
+    public ParticleSystem bagParticles;
     public TextMeshProUGUI orderNumberText;
     public RectTransform progressBar;
     public float progressBarSpeed = 4f;
 
     public List<FoodAmount> foods = new List<FoodAmount>();
     public int orderId;
-    
+
     [SerializeField] private bool isPacked;
     private bool isMouseDown;
 
     private int spawnId;
     private bool initialized = false;
     private const float progressBardWidth = 0.1362f;
+
+    [Header("Add Food Tween")]
+    public float punchScale = 0.15f;
+    public float punchPosition = 0.1f;
+    public float tweenDuration = 0.25f;
+
+    private Vector3 initialScale;
+    private Vector3 initialPosition;
+    private Tween activeTween;
+
+    private void Awake()
+    {
+        initialScale = transform.localScale;
+        initialPosition = transform.localPosition;
+    }
 
     public void Initialize(int spawnId, int orderId)
     {
@@ -56,20 +74,21 @@ public class Bag : MonoBehaviour
         }
     }
 
+    [Button]
     private void SetPacked(bool packed)
     {
         if (isPacked == packed)
             return;
 
         isPacked = packed;
-        
+
         bagOpen.SetActive(!isPacked);
         bagClosed.SetActive(isPacked);
         progressBar.parent.gameObject.SetActive(!isPacked);
-        
-        if (isPacked) FoodManager.Instance.FreeSpawnPoint(spawnId);
+
+        if (isPacked) FoodManager.Instance?.FreeSpawnPoint(spawnId);
     }
-    
+
     public void AddFood(FoodSO food, int amount = 1)
     {
         if (amount <= 0) return;
@@ -83,6 +102,32 @@ public class Bag : MonoBehaviour
         {
             foods.Add(new FoodAmount(food, amount));
         }
+    }
+
+    public void PlayAddFoodTween()
+    {
+        activeTween?.Kill();
+
+        transform.localScale = initialScale;
+        transform.localPosition = initialPosition;
+
+        bagParticles.Play();
+        
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(transform.DOPunchScale(
+            Vector3.one * punchScale,
+            tweenDuration,
+            8,
+            0.8f));
+
+        seq.Join(transform.DOPunchPosition(
+            UnityEngine.Random.insideUnitSphere * punchPosition,
+            tweenDuration,
+            10,
+            0.9f));
+
+        activeTween = seq;
     }
 
     public void OnMouseDown()

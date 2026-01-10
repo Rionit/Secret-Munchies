@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3219864201025155053}
   - component: {fileID: 3561891964428397400}
   - component: {fileID: 886483027312813167}
+  - component: {fileID: 7415135498178368711}
   m_Layer: 0
   m_Name: Fries
   m_TagString: Untagged
@@ -85,6 +86,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Food
   foodData: {fileID: 0}
   dispenser: {fileID: 0}
+--- !u!114 &7415135498178368711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6303294973834408532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cfc3a14911a874faabadbfae36135d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Trail
+  trail: {fileID: 1179750675183602496, guid: 5c6be19581f733647ba2a89a510eea8d, type: 3}
 --- !u!1001 &20277932258812711
 PrefabInstance:
   m_ObjectHideFlags: 0

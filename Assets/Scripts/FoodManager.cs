@@ -201,4 +201,13 @@ public class FoodManager : MonoBehaviour
     {
         return points != null && points.Length > 0;
     }
+
+    [Button]
+    private void DebugAddFood(FoodAmount f)
+    {
+        for (int i = 0; i < f.amount; i++)
+        {
+            foodDispenserController.DispenseFood(f.food);
+        }
+    }
 }

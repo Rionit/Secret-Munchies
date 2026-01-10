@@ -1,0 +1,93 @@
+OVDF v1.1
+Bag, Assembly-CSharp
+MetaGuid:a920c8e6eb8f7814496fb9ed6bbfc776
+
+# $3Zkqvx4X9TnVsttnDPT2L9
+Position: $EDmy7m6SNAq5JzG8kTo4Hr:1
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+
+# $L31Kk6qGheSkphGzqJNgmN
+Position: $root:0
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Prefabs"
+	ShowLabel = True
+	CenterLabel = True
+
+# $UCkYbzUF8ZxEKHuEs8tPP7
+Position: $root:1
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "References"
+	ShowLabel = True
+	CenterLabel = True
+
+# $EDmy7m6SNAq5JzG8kTo4Hr
+Position: $root:2
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Settings"
+	ShowLabel = True
+	CenterLabel = True
+
+# $YA7UENbXsD55Ecnq61cG2v
+Position: $root:15
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Debug"
+	ShowLabel = True
+	CenterLabel = True
+
+# $HTb8VMvydZJXDY3BdJF7L7
+Position: $YA7UENbXsD55Ecnq61cG2v:2
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $4hwVtdmX6G4wjeCGTaegW9
+Position: $HTb8VMvydZJXDY3BdJF7L7:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+	Size = 20 %
+
+# $2BZrdMCb359rqbGcy3Hmf2
+Position: $HTb8VMvydZJXDY3BdJF7L7:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# tweenDuration
+Position: $3Zkqvx4X9TnVsttnDPT2L9:2
+
+# punchPosition
+Position: $3Zkqvx4X9TnVsttnDPT2L9:1
+
+# punchScale
+Position: $3Zkqvx4X9TnVsttnDPT2L9:0
+
+# bagOpen
+Position: $L31Kk6qGheSkphGzqJNgmN:0
+
+# bagClosed
+Position: $L31Kk6qGheSkphGzqJNgmN:1
+
+# orderNumberText
+Position: $UCkYbzUF8ZxEKHuEs8tPP7:1
+
+# progressBar
+Position: $UCkYbzUF8ZxEKHuEs8tPP7:2
+
+# progressBarSpeed
+Position: $EDmy7m6SNAq5JzG8kTo4Hr:0
+
+# isPacked
+Position: $4hwVtdmX6G4wjeCGTaegW9:0
++ [Sirenix.OdinInspector.ReadOnlyAttribute]
++ [Sirenix.OdinInspector.ToggleLeftAttribute]
+
+# orderId
+Position: $YA7UENbXsD55Ecnq61cG2v:1
++ [Sirenix.OdinInspector.ReadOnlyAttribute]
+
+# foods
+Position: $YA7UENbXsD55Ecnq61cG2v:0
+
+# SetPacked(bool)
+Position: $2BZrdMCb359rqbGcy3Hmf2:0
+
+# PlayAddFoodTween()
+Position: $3Zkqvx4X9TnVsttnDPT2L9:3
+
+# bagParticles
+Position: $UCkYbzUF8ZxEKHuEs8tPP7:0

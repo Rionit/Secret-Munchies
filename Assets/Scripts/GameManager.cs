@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [Title("Events")]
     [HideInInspector] public event Action<GameObject> onItemGrabbed;
     [HideInInspector] public event Action<GameObject> onItemDropped;
+    [HideInInspector] public event Action<GameObject> onItemDropTweenEnded;
     [HideInInspector] public event Action<CinemachineCamera> onCameraChanged;
     [HideInInspector] public event Action<CinemachineCamera> onCameraBlendFinished;
 
@@ -172,7 +173,12 @@ public class GameManager : MonoBehaviour
         Sequence sequence = DOTween.Sequence();
         sequence.Append(holdingItem.transform.DOMove(bag.transform.position + Vector3.up * 0.2f, 0.5f));
         sequence.Append(holdingItem.transform.DOMove(bag.transform.position, 0.5f))
-            .OnComplete(() => Destroy(itemToDestroy));
+            .OnComplete(() =>
+            {
+                Destroy(itemToDestroy);
+                onItemDropTweenEnded?.Invoke(holdingItem);
+                bag.PlayAddFoodTween();
+            });
 
         onItemDropped?.Invoke(holdingItem);
         holdingItem = null;
@@ -204,7 +210,8 @@ public class GameManager : MonoBehaviour
             .OnComplete(() =>
             {
                 droppedItem.transform.SetParent(null);
-                onItemDropped?.Invoke(droppedItem);
+                onItemDropped?.Invoke(droppedItem); // TODO: Put outside lambda
+                onItemDropTweenEnded?.Invoke(holdingItem);
             });
 
         holdingItem = null;
