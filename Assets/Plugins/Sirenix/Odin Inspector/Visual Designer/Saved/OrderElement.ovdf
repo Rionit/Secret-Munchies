@@ -1,0 +1,6 @@
+OVDF v1.1
+OrderElement, Assembly-CSharp
+MetaGuid:95517705bb545d744aad3eb589f96b54
+
+# orderId
++ [Sirenix.OdinInspector.RequiredAttribute]

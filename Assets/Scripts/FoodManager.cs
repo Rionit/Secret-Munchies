@@ -29,6 +29,8 @@ public class FoodManager : MonoBehaviour
     [Required]
     public FoodDispenserController foodDispenserController;
 
+    [Required] public OrderScreen orderScreen;
+    
     [Required]
     public OrderMakerApp orderMakerApp;
 
@@ -76,6 +78,7 @@ public class FoodManager : MonoBehaviour
         }
 
         orders.Add(currentOrder);
+        orderScreen.AddOrder(currentOrder);
         StartCoroutine(PrepareFood(currentOrder));
         TrySpawnOrder(currentOrder);
 
@@ -208,6 +211,19 @@ public class FoodManager : MonoBehaviour
         for (int i = 0; i < f.amount; i++)
         {
             foodDispenserController.DispenseFood(f.food);
+        }
+    }
+
+    public void OnOrderFinished(int orderId, bool result)
+    {
+        foreach (Order order in orders)
+        {
+            if (order.Id == orderId)
+            {
+                orders.Remove(order);
+                orderScreen.RemoveOrder(order);
+                break;
+            }
         }
     }
 }

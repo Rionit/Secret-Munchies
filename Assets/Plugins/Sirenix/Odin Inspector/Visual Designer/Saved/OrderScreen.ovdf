@@ -1,0 +1,81 @@
+OVDF v1.1
+OrderScreen, Assembly-CSharp
+MetaGuid:5d3d8a340ce407d4babcc640a7416370
+
+# $EtvPEm6sYq9SmSkk3CbweN
+Position: $root:0
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "References"
+	CenterLabel = True
+	ShowLabel = True
+
+# $4y7D1pM6EfSGwWtnEtDGMX
+Position: $root:1
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Settings"
+	CenterLabel = True
+	ShowLabel = True
+
+# $KET6LvqEGspcE19TGzTP6i
+Position: $root:3
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Debug"
+	CenterLabel = True
+	ShowLabel = True
+
+# orderPrefab
+Position: $EtvPEm6sYq9SmSkk3CbweN:0
++ [Sirenix.OdinInspector.RequiredAttribute]
+
+# requiredFoodPrefab
++ [Sirenix.OdinInspector.RequiredAttribute]
+
+# orderedFoodPrefab
+Position: $EtvPEm6sYq9SmSkk3CbweN:1
++ [Sirenix.OdinInspector.RequiredAttribute]
+
+# maxVisibleOrders
+Position: $4y7D1pM6EfSGwWtnEtDGMX:2
++ [UnityEngine.RangeAttribute]
+	max = 6
+	min = 1
+
+# AddOrder(Order)
+Position: $root:4
+
+# RemoveOrder(Order)
+Position: $root:5
+
+# TestAddOrder(FoodAmount)
+Position: $KET6LvqEGspcE19TGzTP6i:0
+* [Sirenix.OdinInspector.ButtonAttribute]
+	Style = Box
+	Expanded = True
+	stretch = True
+	HasDefinedStretch = True
+	drawResult = False
+	drawResultIsSet = True
+
+# TestResetOrders()
+Position: $KET6LvqEGspcE19TGzTP6i:2
+* [Sirenix.OdinInspector.ButtonAttribute]
+	Style = Box
+	Expanded = True
+	stretch = True
+	HasDefinedStretch = True
+
+# TestRemoveOrder(int)
+Position: $KET6LvqEGspcE19TGzTP6i:1
+* [Sirenix.OdinInspector.ButtonAttribute]
+	Style = Box
+	Expanded = True
+	drawResult = False
+	drawResultIsSet = True
+	stretch = True
+	HasDefinedStretch = True
+
+# orders
+Position: $4y7D1pM6EfSGwWtnEtDGMX:0
+
+# visibleOrders
+Position: $4y7D1pM6EfSGwWtnEtDGMX:1

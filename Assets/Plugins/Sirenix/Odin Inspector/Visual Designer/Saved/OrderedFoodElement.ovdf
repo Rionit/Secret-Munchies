@@ -1,0 +1,9 @@
+OVDF v1.1
+OrderedFoodElement, Assembly-CSharp
+MetaGuid:820df4ea6a977404ba125ad5c3024f4e
+
+# foodName
++ [Sirenix.OdinInspector.RequiredAttribute]
+
+# amount
++ [Sirenix.OdinInspector.RequiredAttribute]

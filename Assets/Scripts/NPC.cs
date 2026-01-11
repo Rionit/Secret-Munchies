@@ -12,7 +12,7 @@ public class NPC : MonoBehaviour
     public enum States { NULL, IDLE, PATROL, ORDER_QUEUE, WAIT_QUEUE, WAIT_PATROL, COLLECT_ORDER }
 
     [Title("Events")]
-    [HideInInspector] public Action<int> onOrderCollected;
+    [HideInInspector] public Action<int, bool> onOrderCollected;
     [HideInInspector] public Action<NPC> onArrivedAtQueue;
 
     [FormerlySerializedAs("dirChangeChance")]
@@ -126,6 +126,8 @@ public class NPC : MonoBehaviour
         {
             isPickingBag = true;
             GameManager.Instance.counterController.PickItem(bag.gameObject);
+            
+            bool result = FoodManager.Compare(bag.foods, wantedFoods);
 
             Sequence sequence = DOTween.Sequence();
             sequence.Append(bag.transform.DOMove(bag.transform.position + Vector3.up * 0.2f, 0.5f));
@@ -133,10 +135,10 @@ public class NPC : MonoBehaviour
                 .OnComplete(() => Destroy(bag.gameObject)));
             sequence.AppendInterval(1.0f).OnComplete(() =>
             {
+                onOrderCollected?.Invoke(orderId, result);
                 isPickingBag = false;
                 bag = null;
                 SetState(States.PATROL);
-                onOrderCollected?.Invoke(orderId);
             });
         }
     }
@@ -158,8 +160,10 @@ public class NPC : MonoBehaviour
     [Tooltip("Force NPC into a new state (debug)")]
     public void SetState(States newState)
     {
+        Debug.Log($"Trying to change from {state} to {newState}");
         if (state == newState) return;
 
+        Debug.Log($"State changed from {state} to {newState}");
         hasArrivedAtQueue = false;
         state = newState;
         UpdateAgentPriority();

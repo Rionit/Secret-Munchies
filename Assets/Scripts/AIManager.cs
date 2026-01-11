@@ -10,6 +10,7 @@ public class AIManager : MonoBehaviour
     public static AIManager Instance { get; private set; }
 
     public Action onNPCOrderCreated;
+    public Action<bool> onOrderFinished;
 
     [Required] public Transform guiCanvas;
     [Required] public DialogueController dialogueController;
@@ -88,7 +89,7 @@ public class AIManager : MonoBehaviour
         {
             Bag bag = obj.GetComponent<Bag>();
             if (bag != null)
-                OrderFinished(bag);
+                OrderReadyForCollection(bag);
         };
     }
 
@@ -112,6 +113,7 @@ public class AIManager : MonoBehaviour
         {
             allNPCs.Add(npc);
             npc.onArrivedAtQueue += OnNPCArrived;
+            npc.onOrderCollected += FoodManager.Instance.OnOrderFinished;
         }
     }
 
@@ -169,14 +171,14 @@ public class AIManager : MonoBehaviour
         onNPCOrderCreated?.Invoke();
     }
 
-    private void OrderFinished(Bag bag)
+    private void OrderReadyForCollection(Bag bag)
     {
         NPC npc = allNPCs.Find(n => n.orderId == bag.orderId);
         npc.bag = bag;
         npc.SetState(NPC.States.COLLECT_ORDER);
         waitQueue.Remove(npc);
     }
-    
+
     public Vector3 GetQueueDestination(NPC npc)
     {
         Transform[] queuePoints = npc.state switch
