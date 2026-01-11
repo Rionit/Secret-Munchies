@@ -34,7 +34,10 @@ public class OrderScreen : MonoBehaviour
     public void RemoveOrder(Order orderToRemove)
     {
         orders.Remove(orderToRemove);
-        Destroy(visibleOrders[orderToRemove.Id]);
+        GameObject instance = visibleOrders[orderToRemove.Id];
+        AppWindow app = visibleOrders[orderToRemove.Id].GetComponent<AppWindow>();
+        app.OnClosed += () => { Destroy(instance); };
+        app.Close();
         visibleOrders.Remove(orderToRemove.Id);
         TryShowOrders();
     }
