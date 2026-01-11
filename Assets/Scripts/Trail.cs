@@ -12,6 +12,6 @@ public class Trail : MonoBehaviour
 
     private void Start()
     {
-        Instantiate(trail, this.transform);
+        // Instantiate(trail, this.transform);
     }
 }

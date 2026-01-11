@@ -77,7 +77,7 @@ public class NPC : MonoBehaviour
         agent.updateUpAxis = false;
         agent.speed = Random.Range(minSpeed, maxSpeed);
 
-        direction *= Random.Range(0, 2) == 0 ? -1 : 1;
+        direction = Random.Range(0, 2) == 0 ? -1 : 1;
         SetState(state);
 
         wantedFoods = FoodManager.CreateRandomWantedFoods(FoodManager.Instance.foods);
