@@ -113,6 +113,9 @@
         },
         {
             "m_Id": "ec11bae574964b3c83aba016d19785b2"
+        },
+        {
+            "m_Id": "9c777adae42f45c18322f3997ff997b9"
         }
     ],
     "m_GroupDatas": [],
@@ -380,6 +383,20 @@
             "m_InputSlot": {
                 "m_Node": {
                     "m_Id": "46c43f9454f846e9b37a47b784b3e292"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "9c777adae42f45c18322f3997ff997b9"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "ec430a7e4ca549a1b42e8dfd209bd8e0"
                 },
                 "m_SlotId": 1
             }
@@ -2674,10 +2691,10 @@
     "m_Guid": {
         "m_GuidSerialized": "42cdf604-ed2c-45a4-9f63-efe36a897801"
     },
-    "m_Name": "Size",
+    "m_Name": "NoiseDistance",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Size",
-    "m_DefaultReferenceName": "_Size",
+    "m_RefNameGeneratedByDisplayName": "NoiseDistance",
+    "m_DefaultReferenceName": "_NoiseDistance",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -2689,7 +2706,7 @@
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
-    "m_Value": 0.0,
+    "m_Value": -2.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -3054,6 +3071,42 @@
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "9c777adae42f45c18322f3997ff997b9",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -35.000003814697269,
+            "y": 1958.000244140625,
+            "width": 151.0000457763672,
+            "height": 33.9998779296875
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "d9be245a00404f94a8d15f788373ee23"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "8546a2f487a14fe6b98597f174f0e34b"
     }
 }
 
@@ -3632,6 +3685,21 @@
         "y": 0.0,
         "z": 0.0
     },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "d9be245a00404f94a8d15f788373ee23",
+    "m_Id": 0,
+    "m_DisplayName": "NoiseDistance",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
     "m_Labels": []
 }
 

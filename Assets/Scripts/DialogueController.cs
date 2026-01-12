@@ -206,7 +206,7 @@ public class DialogueController : MonoBehaviour
         }
     }
 
-    private void ClearCurrentDialogue()
+    public void ClearCurrentDialogue()
     {
         if (currentDelayCoroutine != null)
         {

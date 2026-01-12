@@ -29,6 +29,7 @@ public class BookController : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.onCameraChanged += _ => PutDown();
+        openedBook.SetActive(false);
     }
 
     public void Grab()
@@ -49,6 +50,7 @@ public class BookController : MonoBehaviour
         sequence.Append(openedBook.transform.DOLocalMoveY(ogOpenedPosition.y + LiftOpened, LiftDurationMedium));
 
         isHeld = true;
+        openedBook.SetActive(true);
     }
 
     public void PutDown()
@@ -61,6 +63,7 @@ public class BookController : MonoBehaviour
         sequence.Append(closedBook.transform.DOMove(ogClosedPosition + new Vector3(0f, LiftSmall, 0f), LiftDurationMedium));
         sequence.Join(closedBook.transform.DORotate(ogClosedRotation, LiftDurationMedium));
         sequence.Append(closedBook.transform.DOMoveY(ogClosedPosition.y, LiftDurationShort));
+        sequence.OnComplete(() => openedBook.SetActive(false));
         
         isHeld = false;
     }

@@ -27,6 +27,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _Cull: 0
     - _QueueControl: 0
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 1}

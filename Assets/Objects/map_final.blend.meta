@@ -32,6 +32,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: PureGray
+    second: {fileID: 2100000, guid: 31da15c1a2bdf08439c7637aefa08579, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PureWhite
+    second: {fileID: 2100000, guid: 9a9916d4fea34754ca9c672745e3c0e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: StickyNote
     second: {fileID: 2100000, guid: 8e018abd02f53c6468175098e848d3a2, type: 2}
   - first:

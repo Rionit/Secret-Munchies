@@ -9,6 +9,7 @@ public class Clickable : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log("OW!!");
         onClick?.Invoke(gameObject);
     }
 }

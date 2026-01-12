@@ -7,22 +7,31 @@ Position: $root:4
 + [Sirenix.OdinInspector.BoxGroupAttribute]
 	GroupName = "Cameras"
 	LabelText = "Cameras"
+	CenterLabel = True
+	ShowLabel = True
 
 # $BStm6xNKbgQHA12SqpqQgv
 Position: $root:5
 + [Sirenix.OdinInspector.BoxGroupAttribute]
 	GroupName = "Player Interaction"
 
-# virtualCameras
+# $PcbYDSVmdN7gczhPbbpxAG
 Position: $Q9rdnsEY6pdmHVuXToD2Dr:1
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "References"
+	ShowLabel = True
+	CenterLabel = True
+
+# virtualCameras
+Position: $PcbYDSVmdN7gczhPbbpxAG:1
 - [Sirenix.OdinInspector.TitleAttribute]
 	TitleAlignment = Centered
 
 # computerCloseupCamera
-Position: $Q9rdnsEY6pdmHVuXToD2Dr:2
+Position: $PcbYDSVmdN7gczhPbbpxAG:2
 
 # mainCamera
-Position: $Q9rdnsEY6pdmHVuXToD2Dr:3
+Position: $PcbYDSVmdN7gczhPbbpxAG:0
 
 # currentCustomerId
 Position: $BStm6xNKbgQHA12SqpqQgv:0
@@ -35,22 +44,22 @@ Position: $BStm6xNKbgQHA12SqpqQgv:2
 
 # currentCameraIdx
 Position: $Q9rdnsEY6pdmHVuXToD2Dr:0
-+ [Sirenix.OdinInspector.TitleAttribute]
-	Title = "Cameras"
-	TitleAlignment = Centered
 + [Sirenix.OdinInspector.ValueDropdownAttribute]
 
 # playerInput
 Position: $BStm6xNKbgQHA12SqpqQgv:4
 
 # overrideCamera
-Position: $Q9rdnsEY6pdmHVuXToD2Dr:4
+Position: $Q9rdnsEY6pdmHVuXToD2Dr:2
 
 # holdingItem
 Position: $BStm6xNKbgQHA12SqpqQgv:3
 
 # NextCamera()
-Position: $Q9rdnsEY6pdmHVuXToD2Dr:5
+Position: $Q9rdnsEY6pdmHVuXToD2Dr:3
 
 # PrevCamera()
-Position: $Q9rdnsEY6pdmHVuXToD2Dr:6
+Position: $Q9rdnsEY6pdmHVuXToD2Dr:4
+
+# pentagonCamera
+Position: $PcbYDSVmdN7gczhPbbpxAG:3

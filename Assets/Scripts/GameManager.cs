@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public event Action<GameObject> onItemDropTweenEnded;
     [HideInInspector] public event Action<CinemachineCamera> onCameraChanged;
     [HideInInspector] public event Action<CinemachineCamera> onCameraBlendFinished;
+    [HideInInspector] public event Action<bool> onMenuSwitched;
 
     [Title("Cameras")]
     [ValidateInput(nameof(ValidateVirtualCameras),
@@ -27,6 +28,9 @@ public class GameManager : MonoBehaviour
 
     [Required, Tooltip("Close-up camera used for computer interaction")]
     public CinemachineCamera computerCloseupCamera;
+
+    [Required, Tooltip("Camera overlooking Pentagon, used for Main Menu")]
+    public CinemachineCamera pentagonCamera;
 
     [Required]
     public Camera mainCamera;
@@ -62,6 +66,8 @@ public class GameManager : MonoBehaviour
     
     private CinemachineBrain cinemachineBrain;
     private Coroutine currentBlend;
+
+    private bool isMenuActive;
     
     private void Awake()
     {
@@ -82,7 +88,7 @@ public class GameManager : MonoBehaviour
         cinemachineBrain = mainCamera.GetComponent<CinemachineBrain>();
         
         SetActiveCamera(0);
-        onCameraBlendFinished?.Invoke(virtualCameras[0]);
+        onCameraBlendFinished?.Invoke(virtualCameras[0]); // if this camera already active 
     }
 
     private void OnEnable()
@@ -90,6 +96,7 @@ public class GameManager : MonoBehaviour
         var actions = playerInput.actions;
         actions["CameraNext"].performed += _ => NextCamera();
         actions["CameraPrev"].performed += _ => PrevCamera();
+        actions["Menu"].performed += _ => ToggleMenu();
     }
 
     private void OnDisable()
@@ -97,6 +104,37 @@ public class GameManager : MonoBehaviour
         var actions = playerInput.actions;
         actions["CameraNext"].performed -= _ => NextCamera();
         actions["CameraPrev"].performed -= _ => PrevCamera();
+        actions["Menu"].performed -= _ => ToggleMenu();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ToggleMenu()
+    {
+        if (isMenuActive)
+        {
+            isMenuActive = false;
+            CinemachineCore.UniformDeltaTimeOverride = Time.unscaledDeltaTime;
+            ResetOverrideCamera();
+            onCameraBlendFinished += _ => { Time.timeScale = 1f; };
+            onMenuSwitched?.Invoke(isMenuActive);
+        }
+        else
+        {
+            isMenuActive = true;
+            CinemachineCore.UniformDeltaTimeOverride = Time.unscaledDeltaTime;
+            AIManager.Instance.dialogueController.ClearCurrentDialogue();
+            OverrideActiveCamera(pentagonCamera);
+            onCameraBlendFinished += _ =>
+            {
+                Time.timeScale = 0f;
+                onMenuSwitched?.Invoke(isMenuActive);
+            };
+        }
+        
     }
 
     [Button(ButtonSizes.Small)]
@@ -105,7 +143,6 @@ public class GameManager : MonoBehaviour
         currentCameraIdx = (currentCameraIdx + 1) % virtualCameras.Length;
         SetActiveCamera(currentCameraIdx);
         onCameraChanged?.Invoke(virtualCameras[currentCameraIdx]);
-        StartWaitingForCameraBlendFinish();
         Debug.LogWarning("Next Camera");
     }
 
@@ -115,7 +152,6 @@ public class GameManager : MonoBehaviour
         currentCameraIdx = (currentCameraIdx - 1 + virtualCameras.Length) % virtualCameras.Length;
         SetActiveCamera(currentCameraIdx);
         onCameraChanged?.Invoke(virtualCameras[currentCameraIdx]);
-        StartWaitingForCameraBlendFinish();
         Debug.LogWarning("Prev Camera");
     }
 
@@ -142,13 +178,14 @@ public class GameManager : MonoBehaviour
         yield return new WaitWhile(() => cinemachineBrain.IsBlending);
         
         Debug.Log("Blend complete! Camera transition finished.");
-        onCameraBlendFinished?.Invoke(virtualCameras[currentCameraIdx]);
+        onCameraBlendFinished?.Invoke(overrideCamera != null ? overrideCamera : virtualCameras[currentCameraIdx]);
     }
 
     private void SetActiveCamera(int index)
     {
         for (int i = 0; i < virtualCameras.Length; i++)
             virtualCameras[i].Priority = (i == index) ? 10 : 0;
+        StartWaitingForCameraBlendFinish();
     }
 
     public void OnComputerClick(GameObject sender)
@@ -221,6 +258,7 @@ public class GameManager : MonoBehaviour
     {
         overrideCamera = camera;
         camera.Priority = 20;
+        StartWaitingForCameraBlendFinish();
     }
 
     public void ResetOverrideCamera()
@@ -228,6 +266,7 @@ public class GameManager : MonoBehaviour
         if (overrideCamera == null) return;
         overrideCamera.Priority = 0;
         overrideCamera = null;
+        StartWaitingForCameraBlendFinish();
     }
 
     private bool ValidateVirtualCameras(CinemachineCamera[] cams)
