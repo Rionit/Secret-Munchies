@@ -54,7 +54,10 @@ public class NPC : MonoBehaviour
     [Title("Runtime (Debug)")]
     [ReadOnly, ShowInInspector]
     private NavMeshAgent agent;
-
+    
+    [ReadOnly, ShowInInspector]
+    private Animator animator;
+    
     [ReadOnly, ShowInInspector]
     private int currentPoint;
 
@@ -73,6 +76,8 @@ public class NPC : MonoBehaviour
     {
         AIManager.Instance.RegisterNPC(this);
 
+        animator = GetComponent<Animator>();
+        
         agent = GetComponent<NavMeshAgent>();
         agent.updateUpAxis = false;
         agent.speed = Random.Range(minSpeed, maxSpeed);
@@ -117,6 +122,15 @@ public class NPC : MonoBehaviour
                 agent.SetDestination(AIManager.Instance.orderCollectionPoint.position);
                 HandleOrder();
                 break;
+        }
+
+        if (agent.velocity.magnitude != 0f)
+        {
+            animator.SetBool("Walking", true);
+        }
+        else
+        {
+            animator.SetBool("Walking", false);
         }
     }
 
