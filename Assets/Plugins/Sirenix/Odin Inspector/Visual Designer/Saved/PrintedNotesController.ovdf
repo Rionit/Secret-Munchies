@@ -1,0 +1,98 @@
+OVDF v1.1
+PrintedNotesController, Assembly-CSharp
+MetaGuid:d9a2113cf990df34b882d5d8b15de694
+
+# $f72jcRSTMn6Q3T8LLCqxT
+Position: $root:3
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Forms"
+	ShowLabel = True
+	CenterLabel = True
+
+# $RVKAjR4YsBeo4rMXn5K4zi
+Position: $7HsRrsvVrHcpeTmcN8dhRA:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $5EUGhgoCJS92Twuk2mi2Pd
+Position: $RVKAjR4YsBeo4rMXn5K4zi:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $NxW6CtYzrNiCNZRsmzvqYf
+Position: $RVKAjR4YsBeo4rMXn5K4zi:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $G1eo85Jativpiv8cYdzdyd
+Position: $7HsRrsvVrHcpeTmcN8dhRA:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $KkVMj3TeuwsQAFgUP4CB2r
+Position: $G1eo85Jativpiv8cYdzdyd:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $UyX8e1u2zpmEvfsFyF6Wtv
+Position: $G1eo85Jativpiv8cYdzdyd:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $7HsRrsvVrHcpeTmcN8dhRA
+Position: $f72jcRSTMn6Q3T8LLCqxT:6
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Debug Controls"
+	ShowLabel = True
+	CenterLabel = True
+
+# $UGsRmorbdGBPk8QjPaA9nx
+Position: $root:2
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Animation"
+	ShowLabel = True
+	CenterLabel = True
+
+# formA
+Position: $f72jcRSTMn6Q3T8LLCqxT:0
+
+# formB
+Position: $f72jcRSTMn6Q3T8LLCqxT:1
+
+# forms
+Position: $f72jcRSTMn6Q3T8LLCqxT:2
+
+# currentForm
+Position: $f72jcRSTMn6Q3T8LLCqxT:3
++ [Sirenix.OdinInspector.ReadOnlyAttribute]
+
+# front
+Position: $f72jcRSTMn6Q3T8LLCqxT:4
++ [Sirenix.OdinInspector.ReadOnlyAttribute]
+
+# back
+Position: $f72jcRSTMn6Q3T8LLCqxT:5
++ [Sirenix.OdinInspector.ReadOnlyAttribute]
+
+# ShowPrintedNotes()
+Position: $5EUGhgoCJS92Twuk2mi2Pd:0
+* [Sirenix.OdinInspector.ButtonAttribute]
+	Name = "Show Notes"
+
+# HidePrintedNotes()
+Position: $NxW6CtYzrNiCNZRsmzvqYf:0
+* [Sirenix.OdinInspector.ButtonAttribute]
+	Name = "Hide Notes"
+	Expanded = False
+	stretch = True
+	HasDefinedStretch = True
+
+# Next()
+Position: $KkVMj3TeuwsQAFgUP4CB2r:0
+* [Sirenix.OdinInspector.ButtonAttribute]
+	Name = "Next Form"
+
+# Previous()
+Position: $UyX8e1u2zpmEvfsFyF6Wtv:0
+* [Sirenix.OdinInspector.ButtonAttribute]
+	Name = "Previous Form"
+
+# startTransform
+Position: $UGsRmorbdGBPk8QjPaA9nx:0
+
+# endTransform
+Position: $UGsRmorbdGBPk8QjPaA9nx:1

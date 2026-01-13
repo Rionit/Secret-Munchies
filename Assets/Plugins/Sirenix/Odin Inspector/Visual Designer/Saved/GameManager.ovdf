@@ -47,13 +47,13 @@ Position: $Q9rdnsEY6pdmHVuXToD2Dr:0
 + [Sirenix.OdinInspector.ValueDropdownAttribute]
 
 # playerInput
-Position: $BStm6xNKbgQHA12SqpqQgv:4
+Position: $BStm6xNKbgQHA12SqpqQgv:5
 
 # overrideCamera
 Position: $Q9rdnsEY6pdmHVuXToD2Dr:2
 
 # holdingItem
-Position: $BStm6xNKbgQHA12SqpqQgv:3
+Position: $BStm6xNKbgQHA12SqpqQgv:4
 
 # NextCamera()
 Position: $Q9rdnsEY6pdmHVuXToD2Dr:3
@@ -63,3 +63,6 @@ Position: $Q9rdnsEY6pdmHVuXToD2Dr:4
 
 # pentagonCamera
 Position: $PcbYDSVmdN7gczhPbbpxAG:3
+
+# notepadApp
+Position: $BStm6xNKbgQHA12SqpqQgv:3

@@ -1,0 +1,141 @@
+OVDF v1.1
+AnswerLine, Assembly-CSharp
+MetaGuid:beb0a956e9ee64f409f01091b799a0fa
+
+# $4kZWSbqKQnt38LF3sduW3E
+Position: $root:0
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "CheckBoxes"
+	ShowLabel = True
+	CenterLabel = True
+
+# $GE58gRCfpaZsdcFm8gaaCA
+Position: $4kZWSbqKQnt38LF3sduW3E:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $RzmuL3MYvsBmca17w7d67Q
+Position: $GE58gRCfpaZsdcFm8gaaCA:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $QL1ppeyowAG3XrDHK5Qr58
+Position: $GE58gRCfpaZsdcFm8gaaCA:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $P8Cubq15yM7jpY9DoDtAEk
+Position: $GE58gRCfpaZsdcFm8gaaCA:2
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $DM9bMwkSbUrtLLv61Ri5ph
+Position: $GE58gRCfpaZsdcFm8gaaCA:3
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $UZxgJgDL4nmyYZXmzaABEy
+Position: $4kZWSbqKQnt38LF3sduW3E:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $FyfSuvUWJrakUVBUR6tCRm
+Position: $UZxgJgDL4nmyYZXmzaABEy:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+	Size = Auto
+
+# $QjpiYN3YArxzYQQ9P6WTSp
+Position: $UZxgJgDL4nmyYZXmzaABEy:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $DxcG6YiySjv8YcAymmJYDW
+Position: $root:1
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "LineNumber"
+	ShowLabel = True
+	CenterLabel = True
+
+# $AxqrKaNd5gdUgyuwka9VmG
+Position: $DxcG6YiySjv8YcAymmJYDW:3
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $Cak3Yivn4LGyM1xMzzsMjt
+Position: $AxqrKaNd5gdUgyuwka9VmG:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $JRtfBaWGaNm7amPDR617jk
+Position: $AxqrKaNd5gdUgyuwka9VmG:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# a
+Position: $RzmuL3MYvsBmca17w7d67Q:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "A"
+	TitleAlignment = Centered
+	HorizontalLine = True
+
+# b
+Position: $QL1ppeyowAG3XrDHK5Qr58:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "B"
+	TitleAlignment = Centered
+
+# c
+Position: $P8Cubq15yM7jpY9DoDtAEk:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "C"
+	TitleAlignment = Centered
+
+# d
+Position: $DM9bMwkSbUrtLLv61Ri5ph:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "D"
+	TitleAlignment = Centered
+
+# lineNumber
+Position: $DxcG6YiySjv8YcAymmJYDW:1
+
+# checkBoxA
+Position: $ZMnkxTsMGv8YSjNSGK4Pj:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
+
+# checkBoxB
+Position: $GLt6TEAoV2F3G2LHyr2WjM:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
+
+# checkBoxC
+Position: $4HqtojqgYV8MCVY33R7VMK:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
+
+# checkBoxD
+Position: $N4Ym6JGtbC1CbiEiNBNCrA:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
+
+# checkboxSpace
+Position: $4kZWSbqKQnt38LF3sduW3E:2
++ [Sirenix.OdinInspector.PropertyTooltipAttribute]
+	Tooltip = "Space between square checkbox and it's label"
+
+# SetCheckboxSpace()
+Position: $QjpiYN3YArxzYQQ9P6WTSp:0
+* [Sirenix.OdinInspector.ButtonAttribute]
+	Style = Box
+	stretch = True
+	HasDefinedStretch = True
+	Expanded = True
+
+# checkboxSpacing
+Position: $FyfSuvUWJrakUVBUR6tCRm:0
+
+# lineNumberText
+Position: $DxcG6YiySjv8YcAymmJYDW:0
+
+# ShowLineNumber()
+Position: $Cak3Yivn4LGyM1xMzzsMjt:0
+
+# HideLineNumber()
+Position: $JRtfBaWGaNm7amPDR617jk:0
+
+# interactable
+Position: $4kZWSbqKQnt38LF3sduW3E:2
+
+# isLineNumberVisible
+Position: $DxcG6YiySjv8YcAymmJYDW:2

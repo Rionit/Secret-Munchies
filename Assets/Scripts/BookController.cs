@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -32,6 +33,7 @@ public class BookController : MonoBehaviour
         openedBook.SetActive(false);
     }
 
+    [Button]
     public void Grab()
     {
         if (isHeld) return;
@@ -53,6 +55,7 @@ public class BookController : MonoBehaviour
         openedBook.SetActive(true);
     }
 
+    [Button]
     public void PutDown()
     {
         if (!isHeld) return;

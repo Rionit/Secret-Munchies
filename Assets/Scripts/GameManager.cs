@@ -48,6 +48,9 @@ public class GameManager : MonoBehaviour
     [Required]
     public CounterController counterController;
 
+    [Required]
+    public NotepadApp notepadApp;
+    
     [ShowInInspector, LabelText("Current Camera Index"), ValueDropdown(nameof(GetCameraIndices))]
     public int currentCameraIdx = 0;
 
