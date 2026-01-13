@@ -1,0 +1,63 @@
+OVDF v1.1
+MorseCodeController, Assembly-CSharp
+MetaGuid:a4743020a51827c44aad7bec45b61a38
+
+# $Ndpbr62xFrkJLKdD81hrcS
+Position: $JdeHbAbprBMi31rwAnnT2:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $EajkvebDj29f2a8m3yQDRR
+Position: $Ndpbr62xFrkJLKdD81hrcS:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $8Tj2RWGz2TtWVR6GxidWmA
+Position: $Ndpbr62xFrkJLKdD81hrcS:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $JdeHbAbprBMi31rwAnnT2
+Position: $root:10
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Controls"
+	ShowLabel = True
+	CenterLabel = True
+
+# $6ycLxgvAE8rSJABcDXg3cM
+Position: $root:9
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Debug"
+	ShowLabel = True
+	CenterLabel = True
+
+# $13DVWpnWEyDoqLvb9qTjRj
+Position: $root:0
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Settings"
+	ShowLabel = True
+	CenterLabel = True
+
+# Dash()
+Position: $8Tj2RWGz2TtWVR6GxidWmA:0
+
+# Dot()
+Position: $EajkvebDj29f2a8m3yQDRR:0
+
+# FinishMessage()
+Position: $JdeHbAbprBMi31rwAnnT2:1
+
+# Clear()
+Position: $JdeHbAbprBMi31rwAnnT2:2
+
+# currentMessage
+Position: $6ycLxgvAE8rSJABcDXg3cM:2
+
+# currentMorseCharacter
+Position: $6ycLxgvAE8rSJABcDXg3cM:1
+
+# timeSinceLastInput
+Position: $6ycLxgvAE8rSJABcDXg3cM:0
+
+# characterGapThreshold
+Position: $13DVWpnWEyDoqLvb9qTjRj:0
+
+# wordGapThreshold
+Position: $13DVWpnWEyDoqLvb9qTjRj:1

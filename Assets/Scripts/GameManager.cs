@@ -92,6 +92,8 @@ public class GameManager : MonoBehaviour
         
         SetActiveCamera(0);
         onCameraBlendFinished?.Invoke(virtualCameras[0]); // if this camera already active 
+        
+        AIManager.Instance.dialogueController.OnDialogueEnded += OnDialogueEnded;
     }
 
     private void OnEnable()
@@ -222,6 +224,11 @@ public class GameManager : MonoBehaviour
 
         onItemDropped?.Invoke(holdingItem);
         holdingItem = null;
+    }
+
+    private void OnDialogueEnded(TopSecretCategory category)
+    {
+        
     }
 
     public bool GrabItem(GameObject instance)

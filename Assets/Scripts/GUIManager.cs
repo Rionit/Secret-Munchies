@@ -10,6 +10,8 @@ public class GUIManager : MonoBehaviour
     public GameObject itemFrame;
     public Sprite bagSprite;
     
+    public GameObject morseCodeUI;
+    
     public GameObject maineMenu;
     public GameObject gameName;
     public GameObject morseCodeTop;
@@ -104,5 +106,10 @@ public class GUIManager : MonoBehaviour
                 .Join(topRT.DOAnchorPos(topFinalPos + Vector2.up * offsetY, duration / 2f).SetEase(Ease.InCubic))
                 .Join(bottomRT.DOAnchorPos(bottomFinalPos + Vector2.down * offsetY, duration / 2f).SetEase(Ease.InCubic));
         }
+    }
+
+    public void UpdateMorseCodeUI()
+    {
+        morseCodeUI.SetActive(!morseCodeUI.activeSelf);
     }
 }
