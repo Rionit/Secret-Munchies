@@ -15861,7 +15861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4026260354304167391, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4026260354304167391, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -15946,6 +15946,10 @@ PrefabInstance:
     - target: {fileID: 6256493325474413439, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
       propertyPath: lineNumber
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6632392434047414622, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
+      propertyPath: m_Spacing
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6650451049374345564, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
       propertyPath: m_fontSize
@@ -16073,7 +16077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7839030811184229146, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7839030811184229146, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -16083,9 +16087,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7954644202699412048, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
+      propertyPath: m_Spacing
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8247684596719219711, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
       propertyPath: m_fontSize
       value: 4.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8645517136340433842, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
+      propertyPath: m_Spacing
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8661353441859295671, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
       propertyPath: m_fontSize
@@ -16093,11 +16105,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8679165637472797109, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
       propertyPath: m_Spacing
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8679165637472797109, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
       propertyPath: m_ChildControlHeight
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8679165637472797109, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}
       propertyPath: m_ChildForceExpandWidth
