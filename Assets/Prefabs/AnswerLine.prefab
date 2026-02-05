@@ -228,6 +228,8 @@ MonoBehaviour:
   lineNumberText: {fileID: 2968543005178810683}
   lineNumber: 0
   checkboxSpacing: 2
+  blackBar: {fileID: 3408800339578537293}
+  censored: 0
 --- !u!222 &136554655045172192
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -284,14 +286,14 @@ MonoBehaviour:
       - m_Target: {fileID: 6256493325474413439}
         m_TargetAssemblyTypeName: AnswerLine, Assembly-CSharp
         m_MethodName: Censor
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!65 &4908370676497591568
 BoxCollider:

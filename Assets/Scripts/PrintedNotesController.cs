@@ -1,32 +1,39 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using UnityEngine;
-using UnityEngine.Serialization;
+
+[System.Serializable]
+public struct FormData
+{
+    public int[] masks;
+    public bool[] censorships;
+
+    public FormData(int[] masks)
+    {
+        this.masks = masks;
+        censorships = new bool[masks.Length];
+    }
+}
 
 public class PrintedNotesController : MonoBehaviour
 {
-    [Required] public Transform startTransform; 
-    [Required] public Transform endTransform; 
-    
+    [Required] public Transform startTransform;
+    [Required] public Transform endTransform;
+
     public PrintedForm formA;
     public PrintedForm formB;
-    
-    [ShowInInspector]
-    private Dictionary<int, int[]> forms = new Dictionary<int, int[]>();
 
     [ShowInInspector]
-    private int currentForm = -1;
+    private List<FormData> forms = new();
 
     [ShowInInspector]
-    private PrintedForm front;
-    [ShowInInspector]
-    private PrintedForm back;
-    
-    
+    private int currentFormIndex = -1; // 0-based
+
+    [ShowInInspector] private PrintedForm front;
+    [ShowInInspector] private PrintedForm back;
+
     private Vector3 frontPos;
     private Vector3 backPos;
     private Quaternion frontRot;
@@ -34,12 +41,15 @@ public class PrintedNotesController : MonoBehaviour
 
     private Sequence switchAnimation;
     private Sequence showAnimation;
-    
+
     private void Start()
     {
+        formA.OnFormDataChanged += OnFormDataChanged;
+        formB.OnFormDataChanged += OnFormDataChanged;
+
         front = formA;
         back = formB;
-        
+
         frontPos = front.transform.localPosition;
         backPos = back.transform.localPosition;
         frontRot = front.transform.localRotation;
@@ -49,11 +59,14 @@ public class PrintedNotesController : MonoBehaviour
         GameManager.Instance.notepadApp.OnPrintForm += PrintForm;
     }
 
+    private void OnFormDataChanged(FormData formData, int formNumber)
+    {
+        forms[formNumber] = formData;
+    }
+
     private void PrintForm(int[] answers)
     {
-        int sheetNumber = forms.Count + 1;
-        forms.Add(sheetNumber, answers);
-        
+        forms.Add(new FormData(answers));
     }
 
     [Button]
@@ -61,24 +74,24 @@ public class PrintedNotesController : MonoBehaviour
     {
         showAnimation?.Kill();
         showAnimation = DOTween.Sequence();
-        
+
         front.transform.localPosition = frontPos;
         back.transform.localPosition = backPos;
-        
+
         showAnimation.Append(transform.DOMove(endTransform.position, .2f));
         showAnimation.Join(transform.DORotateQuaternion(endTransform.rotation, .2f));
         showAnimation.Join(transform.DOScale(endTransform.localScale, .2f));
-        
+
         if (forms.Count == 0) return;
-        
-        currentForm = forms.Count;
-        
-        front.Initialize(currentForm, forms[currentForm]);
+
+        currentFormIndex = forms.Count - 1;
+
+        front.Initialize(currentFormIndex + 1, forms[currentFormIndex]);
         front.gameObject.SetActive(true);
 
         if (forms.Count < 2) return;
-        
-        back.Initialize(currentForm - 1, forms[currentForm - 1]);
+
+        back.Initialize(currentFormIndex, forms[currentFormIndex - 1]);
         back.gameObject.SetActive(true);
     }
 
@@ -87,13 +100,13 @@ public class PrintedNotesController : MonoBehaviour
     {
         showAnimation?.Kill();
         showAnimation = DOTween.Sequence();
-        
+
         showAnimation.Append(transform.DOMove(startTransform.position, .2f));
         showAnimation.Join(transform.DORotateQuaternion(startTransform.rotation, .2f));
         showAnimation.Join(transform.DOScale(startTransform.localScale, .2f));
         showAnimation.OnComplete(() =>
         {
-            front.gameObject.SetActive(false); 
+            front.gameObject.SetActive(false);
             back.gameObject.SetActive(false);
         });
     }
@@ -101,62 +114,47 @@ public class PrintedNotesController : MonoBehaviour
     [Button]
     public void Next()
     {
-        if (currentForm < forms.Count) currentForm++;
-        else return;
-        
-        back.Initialize(currentForm, forms[currentForm]);
-        
-        Quaternion tiltRight = frontRot * Quaternion.Euler(0f, 10f, 10f);
-        Quaternion tiltLeft = backRot * Quaternion.Euler(0f, -10f, -10f);
-        
-        switchAnimation?.Kill();
-        switchAnimation = DOTween.Sequence();
-        switchAnimation.SetEase(Ease.InOutQuad);
-        
-        // Move front right, back left
-        switchAnimation.Append(front.transform.DOLocalMove(frontPos + Vector3.right * 0.2f, .4f));
-        switchAnimation.Join(front.transform.DOLocalRotateQuaternion(tiltRight, 0.4f));
-        switchAnimation.Join(back.transform.DOLocalMove(backPos + Vector3.left * 0.2f, .4f));
-        switchAnimation.Join(back.transform.DOLocalRotateQuaternion(tiltLeft, 0.4f));
-            
-        // Swap positions
-        switchAnimation.Append(front.transform.DOLocalMove(backPos, .4f));
-        switchAnimation.Join(front.transform.DOLocalRotateQuaternion(backRot, 0.4f));
-        switchAnimation.Join(back.transform.DOLocalMove(frontPos, .4f));
-        switchAnimation.Join(back.transform.DOLocalRotateQuaternion(frontRot, 0.4f));
+        if (currentFormIndex >= forms.Count - 1) return;
+        currentFormIndex++;
 
-        switchAnimation.OnComplete(() => (front, back) = (back, front));
+        back.Initialize(currentFormIndex + 1, forms[currentFormIndex]);
+
+        AnimateSwap(forward: true);
     }
 
-    // TODO: Might be redundant and can be just one function for animation
     [Button]
     public void Previous()
     {
-        if (currentForm - 1 > 0) currentForm--;
-        else return;
+        if (currentFormIndex <= 0) return;
+        currentFormIndex--;
 
-        back.Initialize(currentForm, forms[currentForm]);
+        back.Initialize(currentFormIndex + 1, forms[currentFormIndex]);
 
-        Quaternion tiltRight = frontRot * Quaternion.Euler(0f, -10f, -10f);
-        Quaternion tiltLeft = backRot * Quaternion.Euler(0f, 10f, 10f);
+        AnimateSwap(forward: false);
+    }
+
+    private void AnimateSwap(bool forward)
+    {
+        Quaternion tiltFront = frontRot * Quaternion.Euler(0f, forward ? 10f : -10f, forward ? 10f : -10f);
+        Quaternion tiltBack  = backRot  * Quaternion.Euler(0f, forward ? -10f : 10f, forward ? -10f : 10f);
 
         switchAnimation?.Kill();
         switchAnimation = DOTween.Sequence();
         switchAnimation.SetEase(Ease.InOutQuad);
 
-        // Move front left, back right
-        switchAnimation.Append(front.transform.DOLocalMove(frontPos + Vector3.left * 0.2f, 0.4f));
-        switchAnimation.Join(front.transform.DOLocalRotateQuaternion(tiltRight, 0.4f));
-        switchAnimation.Join(back.transform.DOLocalMove(backPos + Vector3.right * 0.2f, 0.4f));
-        switchAnimation.Join(back.transform.DOLocalRotateQuaternion(tiltLeft, 0.4f));
+        Vector3 frontOffset = Vector3.right * (forward ? 0.2f : -0.2f);
+        Vector3 backOffset  = Vector3.left  * (forward ? 0.2f : -0.2f);
 
-        // Swap positions
-        switchAnimation.Append(front.transform.DOLocalMove(backPos, 0.4f));
-        switchAnimation.Join(front.transform.DOLocalRotateQuaternion(backRot, 0.4f));
-        switchAnimation.Join(back.transform.DOLocalMove(frontPos, 0.4f));
-        switchAnimation.Join(back.transform.DOLocalRotateQuaternion(frontRot, 0.4f));
+        switchAnimation.Append(front.transform.DOLocalMove(frontPos + frontOffset, .4f));
+        switchAnimation.Join(front.transform.DOLocalRotateQuaternion(tiltFront, .4f));
+        switchAnimation.Join(back.transform.DOLocalMove(backPos + backOffset, .4f));
+        switchAnimation.Join(back.transform.DOLocalRotateQuaternion(tiltBack, .4f));
+
+        switchAnimation.Append(front.transform.DOLocalMove(backPos, .4f));
+        switchAnimation.Join(front.transform.DOLocalRotateQuaternion(backRot, .4f));
+        switchAnimation.Join(back.transform.DOLocalMove(frontPos, .4f));
+        switchAnimation.Join(back.transform.DOLocalRotateQuaternion(frontRot, .4f));
 
         switchAnimation.OnComplete(() => (front, back) = (back, front));
     }
-
 }

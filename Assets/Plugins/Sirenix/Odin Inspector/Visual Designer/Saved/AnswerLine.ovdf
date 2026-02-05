@@ -61,6 +61,26 @@ Position: $AxqrKaNd5gdUgyuwka9VmG:0
 Position: $AxqrKaNd5gdUgyuwka9VmG:1
 + [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
 
+# $VMiYedwr33MQquY7vSv3pm
+Position: $root:8
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Censor"
+	ShowLabel = True
+	CenterLabel = True
+
+# $5Gezr5j8KgunicXyYrZtZz
+Position: $VMiYedwr33MQquY7vSv3pm:2
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $NbCP2LjQxUcxht1wax46at
+Position: $5Gezr5j8KgunicXyYrZtZz:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+	Size = 25 %
+
+# $BycsMw2G4tt5kZihY9K1DH
+Position: $5Gezr5j8KgunicXyYrZtZz:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
 # a
 Position: $RzmuL3MYvsBmca17w7d67Q:0
 + [Sirenix.OdinInspector.HideLabelAttribute]
@@ -139,3 +159,22 @@ Position: $4kZWSbqKQnt38LF3sduW3E:2
 
 # isLineNumberVisible
 Position: $DxcG6YiySjv8YcAymmJYDW:2
+
+# isCensored
+Position: $NbCP2LjQxUcxht1wax46at:0
++ [Sirenix.OdinInspector.ToggleLeftAttribute]
++ [Sirenix.OdinInspector.ReadOnlyAttribute]
+
+# Censor()
+Position: $QMMycZR7o7zMEuHTc2kd3W:0
+
+# blackBar
+Position: $VMiYedwr33MQquY7vSv3pm:0
+
+# Censor(bool)
+Position: $BycsMw2G4tt5kZihY9K1DH:0
+* [Sirenix.OdinInspector.ButtonAttribute]
+	Style = CompactBox
+	Expanded = True
+	stretch = True
+	HasDefinedStretch = True

@@ -2,10 +2,13 @@ using System;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class AnswerLine : MonoBehaviour
 {
+    public Action<bool, int> OnCensored;
+    
     [Required] public Checkbox a;
     [Required] public Checkbox b;
     [Required] public Checkbox c;
@@ -15,14 +18,15 @@ public class AnswerLine : MonoBehaviour
     [Required] public TextMeshProUGUI lineNumberText;
     [Required] public int lineNumber;
     public float checkboxSpacing = 2.0f;
+
+    [Required] public Image blackBar;
+    [FormerlySerializedAs("censored")] public bool isCensored = false;
     
     private Checkbox[] checkboxes;
-    private Image blackBar;
     
     private void Awake()
     {
         checkboxes = new[] { a, b, c, d };
-        blackBar = GetComponent<Image>();
     }
 
     private void Start()
@@ -56,11 +60,14 @@ public class AnswerLine : MonoBehaviour
         d.toggle.isOn = (result & (1 << 0)) != 0; // D
     }
 
-    public void Censor()
+    [Button]
+    public void Censor(bool censored)
     {
         if (!interactable)
         {
-            blackBar.color = new Color(0, 0, 0, 1);
+            this.isCensored = censored;
+            blackBar.color = new Color(0, 0, 0, this.isCensored ? 1f : 0f);
+            OnCensored?.Invoke(this.isCensored, lineNumber-1);
         }
     }
 
