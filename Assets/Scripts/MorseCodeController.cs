@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class MorseCodeController : MonoBehaviour
 {
+    public Action<string> OnMorseCodeSymbolRegistered;      // ./-
+    public Action<string> OnMorseCodeCharacterRegistered;   // alphabet/numbers
+    
     [Title("Timing Settings")]
     [Range(0.2f, 2f)]
     public float characterGapThreshold = 1.0f;
@@ -15,7 +18,7 @@ public class MorseCodeController : MonoBehaviour
     [Required] public Slider timeSlider;
 
     [Required] public TextMeshProUGUI messageText;
-
+    
     [ShowInInspector, ReadOnly]
     private float timeSinceLastInput;
 
@@ -32,13 +35,13 @@ public class MorseCodeController : MonoBehaviour
 
     private readonly Dictionary<string, char> morseToChar = new Dictionary<string, char>()
     {
-        { ".-", 'A' },   { "-...", 'B' }, { "-.-.", 'C' }, { "-..", 'D' },
-        { ".", 'E' },    { "..-.", 'F' }, { "--.", 'G' },  { "....", 'H' },
-        { "..", 'I' },   { ".---", 'J' }, { "-.-", 'K' },  { ".-..", 'L' },
-        { "--", 'M' },   { "-.", 'N' },   { "---", 'O' },  { ".--.", 'P' },
-        { "--.-", 'Q' }, { ".-.", 'R' },  { "...", 'S' },  { "-", 'T' },
-        { "..-", 'U' },  { "...-", 'V' }, { ".--", 'W' },  { "-..-", 'X' },
-        { "-.--", 'Y' }, { "--..", 'Z' }
+        { "·-", 'A' },   { "-···", 'B' }, { "-·-·", 'C' }, { "-··", 'D' },
+        { "·", 'E' },    { "··-·", 'F' }, { "--·", 'G' },  { "····", 'H' },
+        { "··", 'I' },   { "·---", 'J' }, { "-·-", 'K' },  { "·-··", 'L' },
+        { "--", 'M' },   { "-·", 'N' },   { "---", 'O' },  { "·--·", 'P' },
+        { "--·-", 'Q' }, { "·-·", 'R' },  { "···", 'S' },  { "-", 'T' },
+        { "··-", 'U' },  { "···-", 'V' }, { "·--", 'W' },  { "-··-", 'X' },
+        { "-·--", 'Y' }, { "--··", 'Z' }
     };
 
     private void Update()
@@ -58,7 +61,7 @@ public class MorseCodeController : MonoBehaviour
     [Button(ButtonSizes.Large)]
     public void Dot()
     {
-        RegisterInput(".");
+        RegisterInput("·");
     }
 
     [Button(ButtonSizes.Large)]
@@ -69,6 +72,7 @@ public class MorseCodeController : MonoBehaviour
 
     private void RegisterInput(string symbol)
     {
+        OnMorseCodeSymbolRegistered?.Invoke(symbol);
         currentMorseCharacter += symbol;
         lastInputTime = Time.time;
         timeSinceLastInput = 0f;
@@ -81,7 +85,10 @@ public class MorseCodeController : MonoBehaviour
     private void RegisterCharacter()
     {
         if (morseToChar.TryGetValue(currentMorseCharacter, out char character))
+        {
+            OnMorseCodeCharacterRegistered?.Invoke(character.ToString());
             currentMessage += character;
+        }
 
         currentMorseCharacter = "";
         hasInput = false;

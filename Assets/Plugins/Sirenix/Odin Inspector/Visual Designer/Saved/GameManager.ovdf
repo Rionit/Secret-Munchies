@@ -22,6 +22,13 @@ Position: $Q9rdnsEY6pdmHVuXToD2Dr:1
 	ShowLabel = True
 	CenterLabel = True
 
+# $5K4g5WFWoJRq8U7hcVJRfr
+Position: $root
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Secrets"
+	CenterLabel = True
+	ShowLabel = True
+
 # virtualCameras
 Position: $PcbYDSVmdN7gczhPbbpxAG:1
 - [Sirenix.OdinInspector.TitleAttribute]
@@ -66,3 +73,6 @@ Position: $PcbYDSVmdN7gczhPbbpxAG:3
 
 # notepadApp
 Position: $BStm6xNKbgQHA12SqpqQgv:3
+
+# secrets
+Position: $5K4g5WFWoJRq8U7hcVJRfr:0

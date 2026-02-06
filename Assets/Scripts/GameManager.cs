@@ -70,6 +70,8 @@ public class GameManager : MonoBehaviour
     private CinemachineBrain cinemachineBrain;
     private Coroutine currentBlend;
 
+    [ShowInInspector] private List<Secret> secrets = new List<Secret>();
+    
     private bool isMenuActive;
     
     private void Awake()
@@ -228,7 +230,11 @@ public class GameManager : MonoBehaviour
 
     private void OnDialogueEnded(TopSecretCategory category)
     {
-        
+        if (category != TopSecretCategory.None)
+        {
+            Secret secret = new Secret(category);
+            secrets.Add(secret);
+        }
     }
 
     public bool GrabItem(GameObject instance)
