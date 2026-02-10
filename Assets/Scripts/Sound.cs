@@ -1,0 +1,28 @@
+using System;
+using Sirenix.OdinInspector;
+using UnityEngine;
+
+[Serializable]
+public class Sound
+{
+    public string name;
+
+    public AudioClip clip;
+
+    [Range(0f, 1f)]
+    public float volume = 1f;
+
+    [Range(0f, 3f)]
+    public float pitch = 1f;
+
+    public bool loop;
+
+    public bool playOnAwake;
+
+    public bool is3D;
+    
+    [Required] public AudioSource source;
+    
+    [HideInInspector] public Coroutine fade;
+
+}

@@ -61,12 +61,14 @@ public class MorseCodeController : MonoBehaviour
     [Button(ButtonSizes.Large)]
     public void Dot()
     {
+        AudioManager.Instance?.PlayOneShot("dot");
         RegisterInput("·");
     }
 
     [Button(ButtonSizes.Large)]
     public void Dash()
     {
+        AudioManager.Instance?.PlayOneShot("dash");
         RegisterInput("-");
     }
 

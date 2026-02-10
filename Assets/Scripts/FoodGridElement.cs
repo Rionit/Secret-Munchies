@@ -44,6 +44,7 @@ public class FoodGridElement : MonoBehaviour
         count = Mathf.Min(count, 10);
         counterLabel.text = count.ToString();
         OnValueChanged?.Invoke(this, count);
+        AudioManager.Instance?.PlayOneShot("click");
     }
 
     [Button(ButtonSizes.Small), Tooltip("Decrease food count")]
@@ -53,6 +54,7 @@ public class FoodGridElement : MonoBehaviour
         count = Mathf.Max(count, 0);
         counterLabel.text = count.ToString();
         OnValueChanged?.Invoke(this, count);
+        AudioManager.Instance?.PlayOneShot("click");
     }
 
     [Button(ButtonSizes.Small), Tooltip("Reset food count to zero")]

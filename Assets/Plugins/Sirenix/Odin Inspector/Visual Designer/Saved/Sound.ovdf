@@ -1,0 +1,62 @@
+OVDF v1.1
+Sound, Assembly-CSharp
+
+# $HX4w3rs6LUeuEMLsf6sLPh
+Position: $root:1
++ [Sirenix.OdinInspector.FoldoutGroupAttribute]
+	GroupName = "$name"
+
+# $5kP9bxX2zLurPXMZPZ6Wq3
+Position: $HX4w3rs6LUeuEMLsf6sLPh:3
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "AudioSource Parameters"
+	ShowLabel = True
+	CenterLabel = True
+
+# $DDuiteckv2fmKybfSDByb2
+Position: $5kP9bxX2zLurPXMZPZ6Wq3:2
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $8KyNJ3fBLfWpPpNDsNB28s
+Position: $DDuiteckv2fmKybfSDByb2:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $XvQBWBqBRC6SGC1jrwMqJK
+Position: $DDuiteckv2fmKybfSDByb2:2
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $GH7QPSZg4h3hfmutQaKzHJ
+Position: $DDuiteckv2fmKybfSDByb2:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# clip
+Position: $HX4w3rs6LUeuEMLsf6sLPh:1
++ [Sirenix.OdinInspector.RequiredAttribute]
+
+# name
+Position: $HX4w3rs6LUeuEMLsf6sLPh:0
++ [Sirenix.OdinInspector.RequiredAttribute]
+
+# source
+Position: $HX4w3rs6LUeuEMLsf6sLPh:2
+* [Sirenix.OdinInspector.RequiredAttribute]
+	MessageType = Warning
+	ErrorMessage = "Default audio source will be used"
+
+# volume
+Position: $5kP9bxX2zLurPXMZPZ6Wq3:0
+
+# pitch
+Position: $5kP9bxX2zLurPXMZPZ6Wq3:1
+
+# loop
+Position: $GH7QPSZg4h3hfmutQaKzHJ:0
++ [Sirenix.OdinInspector.ToggleLeftAttribute]
+
+# playOnAwake
+Position: $8KyNJ3fBLfWpPpNDsNB28s:0
++ [Sirenix.OdinInspector.ToggleLeftAttribute]
+
+# is3D
+Position: $XvQBWBqBRC6SGC1jrwMqJK:0
++ [Sirenix.OdinInspector.ToggleLeftAttribute]

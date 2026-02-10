@@ -124,14 +124,19 @@ public class GameManager : MonoBehaviour
         if (isMenuActive)
         {
             isMenuActive = false;
+            AudioManager.Instance.FadeOut("music_menu", 5f);
             CinemachineCore.UniformDeltaTimeOverride = Time.unscaledDeltaTime;
             ResetOverrideCamera();
-            onCameraBlendFinished += _ => { Time.timeScale = 1f; };
+            onCameraBlendFinished += _ =>
+            {
+                Time.timeScale = 1f;
+            };
             onMenuSwitched?.Invoke(isMenuActive);
         }
         else
         {
             isMenuActive = true;
+            AudioManager.Instance.FadeIn("music_menu", 5f);
             CinemachineCore.UniformDeltaTimeOverride = Time.unscaledDeltaTime;
             AIManager.Instance.dialogueController.ClearCurrentDialogue();
             OverrideActiveCamera(pentagonCamera);

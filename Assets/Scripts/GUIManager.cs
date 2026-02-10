@@ -111,5 +111,9 @@ public class GUIManager : MonoBehaviour
     public void UpdateMorseCodeUI()
     {
         morseCodeUI.SetActive(!morseCodeUI.activeSelf);
+        if(morseCodeUI.activeSelf)
+            AudioManager.Instance.FadeIn("morse_code_background_hum");
+        else
+            AudioManager.Instance.FadeOut("morse_code_background_hum");
     }
 }

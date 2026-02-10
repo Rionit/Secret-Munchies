@@ -69,6 +69,8 @@ public class FoodDispenserController : MonoBehaviour
             .SetEase(Ease.OutQuint));
         seq.Join(foodInstance.transform.DORotate(new Vector3(0, 0, -30f), 0.3f));
 
+        seq.InsertCallback(0f, () => { AudioManager.Instance.PlayOneShot("sliding"); });
+        
         return seq;
     }
 
@@ -76,10 +78,12 @@ public class FoodDispenserController : MonoBehaviour
     {
         Sequence seq = DOTween.Sequence();
 
+
         seq.Append(foodInstance.transform.DOMove(endPosition, 2f)
             .SetEase(Ease.OutBounce));
         seq.Join(foodInstance.transform.DORotate(Vector3.zero, 3f));
-
+        // seq.InsertCallback(.75f, () => { AudioManager.Instance.PlayOneShot("bounce"); }); // i dont like it
+        
         return seq;
     }
 

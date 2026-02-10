@@ -67,6 +67,7 @@ public class PrintedNotesController : MonoBehaviour
     private void PrintForm(int[] answers)
     {
         forms.Add(new FormData(answers));
+        AudioManager.Instance.PlayOneShot("printer");
     }
 
     [Button]

@@ -85,6 +85,7 @@ public class Bag : MonoBehaviour
         bagOpen.SetActive(!isPacked);
         bagClosed.SetActive(isPacked);
         progressBar.parent.gameObject.SetActive(!isPacked);
+        AudioManager.Instance.PlayOneShot("paper_close");
 
         if (isPacked) FoodManager.Instance?.FreeSpawnPoint(spawnId);
     }
@@ -121,6 +122,8 @@ public class Bag : MonoBehaviour
             8,
             0.8f));
 
+        seq.InsertCallback(0f, () => { AudioManager.Instance.PlayOneShot("paper_insert"); });
+        
         seq.Join(transform.DOPunchPosition(
             UnityEngine.Random.insideUnitSphere * punchPosition,
             tweenDuration,
