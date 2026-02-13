@@ -36,6 +36,8 @@ public class AnswerLine : MonoBehaviour
         foreach (var box in checkboxes)
         {
             box.toggle.interactable = interactable;
+            if (interactable)
+                box.toggle.onValueChanged.AddListener(isOn => { if (isOn) AudioManager.Instance.PlayOneShot("checkbox"); });
         }
     }
 

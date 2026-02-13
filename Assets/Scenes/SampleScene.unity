@@ -16420,6 +16420,30 @@ MonoBehaviour:
     playOnAwake: 0
     is3D: 1
     source: {fileID: 1884817388}
+  - name: high_woosh
+    clip: {fileID: 8300000, guid: 6d32d69b1750eef29bd9dffc00a93141, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: deep_woosh
+    clip: {fileID: 8300000, guid: 8e676f3bea450b41b96b34dfd234c29b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: paper_shuffle
+    clip: {fileID: 8300000, guid: 4c955f8954ec3980e9b53c54338e7ff0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
 --- !u!4 &1974672396
 Transform:
   m_ObjectHideFlags: 0

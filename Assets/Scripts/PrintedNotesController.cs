@@ -139,6 +139,8 @@ public class PrintedNotesController : MonoBehaviour
         Quaternion tiltFront = frontRot * Quaternion.Euler(0f, forward ? 10f : -10f, forward ? 10f : -10f);
         Quaternion tiltBack  = backRot  * Quaternion.Euler(0f, forward ? -10f : 10f, forward ? -10f : 10f);
 
+        AudioManager.Instance.PlayOneShot("paper_shuffle");
+
         switchAnimation?.Kill();
         switchAnimation = DOTween.Sequence();
         switchAnimation.SetEase(Ease.InOutQuad);

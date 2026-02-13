@@ -44,12 +44,20 @@ public class BookController : MonoBehaviour
         ogOpenedPosition = openedBook.transform.localPosition;
         //ogOpenedRotation = openedBook.transform.eulerAngles;
 
+        AudioManager.Instance.PlayOneShot("high_woosh");
+
         sequence?.Kill();
         sequence = DOTween.Sequence();
         sequence.Append(closedBook.transform.DOMoveY(ogClosedPosition.y + LiftSmall, LiftDurationShort));
+        sequence.InsertCallback(.3f, () => {
+            AudioManager.Instance.PlayOneShot("deep_woosh");
+                });
         sequence.Append(closedBook.transform.DOMove(GameManager.Instance.mainCamera.transform.position + GrabCameraOffset, LiftDurationMedium));
         sequence.Join(closedBook.transform.DORotate(GrabRotation, LiftDurationShort));
         sequence.Append(openedBook.transform.DOLocalMoveY(ogOpenedPosition.y + LiftOpened, LiftDurationMedium));
+        sequence.InsertCallback(.75f, () => {
+            AudioManager.Instance.PlayOneShot("high_woosh");
+                });
 
         isHeld = true;
         openedBook.SetActive(true);
@@ -60,12 +68,20 @@ public class BookController : MonoBehaviour
     {
         if (!isHeld) return;
         
+        AudioManager.Instance.PlayOneShot("deep_woosh");
+
         sequence?.Kill();
         sequence = DOTween.Sequence();
         sequence.Append(openedBook.transform.DOLocalMove(ogOpenedPosition, LiftDurationShort));
         sequence.Append(closedBook.transform.DOMove(ogClosedPosition + new Vector3(0f, LiftSmall, 0f), LiftDurationMedium));
+        sequence.InsertCallback(.3f, () => {
+            AudioManager.Instance.PlayOneShot("high_woosh");
+                });
         sequence.Join(closedBook.transform.DORotate(ogClosedRotation, LiftDurationMedium));
         sequence.Append(closedBook.transform.DOMoveY(ogClosedPosition.y, LiftDurationShort));
+        sequence.InsertCallback(.75f, () => {
+            AudioManager.Instance.PlayOneShot("deep_woosh");
+                });
         sequence.OnComplete(() => openedBook.SetActive(false));
         
         isHeld = false;

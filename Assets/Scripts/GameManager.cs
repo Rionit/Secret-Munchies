@@ -218,6 +218,8 @@ public class GameManager : MonoBehaviour
 
         bag.AddFood(food.foodData);
         GameObject itemToDestroy = holdingItem;
+        
+        AudioManager.Instance.PlayOneShot("deep_woosh");
 
         Sequence sequence = DOTween.Sequence();
         sequence.Append(holdingItem.transform.DOMove(bag.transform.position + Vector3.up * 0.2f, 0.5f));
@@ -248,6 +250,8 @@ public class GameManager : MonoBehaviour
 
         holdingItem = instance;
 
+        AudioManager.Instance.PlayOneShot("high_woosh");
+
         Sequence sequence = DOTween.Sequence();
         sequence.Append(holdingItem.transform.DOMoveY(holdingItem.transform.position.y + 0.1f, 0.2f));
         sequence.Append(holdingItem.transform.DOMove(hand.transform.position, 0.5f))
@@ -262,6 +266,8 @@ public class GameManager : MonoBehaviour
         if (holdingItem == null) return;
 
         GameObject droppedItem = holdingItem;
+
+        AudioManager.Instance.PlayOneShot("deep_woosh");
 
         Sequence sequence = DOTween.Sequence();
         sequence.Append(holdingItem.transform.DOMove(position, 0.5f))

@@ -69,7 +69,7 @@ public class FoodDispenserController : MonoBehaviour
             .SetEase(Ease.OutQuint));
         seq.Join(foodInstance.transform.DORotate(new Vector3(0, 0, -30f), 0.3f));
 
-        seq.InsertCallback(0f, () => { AudioManager.Instance.PlayOneShot("sliding"); });
+        seq.InsertCallback(1f, () => { AudioManager.Instance.PlayOneShot("sliding"); });
         
         return seq;
     }
