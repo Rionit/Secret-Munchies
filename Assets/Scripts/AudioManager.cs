@@ -2,16 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance { get; private set; }
+    
     [SerializeField] private Sound[] sounds;
 
-    public static AudioManager Instance { get; private set; }
+    [SerializeField] private Sound[] voiceSounds;
+    
+    public float voicePitch;
 
     public string currentRoomTone;
     
     private Queue<Sound> soundQueue = new Queue<Sound>();
+    
+    private AudioSource npcAudioSource;
     
     private void Awake()
     {
@@ -37,11 +45,21 @@ public class AudioManager : MonoBehaviour
             sound.source.spatialBlend = sound.is3D ? 1f : 0f;
             if (sound.playOnAwake) Play(sound.name);
         }
+        
+        npcAudioSource = gameObject.AddComponent<AudioSource>();
     }
 
+    public void OnCharacterTyped(string character)
+    {
+        Sound s = GetSound(character.ToLower(), voiceSounds);
+        if (s == null) return;
+        npcAudioSource.pitch = voicePitch;
+        npcAudioSource.PlayOneShot(s.clip);
+    }
+    
     public void PlayOneShot(string name)
     {
-        Sound s = GetSound(name);
+        Sound s = GetSound(name, sounds);
         if (s == null) return;
 
         s.source.PlayOneShot(s.clip);
@@ -49,7 +67,7 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name)
     {
-        Sound s = GetSound(name);
+        Sound s = GetSound(name, sounds);
         if (s == null) return;
 
         s.source.Play();
@@ -57,7 +75,7 @@ public class AudioManager : MonoBehaviour
     
     public void Stop(string name)
     {
-        Sound s = GetSound(name);
+        Sound s = GetSound(name, sounds);
         if (s == null) return;
 
         s.source.Stop();
@@ -65,7 +83,7 @@ public class AudioManager : MonoBehaviour
     
     public void FadeIn(string name, float duration = 1f)
     {
-        Sound s = GetSound(name);
+        Sound s = GetSound(name, sounds);
         if (s == null) return;
         if (s.fade != null)
             StopCoroutine(s.fade);
@@ -75,7 +93,7 @@ public class AudioManager : MonoBehaviour
 
     public void FadeOut(string name, float duration = 1f)
     {
-        Sound s = GetSound(name);
+        Sound s = GetSound(name, sounds);
         if (s == null) return;
         if (s.fade != null)
             StopCoroutine(s.fade);
@@ -85,8 +103,8 @@ public class AudioManager : MonoBehaviour
     
     public void Transition(string from, string to, float duration = 1f)
     {
-        Sound fromSound = GetSound(from);
-        Sound toSound = GetSound(to);
+        Sound fromSound = GetSound(from, sounds);
+        Sound toSound = GetSound(to, sounds);
 
         if (toSound == null) return;
         if (fromSound == null)
@@ -145,9 +163,9 @@ public class AudioManager : MonoBehaviour
         yield return FadeInCoroutine(to, halfDuration);
     }
 
-    private Sound GetSound(string name)
+    private Sound GetSound(string name, Sound[] array)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = Array.Find(array, sound => sound.name == name);
         if (s == null)
         {
             Debug.LogWarning("Sound " + name + " not found!");

@@ -36,6 +36,7 @@ public class SpeechBubble : MonoBehaviour
 
     private void Start()
     {
+        OnCharacterTyped += AudioManager.Instance.OnCharacterTyped;
         AnimateIn();
     }
 
@@ -52,6 +53,11 @@ public class SpeechBubble : MonoBehaviour
     public void CloseAndDestroy()
     {
         AnimateOut(() => Destroy(gameObject));
+    }
+
+    private void OnDestroy()
+    {
+        OnCharacterTyped -= AudioManager.Instance.OnCharacterTyped;
     }
 
     private IEnumerator TypeText(string message)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Unity.Cinemachine;
+using Random = UnityEngine.Random;
 
 public class DialogueController : MonoBehaviour
 {
@@ -74,6 +75,9 @@ public class DialogueController : MonoBehaviour
 
     public void StartDialogue(NPC npc)
     {
+        if (currentNPC != npc)
+            AudioManager.Instance.voicePitch = Random.Range(0.8f, 1.2f);
+        
         currentNPC = npc;
         
         if (!isProperCamera) return;

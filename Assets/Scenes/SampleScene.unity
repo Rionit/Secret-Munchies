@@ -4465,7 +4465,6 @@ GameObject:
   - component: {fileID: 793333302}
   - component: {fileID: 793333303}
   - component: {fileID: 793333304}
-  - component: {fileID: 793333305}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: Untagged
@@ -4700,103 +4699,6 @@ CapsuleCollider:
   m_Height: 2.008544
   m_Direction: 1
   m_Center: {x: 0, y: -0.21455884, z: 0}
---- !u!82 &793333305
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 793333295}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -8244,6 +8146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1260682906}
   - component: {fileID: 1260682907}
+  - component: {fileID: 1260682908}
   m_Layer: 0
   m_Name: Closet
   m_TagString: Untagged
@@ -8281,12 +8184,25 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 4.01007, y: 3.6853442, z: 3.3639512}
   m_Center: {x: 0.29574633, y: 0.9461813, z: -0.09193587}
+--- !u!114 &1260682908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260682905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596b99099f4758847b7865b565da400b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  roomToneName: closet
 --- !u!1 &1262771554
 GameObject:
   m_ObjectHideFlags: 0
@@ -16598,12 +16514,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: empty_mall
     clip: {fileID: 8300000, guid: d122ebc86706cc34193d7195290b89f5, type: 3}
-    volume: 1
+    volume: 0.264
     pitch: 1
     loop: 1
     playOnAwake: 0
     is3D: 0
-    source: {fileID: 793333305}
+    source: {fileID: 0}
   - name: closet
     clip: {fileID: 8300000, guid: 8d3ce4bc21690e24da3580dedeba8e79, type: 3}
     volume: 1
@@ -16611,7 +16527,217 @@ MonoBehaviour:
     loop: 1
     playOnAwake: 0
     is3D: 0
-    source: {fileID: 793333305}
+    source: {fileID: 0}
+  voiceSounds:
+  - name: a
+    clip: {fileID: 8300000, guid: 2acda31b8e3627a459cd6eb80b725cbc, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: b
+    clip: {fileID: 8300000, guid: 81e88f348d8c4a04187f9dbe09929745, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: c
+    clip: {fileID: 8300000, guid: 6bc5af6bf16424140be1eca8abf29a9b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: d
+    clip: {fileID: 8300000, guid: 9c8e7c5a8cf4b484f887451bc077a95e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: e
+    clip: {fileID: 8300000, guid: f523c1d3affc6164abfdfaf5c1b3d1ae, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: f
+    clip: {fileID: 8300000, guid: 7aa6941e6b1ef3049b286acf18fe5652, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: g
+    clip: {fileID: 8300000, guid: 82cb4681e04d4fe4e856759f7744f377, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: h
+    clip: {fileID: 8300000, guid: 1d2b07cf8840d90409f096b5d75a4548, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: i
+    clip: {fileID: 8300000, guid: 487c458b81f87484585f0800a5403b7a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: j
+    clip: {fileID: 8300000, guid: c70973c304ea1aa4f843822c70a3a24e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: k
+    clip: {fileID: 8300000, guid: ef33d4bb3cdeec047a0a8b7ac14f0ae8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: l
+    clip: {fileID: 8300000, guid: d4f3767bc33502048b06b43f219a7e73, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: m
+    clip: {fileID: 8300000, guid: d96cc8af94ff1c149bfb36adbf219e76, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: n
+    clip: {fileID: 8300000, guid: db3ffe17656efdd4cb472960846767a8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: o
+    clip: {fileID: 8300000, guid: 62ca0fe6086cae44bae220a1438b0cf5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: p
+    clip: {fileID: 8300000, guid: 042d494d4a6cb384cb6a7998e2212cf5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: q
+    clip: {fileID: 8300000, guid: 9fe1ee12564851e46bd64594ed4bdd43, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: r
+    clip: {fileID: 8300000, guid: 8479ccc5b7ef0c040bd390593680f982, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: s
+    clip: {fileID: 8300000, guid: 1ddcc9fe1e8eac6468a53a7fd140bf66, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: t
+    clip: {fileID: 8300000, guid: f7e5e395450748f43ab496b7e9b5120d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: u
+    clip: {fileID: 8300000, guid: a4ee229b48627614a82e2683a0347a5e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: v
+    clip: {fileID: 8300000, guid: bb97f92128bef704aa34fc5d8437db09, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: w
+    clip: {fileID: 8300000, guid: 180ecfe410ce1be4b961ea418ea812b8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: x
+    clip: {fileID: 8300000, guid: cecadc6cbd1fa904189ffeaf8696cd54, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: y
+    clip: {fileID: 8300000, guid: f0f4d70be9c6a8c47989ad6e69d70038, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  - name: z
+    clip: {fileID: 8300000, guid: c0762406fbd43144bb343e8c4e865c1c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
+  currentRoomTone: 
 --- !u!4 &1974672396
 Transform:
   m_ObjectHideFlags: 0
@@ -16726,6 +16852,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2006788402}
   - component: {fileID: 2006788403}
+  - component: {fileID: 2006788405}
   - component: {fileID: 2006788404}
   m_Layer: 0
   m_Name: Kitchen
@@ -16861,12 +16988,25 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 8.235476, y: 3.4221864, z: 4.2891974}
   m_Center: {x: 2.8035984, y: 0.81549865, z: 0.28929114}
+--- !u!114 &2006788405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006788401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596b99099f4758847b7865b565da400b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomTone
+  roomToneName: empty_mall
 --- !u!1 &2046137065
 GameObject:
   m_ObjectHideFlags: 0
