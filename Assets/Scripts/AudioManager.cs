@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager Instance { get; private set; }
 
+    public string currentRoomTone;
+    
     private Queue<Sound> soundQueue = new Queue<Sound>();
     
     private void Awake()
@@ -80,19 +82,23 @@ public class AudioManager : MonoBehaviour
         
         s.fade = StartCoroutine(FadeOutCoroutine(s, duration));
     }
-
+    
     public void Transition(string from, string to, float duration = 1f)
     {
         Sound fromSound = GetSound(from);
         Sound toSound = GetSound(to);
 
-        if (fromSound == null || toSound == null) return;
-
-        StartCoroutine(TransitionCoroutine(fromSound, toSound, duration));
+        if (toSound == null) return;
+        if (fromSound == null)
+            StartCoroutine(FadeInCoroutine(toSound, duration));
+        else
+            StartCoroutine(TransitionCoroutine(fromSound, toSound, duration));
     }
 
     private IEnumerator FadeInCoroutine(Sound sound, float duration)
     {
+        //Debug.LogError("Fading in to " + sound.name);
+        
         float targetVolume = sound.volume;
         float startVolume = sound.source.volume;
         
@@ -112,6 +118,8 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator FadeOutCoroutine(Sound sound, float duration)
     {
+        //Debug.LogError("Fading out from " + sound.name);
+        
         float targetVolume = 0f;
         float startVolume = sound.source.volume;
 
@@ -129,6 +137,8 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator TransitionCoroutine(Sound from, Sound to, float duration)
     {
+        //Debug.LogError("Transition from " + from.name + " to " + to.name);
+        
         float halfDuration = duration / 2f;
 
         yield return FadeOutCoroutine(from, halfDuration);
