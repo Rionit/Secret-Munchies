@@ -16528,6 +16528,14 @@ MonoBehaviour:
     playOnAwake: 0
     is3D: 0
     source: {fileID: 0}
+  - name: paper_tear
+    clip: {fileID: 8300000, guid: f49114f2c823e6d4c90318735e26e82e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    playOnAwake: 0
+    is3D: 0
+    source: {fileID: 0}
   voiceSounds:
   - name: a
     clip: {fileID: 8300000, guid: 2acda31b8e3627a459cd6eb80b725cbc, type: 3}
@@ -16737,6 +16745,7 @@ MonoBehaviour:
     playOnAwake: 0
     is3D: 0
     source: {fileID: 0}
+  voicePitch: 0
   currentRoomTone: 
 --- !u!4 &1974672396
 Transform:
@@ -17150,6 +17159,7 @@ MonoBehaviour:
   currentCustomerId: 0
   hand: {fileID: 475840909}
   counterController: {fileID: 850420349}
+  morseCodeController: {fileID: 2064886460}
   notepadApp: {fileID: 1350553398}
   currentCameraIdx: 0
 --- !u!4 &2051972399
@@ -17290,6 +17300,7 @@ MonoBehaviour:
   characterGapThreshold: 0.5
   timeSlider: {fileID: 1980433147}
   messageText: {fileID: 1901275218}
+  isActive: 0
 --- !u!114 &2069155584 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6256493325474413439, guid: 985f87f7709dd4f4ab48ca37cb5bd3d7, type: 3}

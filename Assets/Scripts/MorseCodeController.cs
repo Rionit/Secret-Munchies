@@ -30,6 +30,8 @@ public class MorseCodeController : MonoBehaviour
 
     public event Action<string> OnMessageFinished;
 
+    public bool isActive = false;
+    
     private float lastInputTime;
     private bool hasInput;
 
@@ -61,6 +63,7 @@ public class MorseCodeController : MonoBehaviour
     [Button(ButtonSizes.Large)]
     public void Dot()
     {
+        if (!isActive) return;
         AudioManager.Instance?.PlayOneShot("dot");
         RegisterInput("·");
     }
@@ -68,6 +71,7 @@ public class MorseCodeController : MonoBehaviour
     [Button(ButtonSizes.Large)]
     public void Dash()
     {
+        if (!isActive) return;
         AudioManager.Instance?.PlayOneShot("dash");
         RegisterInput("-");
     }

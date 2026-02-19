@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
 
     [Required]
     public CounterController counterController;
+    [Required]
+    public MorseCodeController morseCodeController;
 
     [Required]
     public NotepadApp notepadApp;
@@ -104,6 +106,8 @@ public class GameManager : MonoBehaviour
         actions["CameraNext"].performed += _ => NextCamera();
         actions["CameraPrev"].performed += _ => PrevCamera();
         actions["Menu"].performed += _ => ToggleMenu();
+        actions["Dot"].performed += _ => morseCodeController.Dot();
+        actions["Dash"].performed += _ => morseCodeController.Dash();
     }
 
     private void OnDisable()
@@ -112,6 +116,8 @@ public class GameManager : MonoBehaviour
         actions["CameraNext"].performed -= _ => NextCamera();
         actions["CameraPrev"].performed -= _ => PrevCamera();
         actions["Menu"].performed -= _ => ToggleMenu();
+        actions["Dot"].performed -= _ => morseCodeController.Dot();
+        actions["Dash"].performed -= _ => morseCodeController.Dash();
     }
 
     public void QuitGame()

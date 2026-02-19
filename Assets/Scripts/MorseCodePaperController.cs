@@ -61,7 +61,7 @@ public class MorseCodePaperController : MonoBehaviour,
             morseCodeController.FinishMessage();
             previous.transform.DOMove(previous.transform.position + Vector3.down * 700f + Vector3.right * Random.Range(50f, 350f), 2.0f);
             previous.transform.DORotate(new Vector3(0f, 0f, Random.Range(-10f, -90f)), 2.0f).OnComplete((() => Destroy(previous.gameObject)));
-            
+            AudioManager.Instance.PlayOneShot("paper_tear");
         }
     }
 }
