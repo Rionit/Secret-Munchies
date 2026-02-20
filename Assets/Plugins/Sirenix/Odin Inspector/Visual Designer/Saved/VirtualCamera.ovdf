@@ -1,0 +1,76 @@
+OVDF v1.1
+VirtualCamera, Assembly-CSharp
+MetaGuid:75d1b77dfdedaf340a8f7f6a420614cf
+
+# $HivyMubp1UVvqpTDS3pC6u
+Position: $root:16
++ [Sirenix.OdinInspector.BoxGroupAttribute]
+	GroupName = "Settings"
+	CenterLabel = True
+	ShowLabel = True
+
+# $YL6CKMfss85L9XxUBUrmrV
+Position: $HivyMubp1UVvqpTDS3pC6u:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute]
+
+# $BnFCy7gQTSLEkKBGx2TwoS
+Position: $YL6CKMfss85L9XxUBUrmrV:0
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $6rwpwfmE8rFhyWRYK5ixhv
+Position: $YL6CKMfss85L9XxUBUrmrV:1
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# $wS1dpprDBaSBCN9wHK58q
+Position: $YL6CKMfss85L9XxUBUrmrV:2
++ [Sirenix.OdinInspector.ColumnGroupAttribute+ColumnSubGroupAttribute]
+
+# cameraMatrix
+Position: $HivyMubp1UVvqpTDS3pC6u:0
+* [Sirenix.OdinInspector.TitleAttribute]
+	TitleAlignment = Centered
+* [Sirenix.OdinInspector.TableMatrixAttribute]
+	Labels = ""
+	Transpose = False
+	HideRowIndices = True
+	HideColumnIndices = True
+
+# isActive
+Position: $HivyMubp1UVvqpTDS3pC6u:2
++ [Sirenix.OdinInspector.ToggleLeftAttribute]
+
+# thisCamera
+Position: $root:17
++ [Sirenix.OdinInspector.HideInAttribute]
+	PrefabKind = All
+
+# rightCamera
+Position: $wS1dpprDBaSBCN9wHK58q:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.TitleAttribute]
+	TitleAlignment = Centered
+	Title = "D"
+
+# backCamera
+Position: $6rwpwfmE8rFhyWRYK5ixhv:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "S"
+	TitleAlignment = Centered
+
+# leftCamera
+Position: $BnFCy7gQTSLEkKBGx2TwoS:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "A"
+	TitleAlignment = Centered
+
+# frontCamera
+Position: $HivyMubp1UVvqpTDS3pC6u:0
++ [Sirenix.OdinInspector.HideLabelAttribute]
++ [Sirenix.OdinInspector.TitleAttribute]
+	Title = "W"
+	TitleAlignment = Centered
+
+# OnNextVirtualCameraSelected
+Position: $HivyMubp1UVvqpTDS3pC6u:3

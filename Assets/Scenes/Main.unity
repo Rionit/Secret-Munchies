@@ -1056,6 +1056,7 @@ GameObject:
   m_Component:
   - component: {fileID: 146953838}
   - component: {fileID: 146953837}
+  - component: {fileID: 146953839}
   m_Layer: 0
   m_Name: PackingCamera
   m_TagString: Untagged
@@ -1121,6 +1122,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 477880838}
   m_LocalEulerAnglesHint: {x: -5.64, y: -90, z: 0}
+--- !u!114 &146953839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146953836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d1b77dfdedaf340a8f7f6a420614cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VirtualCamera
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNextVirtualCameraSelected
+      Entry: 6
+      Data: 
+  isActive: 0
+  thisCamera: {fileID: 0}
+  frontCamera: {fileID: 0}
+  leftCamera: {fileID: 0}
+  backCamera: {fileID: 1181328278}
+  rightCamera: {fileID: 613938782}
 --- !u!1 &164080024
 GameObject:
   m_ObjectHideFlags: 0
@@ -3263,6 +3294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 613938781}
   - component: {fileID: 613938780}
+  - component: {fileID: 613938782}
   m_Layer: 0
   m_Name: HandoutCamera
   m_TagString: Untagged
@@ -3328,6 +3360,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 477880838}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &613938782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613938779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d1b77dfdedaf340a8f7f6a420614cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VirtualCamera
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNextVirtualCameraSelected
+      Entry: 6
+      Data: 
+  isActive: 0
+  thisCamera: {fileID: 0}
+  frontCamera: {fileID: 0}
+  leftCamera: {fileID: 1691597463}
+  backCamera: {fileID: 146953839}
+  rightCamera: {fileID: 1181328278}
 --- !u!1 &642373769
 GameObject:
   m_ObjectHideFlags: 0
@@ -7979,6 +8041,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1181328277}
   - component: {fileID: 1181328276}
+  - component: {fileID: 1181328278}
   m_Layer: 0
   m_Name: CashRegisterCamera
   m_TagString: Untagged
@@ -8044,6 +8107,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 477880838}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1181328278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181328275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d1b77dfdedaf340a8f7f6a420614cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VirtualCamera
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNextVirtualCameraSelected
+      Entry: 6
+      Data: 
+  isActive: 0
+  thisCamera: {fileID: 0}
+  frontCamera: {fileID: 1540640867}
+  leftCamera: {fileID: 613938782}
+  backCamera: {fileID: 146953839}
+  rightCamera: {fileID: 0}
 --- !u!1 &1200407105
 GameObject:
   m_ObjectHideFlags: 0
@@ -9692,6 +9785,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1540640865}
   - component: {fileID: 1540640866}
+  - component: {fileID: 1540640867}
   m_Layer: 0
   m_Name: ComputerCamera
   m_TagString: Untagged
@@ -9757,6 +9851,36 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &1540640867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540640864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d1b77dfdedaf340a8f7f6a420614cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VirtualCamera
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNextVirtualCameraSelected
+      Entry: 6
+      Data: 
+  isActive: 0
+  thisCamera: {fileID: 0}
+  frontCamera: {fileID: 0}
+  leftCamera: {fileID: 613938782}
+  backCamera: {fileID: 1181328278}
+  rightCamera: {fileID: 0}
 --- !u!1001 &1550016028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14164,6 +14288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1691597462}
   - component: {fileID: 1691597461}
+  - component: {fileID: 1691597463}
   m_Layer: 0
   m_Name: MorseCodeCamera
   m_TagString: Untagged
@@ -14229,6 +14354,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 477880838}
   m_LocalEulerAnglesHint: {x: 9.109, y: 0, z: 0}
+--- !u!114 &1691597463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691597460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d1b77dfdedaf340a8f7f6a420614cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VirtualCamera
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: OnNextVirtualCameraSelected
+      Entry: 6
+      Data: 
+  isActive: 0
+  thisCamera: {fileID: 0}
+  frontCamera: {fileID: 0}
+  leftCamera: {fileID: 146953839}
+  backCamera: {fileID: 1181328278}
+  rightCamera: {fileID: 613938782}
 --- !u!1 &1696164416
 GameObject:
   m_ObjectHideFlags: 0
@@ -17162,6 +17317,8 @@ MonoBehaviour:
   morseCodeController: {fileID: 2064886460}
   notepadApp: {fileID: 1350553398}
   currentCameraIdx: 0
+  currentVirtualCamera: {fileID: 0}
+  isTutorialActive: 0
 --- !u!4 &2051972399
 Transform:
   m_ObjectHideFlags: 0

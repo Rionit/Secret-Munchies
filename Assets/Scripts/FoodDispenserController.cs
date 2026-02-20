@@ -13,8 +13,9 @@ public class FoodDispenserController : MonoBehaviour
         {
             if (dispenser.type == foodData.type)
             {
-                var instancePosition = dispenser.startPosition.position + new Vector3(-2f, -5f);
+                var instancePosition = dispenser.startPosition.position + new Vector3(-0.2f, -0.5f);
                 var foodInstance = Instantiate(foodData.prefab, instancePosition, Quaternion.identity);
+                foodInstance.transform.rotation = dispenser.transform.rotation;
                 foodInstance.GetComponent<Clickable>().onClick.AddListener(RemoveFood);
                 foodInstance.GetComponent<Food>().foodData = foodData;
                 foodInstance.GetComponent<Food>().dispenser = dispenser;
@@ -67,7 +68,7 @@ public class FoodDispenserController : MonoBehaviour
 
         seq.Append(foodInstance.transform.DOMove(startPosition, 1f)
             .SetEase(Ease.OutQuint));
-        seq.Join(foodInstance.transform.DORotate(new Vector3(0, 0, -30f), 0.3f));
+        seq.Join(foodInstance.transform.DORotate(foodInstance.GetComponent<Food>().dispenser.transform.rotation.eulerAngles + new Vector3(0, 0, -30f), 0.3f));
 
         seq.InsertCallback(1f, () => { AudioManager.Instance.PlayOneShot("sliding"); });
         
@@ -81,7 +82,7 @@ public class FoodDispenserController : MonoBehaviour
 
         seq.Append(foodInstance.transform.DOMove(endPosition, 2f)
             .SetEase(Ease.OutBounce));
-        seq.Join(foodInstance.transform.DORotate(Vector3.zero, 3f));
+        seq.Join(foodInstance.transform.DORotate(foodInstance.GetComponent<Food>().dispenser.transform.rotation.eulerAngles, 3f));
         // seq.InsertCallback(.75f, () => { AudioManager.Instance.PlayOneShot("bounce"); }); // i dont like it
         
         return seq;

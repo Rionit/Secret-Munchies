@@ -14,7 +14,7 @@ public class OrderMakerApp : MonoBehaviour
 
     private void Start()
     {
-        createOrderButton.interactable = false;
+        createOrderButton.interactable = GameManager.Instance.isTutorialActive;
         foreach (FoodGridElement element in foodGridElements)
         {
             element.OnValueChanged += OnFoodGridElementValueChanged;
@@ -47,6 +47,6 @@ public class OrderMakerApp : MonoBehaviour
 
     private void TryEnableButton()
     {
-        createOrderButton.interactable = isNonzeroOrder && isNPCReady;
+        createOrderButton.interactable = (isNonzeroOrder && isNPCReady) || (GameManager.Instance.isTutorialActive);
     } 
 }

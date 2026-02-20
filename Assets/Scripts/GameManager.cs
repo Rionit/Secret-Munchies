@@ -21,10 +21,10 @@ public class GameManager : MonoBehaviour
 
     [Title("Cameras")]
     [ValidateInput(nameof(ValidateVirtualCameras),
-        "Virtual Cameras array must have exactly 4 elements",
+        "Virtual Cameras array must have at least 4 basic virtual cameras (pc, packing, handout, morse)",
         InfoMessageType.Error)]
     [ListDrawerSettings(ShowFoldout = true, DefaultExpandedState = true)]
-    public CinemachineCamera[] virtualCameras;
+    public VirtualCamera[] virtualCameras;
 
     [Required, Tooltip("Close-up camera used for computer interaction")]
     public CinemachineCamera computerCloseupCamera;
@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
     [ShowInInspector, LabelText("Current Camera Index"), ValueDropdown(nameof(GetCameraIndices))]
     public int currentCameraIdx = 0;
 
+    public VirtualCamera currentVirtualCamera;
+    
     private IEnumerable<int> GetCameraIndices()
     {
         if (virtualCameras == null) yield break;
@@ -75,7 +77,9 @@ public class GameManager : MonoBehaviour
     [ShowInInspector] private List<Secret> secrets = new List<Secret>();
     
     private bool isMenuActive;
-    
+
+    public bool isTutorialActive;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -95,9 +99,34 @@ public class GameManager : MonoBehaviour
         cinemachineBrain = mainCamera.GetComponent<CinemachineBrain>();
         
         SetActiveCamera(0);
-        onCameraBlendFinished?.Invoke(virtualCameras[0]); // if this camera already active 
+        onCameraBlendFinished?.Invoke(virtualCameras[0].thisCamera); // if this camera already active 
         
         AIManager.Instance.dialogueController.OnDialogueEnded += OnDialogueEnded;
+    }
+    
+    private void OnMovePerformed(InputAction.CallbackContext ctx)
+    {
+        Debug.LogError("YUPPP");
+        Vector2 input = ctx.ReadValue<Vector2>();
+
+        if (input.magnitude < 0.5f)
+            return;
+
+        // Dominant axis only (prevents diagonal double calls)
+        if (Mathf.Abs(input.x) > Mathf.Abs(input.y))
+        {
+            if (input.x > 0)
+                currentVirtualCamera.D();
+            else
+                currentVirtualCamera.A();
+        }
+        else
+        {
+            if (input.y > 0)
+                currentVirtualCamera.W();
+            else
+                currentVirtualCamera.S();
+        }
     }
 
     private void OnEnable()
@@ -108,6 +137,7 @@ public class GameManager : MonoBehaviour
         actions["Menu"].performed += _ => ToggleMenu();
         actions["Dot"].performed += _ => morseCodeController.Dot();
         actions["Dash"].performed += _ => morseCodeController.Dash();
+        actions["Move"].performed += OnMovePerformed;
     }
 
     private void OnDisable()
@@ -160,8 +190,7 @@ public class GameManager : MonoBehaviour
     {
         currentCameraIdx = (currentCameraIdx + 1) % virtualCameras.Length;
         SetActiveCamera(currentCameraIdx);
-        onCameraChanged?.Invoke(virtualCameras[currentCameraIdx]);
-        Debug.LogWarning("Next Camera");
+        onCameraChanged?.Invoke(virtualCameras[currentCameraIdx].thisCamera);
     }
 
     [Button(ButtonSizes.Small)]
@@ -169,8 +198,15 @@ public class GameManager : MonoBehaviour
     {
         currentCameraIdx = (currentCameraIdx - 1 + virtualCameras.Length) % virtualCameras.Length;
         SetActiveCamera(currentCameraIdx);
-        onCameraChanged?.Invoke(virtualCameras[currentCameraIdx]);
-        Debug.LogWarning("Prev Camera");
+        onCameraChanged?.Invoke(virtualCameras[currentCameraIdx].thisCamera);
+    }
+
+    public void ChangeCamera(VirtualCamera virtualCamera)
+    {
+        currentCameraIdx = Array.IndexOf(virtualCameras, virtualCamera);
+        SetActiveCamera(currentCameraIdx);
+        onCameraChanged?.Invoke(virtualCameras[currentCameraIdx].thisCamera);
+        currentVirtualCamera = virtualCamera;
     }
 
     private void StartWaitingForCameraBlendFinish()
@@ -196,13 +232,17 @@ public class GameManager : MonoBehaviour
         yield return new WaitWhile(() => cinemachineBrain.IsBlending);
         
         Debug.Log("Blend complete! Camera transition finished.");
-        onCameraBlendFinished?.Invoke(overrideCamera != null ? overrideCamera : virtualCameras[currentCameraIdx]);
+        onCameraBlendFinished?.Invoke(overrideCamera != null ? overrideCamera : virtualCameras[currentCameraIdx].thisCamera);
     }
 
     private void SetActiveCamera(int index)
     {
         for (int i = 0; i < virtualCameras.Length; i++)
-            virtualCameras[i].Priority = (i == index) ? 10 : 0;
+        {
+            virtualCameras[i].thisCamera.Priority = (i == index) ? 10 : 0;
+            virtualCameras[i].isActive = (i == index);
+        }
+     
         StartWaitingForCameraBlendFinish();
     }
 
@@ -302,8 +342,8 @@ public class GameManager : MonoBehaviour
         StartWaitingForCameraBlendFinish();
     }
 
-    private bool ValidateVirtualCameras(CinemachineCamera[] cams)
+    private bool ValidateVirtualCameras(VirtualCamera[] cams)
     {
-        return cams != null && cams.Length == 4;
+        return cams != null && cams.Length >= 4;
     }
 }

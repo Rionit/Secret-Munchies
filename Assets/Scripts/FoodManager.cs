@@ -111,6 +111,7 @@ public class FoodManager : MonoBehaviour
         );
 
         Bag bag = bagInstance.GetComponent<Bag>();
+        bag.transform.rotation = bagSpawnPoints[spawnId].transform.rotation;
         bag.Initialize(spawnId, order.Id);
     }
 
