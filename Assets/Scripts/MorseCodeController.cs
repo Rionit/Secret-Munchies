@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MorseCodeController : MonoBehaviour
@@ -58,6 +59,9 @@ public class MorseCodeController : MonoBehaviour
 
         if (timeSinceLastInput >= characterGapThreshold)
             RegisterCharacter();
+        
+        if(SceneManager.GetActiveScene().name == "Tutorial" && currentMessage == "SOS")
+            GameManager.Instance.NotifyTutorial("morse_code_tapped");
     }
 
     [Button(ButtonSizes.Large)]
@@ -115,6 +119,8 @@ public class MorseCodeController : MonoBehaviour
         OnMessageFinished?.Invoke(currentMessage);
         messageText.text = "";
         currentMessage = "";
+        
+        GameManager.Instance.NotifyTutorial("morse_code_sent");
     }
 
     [Button]

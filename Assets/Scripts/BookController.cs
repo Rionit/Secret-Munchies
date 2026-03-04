@@ -38,6 +38,7 @@ public class BookController : MonoBehaviour
     {
         if (isHeld) return;
         
+        GameManager.Instance.NotifyTutorial("spy_book");
         
         ogClosedPosition = closedBook.transform.position;
         ogClosedRotation = closedBook.transform.eulerAngles;

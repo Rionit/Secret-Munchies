@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class FoodManager : MonoBehaviour
@@ -52,14 +53,18 @@ public class FoodManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (SceneManager.GetActiveScene().name == "Main")
         {
-            Destroy(gameObject);
-            return;
+            Destroy(Instance);
+            Instance = this;            
+            DontDestroyOnLoad(gameObject);
+        }
+        
+        if (Instance == null)
+        {
+            Instance = this;
         }
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -70,7 +75,8 @@ public class FoodManager : MonoBehaviour
 
     public void StartPreparingOrder()
     {
-        AIManager.Instance.ChangeToWaitQueue(currentOrderId);
+        if (AIManager.Instance != null)
+            AIManager.Instance.ChangeToWaitQueue(currentOrderId);
 
         foreach (FoodGridElement foodGridElement in orderMakerApp.foodGridElements)
         {

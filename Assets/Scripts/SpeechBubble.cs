@@ -26,6 +26,7 @@ public class SpeechBubble : MonoBehaviour
     [Title("Events")]
     public Action<string> OnCharacterTyped;
     public Action<string> OnTextTyped;
+    public Action OnClosed;
 
     private Coroutine typingRoutine;
 
@@ -52,7 +53,11 @@ public class SpeechBubble : MonoBehaviour
     [Button(ButtonSizes.Medium)]
     public void CloseAndDestroy()
     {
-        AnimateOut(() => Destroy(gameObject));
+        AnimateOut(() =>
+        {
+            OnClosed?.Invoke();
+            Destroy(gameObject);
+        });
     }
 
     private void OnDestroy()

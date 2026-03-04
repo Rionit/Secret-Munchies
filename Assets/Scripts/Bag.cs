@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using UnityEngine.SceneManagement;
 
 public class Bag : MonoBehaviour
 {
@@ -88,6 +89,8 @@ public class Bag : MonoBehaviour
         AudioManager.Instance.PlayOneShot("paper_close");
 
         if (isPacked) FoodManager.Instance?.FreeSpawnPoint(spawnId);
+        
+        GameManager.Instance.NotifyTutorial("on_bag_picked");
     }
 
     public void AddFood(FoodSO food, int amount = 1)
@@ -103,6 +106,8 @@ public class Bag : MonoBehaviour
         {
             foods.Add(new FoodAmount(food, amount));
         }
+
+        GameManager.Instance.NotifyTutorial("item_added_to_bag");
     }
 
     public void PlayAddFoodTween()

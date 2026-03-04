@@ -81,7 +81,6 @@ public class GameManager : MonoBehaviour
     [ShowInInspector] private List<Secret> secrets = new List<Secret>();
     
     private bool isMenuActive = false;
-    private bool isMorseActive = false;
 
     public bool isTutorialActive;
 
@@ -111,7 +110,8 @@ public class GameManager : MonoBehaviour
         SetActiveCamera(0);
         // onCameraBlendFinished?.Invoke(virtualCameras[0].thisCamera); // if this camera already active 
         
-        AIManager.Instance.dialogueController.OnDialogueEnded += OnDialogueEnded;
+        if (AIManager.Instance != null)
+            AIManager.Instance.dialogueController.OnDialogueEnded += OnDialogueEnded;
 
         if (SceneManager.GetActiveScene().name == "Main")
         {
@@ -218,7 +218,8 @@ public class GameManager : MonoBehaviour
             isMenuActive = true;
             AudioManager.Instance.FadeIn("music_menu", 5f);
             CinemachineCore.UniformDeltaTimeOverride = Time.unscaledDeltaTime;
-            AIManager.Instance.dialogueController.ClearCurrentDialogue();
+            if(AIManager.Instance != null)
+                AIManager.Instance.dialogueController.ClearCurrentDialogue();
             OverrideActiveCamera(pentagonCamera);
             onCameraBlendFinished += _ =>
             {
@@ -252,6 +253,22 @@ public class GameManager : MonoBehaviour
         onCameraChanged?.Invoke(virtualCameras[currentCameraIdx].thisCamera);
         currentVirtualCamera = virtualCamera;
     }
+    
+    public void SetActiveStation(int index)
+    {
+        TutorialManager tutorial = FindObjectOfType<TutorialManager>();
+        if (tutorial != null)
+            tutorial.OnStationChanged(index);
+    }
+    
+    public void NotifyTutorial(string eventName)
+    {
+        if (SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            TutorialManager tutorial = FindObjectOfType<TutorialManager>();
+            tutorial.TriggerCustomEvent(eventName);
+        }
+    }
 
     private void StartWaitingForCameraBlendFinish()
     {
@@ -277,6 +294,9 @@ public class GameManager : MonoBehaviour
         
         Debug.Log("Blend complete! Camera transition finished.");
         onCameraBlendFinished?.Invoke(overrideCamera != null ? overrideCamera : virtualCameras[currentCameraIdx].thisCamera);
+        
+        if (SceneManager.GetActiveScene().name == "Tutorial")
+            SetActiveStation(currentCameraIdx);
     }
 
     private void SetActiveCamera(int index)

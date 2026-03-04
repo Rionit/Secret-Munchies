@@ -28,6 +28,7 @@ public class CounterController : MonoBehaviour
             {
                 availability[dropPoint] = true;
                 GameManager.Instance.DropItem(dropPoint.transform.position);
+                GameManager.Instance.NotifyTutorial("on_bag_dropped");
                 break; 
             }
         }

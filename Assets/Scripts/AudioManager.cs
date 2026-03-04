@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
@@ -24,14 +25,17 @@ public class AudioManager : MonoBehaviour
     
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (SceneManager.GetActiveScene().name == "Main")
         {
-            Destroy(gameObject);
-            return;
+            Destroy(Instance);
+            Instance = this;            
+            DontDestroyOnLoad(gameObject);
         }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
 
         foreach (Sound sound in sounds)
         {
@@ -46,14 +50,16 @@ public class AudioManager : MonoBehaviour
             sound.source.spatialBlend = sound.is3D ? 1f : 0f;
             if (sound.playOnAwake) Play(sound.name);
         }
-        
-        npcAudioSource = gameObject.AddComponent<AudioSource>();
     }
 
     public void OnCharacterTyped(string character)
     {
+        if (character == " ") return;
+        
         Sound s = GetSound(character.ToLower(), voiceSounds);
         if (s == null) return;
+        if (npcAudioSource == null)
+            npcAudioSource = GameManager.Instance.mainCamera.GetComponent<AudioSource>();
         npcAudioSource.pitch = voicePitch;
         npcAudioSource.PlayOneShot(s.clip);
     }
