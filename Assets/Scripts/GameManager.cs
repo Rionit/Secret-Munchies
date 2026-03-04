@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
     [ShowInInspector] private List<Secret> secrets = new List<Secret>();
     
     private bool isMenuActive = false;
+    private bool isMorseActive = false;
 
     public bool isTutorialActive;
 
@@ -141,6 +142,8 @@ public class GameManager : MonoBehaviour
     
     private void OnMovePerformed(InputAction.CallbackContext ctx)
     {
+        if (morseCodeController.isActive) return;
+        
         Vector2 input = ctx.ReadValue<Vector2>();
 
         if (input.magnitude < 0.5f)

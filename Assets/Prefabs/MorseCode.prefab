@@ -1010,7 +1010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4743020a51827c44aad7bec45b61a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MorseCodeController
-  characterGapThreshold: 1
+  characterGapThreshold: 0.407
   timeSlider: {fileID: 1529280270895642069}
   messageText: {fileID: 6380195932285472158}
   isActive: 0
