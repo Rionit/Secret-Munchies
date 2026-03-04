@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { get; private set; }
     
     [SerializeField] private Sound[] sounds;
+    public Sound[] GetSounds() => sounds;
 
     [SerializeField] private Sound[] voiceSounds;
     

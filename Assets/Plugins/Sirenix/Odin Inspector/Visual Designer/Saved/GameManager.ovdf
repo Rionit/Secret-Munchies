@@ -23,7 +23,7 @@ Position: $Q9rdnsEY6pdmHVuXToD2Dr:1
 	CenterLabel = True
 
 # $5K4g5WFWoJRq8U7hcVJRfr
-Position: $root
+Position: $root:69
 + [Sirenix.OdinInspector.BoxGroupAttribute]
 	GroupName = "Secrets"
 	CenterLabel = True
@@ -76,3 +76,6 @@ Position: $BStm6xNKbgQHA12SqpqQgv:3
 
 # secrets
 Position: $5K4g5WFWoJRq8U7hcVJRfr:0
+
+# blankViewCamera
+Position: $PcbYDSVmdN7gczhPbbpxAG:4

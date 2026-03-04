@@ -110,6 +110,7 @@ public class GUIManager : MonoBehaviour
 
     public void UpdateMorseCodeUI()
     {
+        Debug.Log("UpdateMorseCodeUI");
         morseCodeUI.SetActive(!morseCodeUI.activeSelf);
         GameManager.Instance.morseCodeController.isActive = morseCodeUI.activeSelf;
         if(morseCodeUI.activeSelf)

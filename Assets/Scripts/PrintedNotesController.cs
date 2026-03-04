@@ -68,11 +68,19 @@ public class PrintedNotesController : MonoBehaviour
     {
         forms.Add(new FormData(answers));
         AudioManager.Instance.PlayOneShot("printer");
+        UpdateVisibility();
+    }
+
+    private void UpdateVisibility()
+    {
+        front.gameObject.SetActive(forms.Count >= 1);
+        back.gameObject.SetActive(forms.Count >= 2);
     }
 
     [Button]
     public void ShowPrintedNotes()
     {
+        UpdateVisibility();
         showAnimation?.Kill();
         showAnimation = DOTween.Sequence();
 
@@ -84,32 +92,23 @@ public class PrintedNotesController : MonoBehaviour
         showAnimation.Join(transform.DOScale(endTransform.localScale, .2f));
 
         if (forms.Count == 0) return;
-
         currentFormIndex = forms.Count - 1;
-
         front.Initialize(currentFormIndex + 1, forms[currentFormIndex]);
-        front.gameObject.SetActive(true);
 
         if (forms.Count < 2) return;
-
         back.Initialize(currentFormIndex, forms[currentFormIndex - 1]);
-        back.gameObject.SetActive(true);
     }
 
     [Button]
     public void HidePrintedNotes()
     {
+        UpdateVisibility();
         showAnimation?.Kill();
         showAnimation = DOTween.Sequence();
 
         showAnimation.Append(transform.DOMove(startTransform.position, .2f));
         showAnimation.Join(transform.DORotateQuaternion(startTransform.rotation, .2f));
         showAnimation.Join(transform.DOScale(startTransform.localScale, .2f));
-        showAnimation.OnComplete(() =>
-        {
-            front.gameObject.SetActive(false);
-            back.gameObject.SetActive(false);
-        });
     }
 
     [Button]

@@ -6,6 +6,7 @@ using UnityEngine;
 using Unity.Cinemachine;
 using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,6 +32,9 @@ public class GameManager : MonoBehaviour
 
     [Required, Tooltip("Camera overlooking Pentagon, used for Main Menu")]
     public CinemachineCamera pentagonCamera;
+    
+    [Required, Tooltip("Camera looking into blank space, used for Start of the game")]
+    public CinemachineCamera blankViewCamera;
 
     [Required]
     public Camera mainCamera;
@@ -76,21 +80,26 @@ public class GameManager : MonoBehaviour
 
     [ShowInInspector] private List<Secret> secrets = new List<Secret>();
     
-    private bool isMenuActive;
+    private bool isMenuActive = false;
 
     public bool isTutorialActive;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (SceneManager.GetActiveScene().name == "Main")
         {
-            Destroy(gameObject);
-            return;
+            Destroy(Instance);
+            Instance = this;            
+            DontDestroyOnLoad(gameObject);
         }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
+        
+        if (Instance == null)
+        {
+            Instance = this;
+            //DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        
         playerInput = GetComponent<PlayerInput>();
     }
 
@@ -99,14 +108,39 @@ public class GameManager : MonoBehaviour
         cinemachineBrain = mainCamera.GetComponent<CinemachineBrain>();
         
         SetActiveCamera(0);
-        onCameraBlendFinished?.Invoke(virtualCameras[0].thisCamera); // if this camera already active 
+        // onCameraBlendFinished?.Invoke(virtualCameras[0].thisCamera); // if this camera already active 
         
         AIManager.Instance.dialogueController.OnDialogueEnded += OnDialogueEnded;
+
+        if (SceneManager.GetActiveScene().name == "Main")
+        {
+            Time.timeScale = 0f;
+            StartCoroutine(OverrideThenToggle());
+            AudioManager.Instance.Play("kitchen");
+            // OverrideActiveCamera(blankViewCamera);
+            // Invoke(nameof(ToggleMenu), 1f);
+        }
+    }
+    
+    IEnumerator OverrideThenToggle()
+    {
+        OverrideActiveCamera(blankViewCamera);
+        yield return new WaitForSecondsRealtime(1f); 
+        ToggleMenu();
+    }
+    
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        mainCamera = Camera.main;
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
     
     private void OnMovePerformed(InputAction.CallbackContext ctx)
     {
-        Debug.LogError("YUPPP");
         Vector2 input = ctx.ReadValue<Vector2>();
 
         if (input.magnitude < 0.5f)
@@ -157,6 +191,13 @@ public class GameManager : MonoBehaviour
 
     public void ToggleMenu()
     {
+        if (isTutorialActive)
+        {
+            SceneManager.LoadScene("Main");
+            isTutorialActive = false;
+            return;
+        }
+        
         if (isMenuActive)
         {
             isMenuActive = false;
@@ -243,7 +284,8 @@ public class GameManager : MonoBehaviour
             virtualCameras[i].isActive = (i == index);
         }
      
-        StartWaitingForCameraBlendFinish();
+        if (overrideCamera == null)
+            StartWaitingForCameraBlendFinish();
     }
 
     public void OnComputerClick(GameObject sender)
@@ -329,6 +371,8 @@ public class GameManager : MonoBehaviour
 
     public void OverrideActiveCamera(CinemachineCamera camera)
     {
+        if (camera == null) return;
+        ResetOverrideCamera();
         overrideCamera = camera;
         camera.Priority = 20;
         StartWaitingForCameraBlendFinish();
