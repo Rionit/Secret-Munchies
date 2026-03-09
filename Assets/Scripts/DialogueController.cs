@@ -94,7 +94,13 @@ public class DialogueController : MonoBehaviour
 
         bubbleInstance = Instantiate(speechBubblePrefab, guiCanvas).GetComponent<SpeechBubble>();
         bubbleInstance.OnTextTyped += OnMessageFinished;
+        bubbleInstance.OnTextSkipped += OnTextSkipped;
 
+        ShowNextMessage();
+    }
+
+    private void OnTextSkipped()
+    {
         ShowNextMessage();
     }
 

@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     }
     
     [ReadOnly, ShowInInspector]
-    private PlayerInput playerInput;
+    public PlayerInput playerInput;
 
     [ReadOnly, ShowInInspector]
     private CinemachineCamera overrideCamera;

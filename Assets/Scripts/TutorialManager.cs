@@ -50,6 +50,8 @@ public class TutorialManager : MonoBehaviour
         ? steps[currentStepIndex] 
         : null;
 
+    private Coroutine nextStepDelayRoutine;
+
     private void Start()
     {
         GameManager.Instance.isTutorialActive = true;
@@ -74,18 +76,32 @@ public class TutorialManager : MonoBehaviour
             bubbleInstance.CloseAndDestroy();
 
         bubbleInstance = Instantiate(speechBubblePrefab, guiCanvas).GetComponent<SpeechBubble>();
-
-        bubbleInstance.OnTextTyped += OnTextFinished;
+        bubbleInstance.OnClosed += OnBubbleClosed;
+        bubbleInstance.OnTextTyped += OnTextTyped;
+        bubbleInstance.OnTextSkipped += OnTextSkipped;
         bubbleInstance.ShowText(step.message);
 
         GoToNextStep();
     }
 
-    private void OnTextFinished(string message)
+    private void OnTextSkipped()
     {
-        bubbleInstance.OnTextTyped -= OnTextFinished;
-        bubbleInstance.OnClosed += OnBubbleClosed;
-        bubbleInstance.CloseAndDestroy();
+        if (bubbleInstance != null)
+            bubbleInstance.CloseAndDestroy();
+        if (nextStepDelayRoutine != null)
+            StopCoroutine(nextStepDelayRoutine);
+    }
+
+    private void OnTextTyped(string obj)
+    {
+        nextStepDelayRoutine = StartCoroutine(WaitUntilNextStep());
+    }
+
+    private IEnumerator WaitUntilNextStep()
+    {
+        yield return new WaitForSeconds(1f);
+        if (bubbleInstance != null)
+            bubbleInstance.CloseAndDestroy();
     }
 
     private void OnBubbleClosed()
@@ -93,6 +109,8 @@ public class TutorialManager : MonoBehaviour
         if (bubbleInstance != null)
         {
             bubbleInstance.OnClosed -= OnBubbleClosed;
+            bubbleInstance.OnTextTyped -= OnTextTyped;
+            bubbleInstance.OnTextSkipped -= OnTextSkipped;
             bubbleInstance = null;
         }
         

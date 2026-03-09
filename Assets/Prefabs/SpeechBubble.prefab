@@ -64,6 +64,7 @@ MonoBehaviour:
   sentencePause: 0.5
   scaleTweenDuration: 0.25
   scaleEase: 27
+  skip: {fileID: 6283873839263565254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!1 &1909118398361359985
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class SpeechBubble : MonoBehaviour
@@ -26,9 +27,13 @@ public class SpeechBubble : MonoBehaviour
     [Title("Events")]
     public Action<string> OnCharacterTyped;
     public Action<string> OnTextTyped;
+    public Action OnTextSkipped;
     public Action OnClosed;
 
+    public InputActionReference skip;
+    
     private Coroutine typingRoutine;
+    private string currentMessage;
 
     private void Awake()
     {
@@ -38,6 +43,7 @@ public class SpeechBubble : MonoBehaviour
     private void Start()
     {
         OnCharacterTyped += AudioManager.Instance.OnCharacterTyped;
+        skip.action.performed += OnSpacePressed;
         AnimateIn();
     }
 
@@ -63,11 +69,13 @@ public class SpeechBubble : MonoBehaviour
     private void OnDestroy()
     {
         OnCharacterTyped -= AudioManager.Instance.OnCharacterTyped;
+        skip.action.performed -= OnSpacePressed;
     }
 
     private IEnumerator TypeText(string message)
     {
         text.text = string.Empty;
+        currentMessage = message;
 
         foreach (char c in message)
         {
@@ -78,7 +86,20 @@ public class SpeechBubble : MonoBehaviour
         
         OnTextTyped?.Invoke(message);
     }
-
+    
+    private void OnSpacePressed(InputAction.CallbackContext ctx)
+    {
+        if (typingRoutine != null)
+            StopCoroutine(typingRoutine);
+        OnTextSkipped?.Invoke();
+    }
+    
+    public IEnumerator WaitBeforeClosing(float time)
+    {
+        yield return new WaitForSeconds(time);
+        CloseAndDestroy();
+    }
+    
     private void AnimateIn()
     {
         bubble
