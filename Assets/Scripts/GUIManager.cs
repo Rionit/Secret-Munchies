@@ -11,6 +11,7 @@ public class GUIManager : MonoBehaviour
     public Sprite bagSprite;
     
     public GameObject morseCodeUI;
+    public GameObject gameOverUI;
     
     public GameObject maineMenu;
     public GameObject gameName;
@@ -51,6 +52,20 @@ public class GUIManager : MonoBehaviour
         GameManager.Instance.onItemGrabbed += OnItemGrabbed;
         GameManager.Instance.onItemDropped += OnItemDropped;
         GameManager.Instance.onMenuSwitched += OneMenuSwitched;
+        GameManager.Instance.onCameraChanged += _ => CloseMorseCode();
+        GameManager.Instance.onGameOver += CloseMorseCode;
+        GameManager.Instance.onGameOver += OnGameOver;
+    }
+
+    private void OnGameOver()
+    {
+        gameOverUI.SetActive(true);
+    }
+
+    public void HideGameOverUI()
+    {
+        gameOverUI.SetActive(false);
+        GameManager.Instance.Reset();
     }
 
     private void OnDestroy()
@@ -58,6 +73,9 @@ public class GUIManager : MonoBehaviour
         GameManager.Instance.onItemGrabbed -= OnItemGrabbed;
         GameManager.Instance.onItemDropped -= OnItemDropped;
         GameManager.Instance.onMenuSwitched -= OneMenuSwitched;
+        GameManager.Instance.onCameraChanged -= _ => CloseMorseCode();
+        GameManager.Instance.onGameOver -= CloseMorseCode;
+        GameManager.Instance.onGameOver -= OnGameOver;
     }
 
     private void OnItemGrabbed(GameObject obj)
@@ -108,14 +126,17 @@ public class GUIManager : MonoBehaviour
         }
     }
 
-    public void UpdateMorseCodeUI()
+    public void CloseMorseCode()
     {
-        Debug.Log("UpdateMorseCodeUI");
-        morseCodeUI.SetActive(!morseCodeUI.activeSelf);
-        GameManager.Instance.morseCodeController.isActive = morseCodeUI.activeSelf;
-        if(morseCodeUI.activeSelf)
-            AudioManager.Instance.FadeIn("morse_code_background_hum");
-        else
-            AudioManager.Instance.FadeOut("morse_code_background_hum");
+        AudioManager.Instance.FadeOut("morse_code_background_hum");
+        morseCodeUI.SetActive(false);
+        GameManager.Instance.morseCodeController.isActive = false;
+    }
+
+    public void OpenMorseCode()
+    {
+        AudioManager.Instance.FadeIn("morse_code_background_hum");
+        morseCodeUI.SetActive(true);
+        GameManager.Instance.morseCodeController.isActive = true;
     }
 }

@@ -75,8 +75,7 @@ public class DialogueController : MonoBehaviour
 
     public void StartDialogue(NPC npc)
     {
-        if (currentNPC != npc)
-            AudioManager.Instance.voicePitch = Random.Range(0.8f, 1.2f);
+        AudioManager.Instance.voicePitch = npc.voicePitch;  
         
         currentNPC = npc;
         
@@ -241,5 +240,13 @@ public class DialogueController : MonoBehaviour
             messageQueue = new Queue<DialogueMessage>(backupQueue);
             StartDialogue(currentNPC);
         }
+    }
+
+    public void MessedUpOrderResponse(NPC npc)
+    {
+        SpeechBubble bubble = Instantiate(speechBubblePrefab, guiCanvas).GetComponent<SpeechBubble>();
+        AudioManager.Instance.voicePitch = npc.voicePitch;
+        bubble.ShowText("Hey! You messed up my order!");
+        bubble.OnTextTyped += (_) => bubble.CloseAndDestroy();
     }
 }

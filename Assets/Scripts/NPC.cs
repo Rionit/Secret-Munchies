@@ -51,6 +51,8 @@ public class NPC : MonoBehaviour
     [Tooltip("Foods this NPC wants to order")]
     public List<FoodAmount> wantedFoods = new();
 
+    public float voicePitch;
+    
     [Title("Runtime (Debug)")]
     [ReadOnly, ShowInInspector]
     private NavMeshAgent agent;
@@ -74,10 +76,10 @@ public class NPC : MonoBehaviour
 
     private void Start()
     {
+        voicePitch = Random.Range(0.8f, 1.2f);
         AIManager.Instance.RegisterNPC(this);
 
         animator = GetComponent<Animator>();
-        
         agent = GetComponent<NavMeshAgent>();
         agent.updateUpAxis = false;
         agent.speed = Random.Range(minSpeed, maxSpeed);
@@ -142,7 +144,13 @@ public class NPC : MonoBehaviour
             GameManager.Instance.counterController.PickItem(bag.gameObject);
             
             bool result = FoodManager.Compare(bag.foods, wantedFoods);
-
+            if (!result)
+            {
+                AIManager.Instance.dialogueController.MessedUpOrderResponse(this);
+                GameManager.Instance.DecreaseOrderHearts();
+            }
+            
+            AudioManager.Instance.PlayOneShot("paper_place");
             Sequence sequence = DOTween.Sequence();
             sequence.Append(bag.transform.DOMove(bag.transform.position + Vector3.up * 0.2f, 0.5f));
             sequence.Append(bag.transform.DOMove(transform.position, 1.5f)

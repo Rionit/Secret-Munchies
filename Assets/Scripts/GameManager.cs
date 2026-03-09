@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public event Action<CinemachineCamera> onCameraChanged;
     [HideInInspector] public event Action<CinemachineCamera> onCameraBlendFinished;
     [HideInInspector] public event Action<bool> onMenuSwitched;
+    [HideInInspector] public event Action<int> onSecretHeartsChanged;
+    [HideInInspector] public event Action<int> onOrderHeartsChanged;
+    [HideInInspector] public event Action onGameOver;
 
     [Title("Cameras")]
     [ValidateInput(nameof(ValidateVirtualCameras),
@@ -26,9 +29,6 @@ public class GameManager : MonoBehaviour
         InfoMessageType.Error)]
     [ListDrawerSettings(ShowFoldout = true, DefaultExpandedState = true)]
     public VirtualCamera[] virtualCameras;
-
-    [Required, Tooltip("Close-up camera used for computer interaction")]
-    public CinemachineCamera computerCloseupCamera;
 
     [Required, Tooltip("Camera overlooking Pentagon, used for Main Menu")]
     public CinemachineCamera pentagonCamera;
@@ -84,13 +84,16 @@ public class GameManager : MonoBehaviour
 
     public bool isTutorialActive;
 
+    public int secretsHearts { get; private set; } = 3;
+    public int ordersHearts { get; private set; } = 3;
+
     private void Awake()
     {
         if (SceneManager.GetActiveScene().name == "Main")
         {
             Destroy(Instance);
             Instance = this;            
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         
         if (Instance == null)
@@ -107,22 +110,25 @@ public class GameManager : MonoBehaviour
     {
         cinemachineBrain = mainCamera.GetComponent<CinemachineBrain>();
         
-        SetActiveCamera(0);
-        // onCameraBlendFinished?.Invoke(virtualCameras[0].thisCamera); // if this camera already active 
-        
         if (AIManager.Instance != null)
             AIManager.Instance.dialogueController.OnDialogueEnded += OnDialogueEnded;
+        
+        SetActiveCamera(0);
 
         if (SceneManager.GetActiveScene().name == "Main")
         {
             Time.timeScale = 0f;
             StartCoroutine(OverrideThenToggle());
             AudioManager.Instance.Play("kitchen");
-            // OverrideActiveCamera(blankViewCamera);
-            // Invoke(nameof(ToggleMenu), 1f);
+            morseCodeController.OnMessageFinished += CheckMorseWithSecrets;
         }
     }
-    
+
+    public void Reset()
+    {
+        SceneManager.LoadScene("Main");
+    }
+
     IEnumerator OverrideThenToggle()
     {
         OverrideActiveCamera(blankViewCamera);
@@ -138,6 +144,7 @@ public class GameManager : MonoBehaviour
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        morseCodeController.OnMessageFinished -= CheckMorseWithSecrets;
     }
     
     private void OnMovePerformed(InputAction.CallbackContext ctx)
@@ -169,8 +176,8 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         var actions = playerInput.actions;
-        actions["CameraNext"].performed += _ => NextCamera();
-        actions["CameraPrev"].performed += _ => PrevCamera();
+        //actions["CameraNext"].performed += _ => NextCamera();
+        //actions["CameraPrev"].performed += _ => PrevCamera();
         actions["Menu"].performed += _ => ToggleMenu();
         actions["Dot"].performed += _ => morseCodeController.Dot();
         actions["Dash"].performed += _ => morseCodeController.Dash();
@@ -180,8 +187,8 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         var actions = playerInput.actions;
-        actions["CameraNext"].performed -= _ => NextCamera();
-        actions["CameraPrev"].performed -= _ => PrevCamera();
+        //actions["CameraNext"].performed -= _ => NextCamera();
+        //actions["CameraPrev"].performed -= _ => PrevCamera();
         actions["Menu"].performed -= _ => ToggleMenu();
         actions["Dot"].performed -= _ => morseCodeController.Dot();
         actions["Dash"].performed -= _ => morseCodeController.Dash();
@@ -228,22 +235,6 @@ public class GameManager : MonoBehaviour
             };
         }
         
-    }
-
-    [Button(ButtonSizes.Small)]
-    private void NextCamera()
-    {
-        currentCameraIdx = (currentCameraIdx + 1) % virtualCameras.Length;
-        SetActiveCamera(currentCameraIdx);
-        onCameraChanged?.Invoke(virtualCameras[currentCameraIdx].thisCamera);
-    }
-
-    [Button(ButtonSizes.Small)]
-    private void PrevCamera()
-    {
-        currentCameraIdx = (currentCameraIdx - 1 + virtualCameras.Length) % virtualCameras.Length;
-        SetActiveCamera(currentCameraIdx);
-        onCameraChanged?.Invoke(virtualCameras[currentCameraIdx].thisCamera);
     }
 
     public void ChangeCamera(VirtualCamera virtualCamera)
@@ -311,14 +302,6 @@ public class GameManager : MonoBehaviour
             StartWaitingForCameraBlendFinish();
     }
 
-    public void OnComputerClick(GameObject sender)
-    {
-        if (overrideCamera == null)
-            OverrideActiveCamera(computerCloseupCamera);
-        else
-            ResetOverrideCamera();
-    }
-
     public void OnOrderBagClick(GameObject sender)
     {
         Bag bag = sender.GetComponent<Bag>();
@@ -352,6 +335,36 @@ public class GameManager : MonoBehaviour
         {
             Secret secret = new Secret(category);
             secrets.Add(secret);
+        }
+    }
+
+    public void CheckMorseWithSecrets(string message)
+    {
+        foreach (Secret secret in secrets)
+        {
+            if(Secret.GetSecretCategory(message) == secret.category)
+            {
+                return;
+            }
+        }
+
+        secretsHearts--;
+        onSecretHeartsChanged?.Invoke(secretsHearts);
+        if (secretsHearts <= 0)
+        {
+            onGameOver?.Invoke();
+            Time.timeScale = 0.0f;
+        }
+    }
+
+    public void DecreaseOrderHearts()
+    {
+        ordersHearts--;
+        onOrderHeartsChanged?.Invoke(ordersHearts);
+        if (ordersHearts <= 0)
+        {
+            onGameOver?.Invoke();
+            Time.timeScale = 0.0f;
         }
     }
 

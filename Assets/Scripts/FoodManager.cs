@@ -57,7 +57,7 @@ public class FoodManager : MonoBehaviour
         {
             Destroy(Instance);
             Instance = this;            
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         
         if (Instance == null)

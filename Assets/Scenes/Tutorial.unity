@@ -5009,7 +5009,6 @@ MonoBehaviour:
   - {fileID: 110983423}
   - {fileID: 1000242585}
   - {fileID: 666691558}
-  computerCloseupCamera: {fileID: 0}
   pentagonCamera: {fileID: 0}
   blankViewCamera: {fileID: 0}
   mainCamera: {fileID: 2111472695}
@@ -5020,6 +5019,7 @@ MonoBehaviour:
   notepadApp: {fileID: 915892368}
   currentCameraIdx: 0
   currentVirtualCamera: {fileID: 3396820320748357855}
+  playerInput: {fileID: 0}
   isTutorialActive: 0
 --- !u!4 &192148398
 Transform:
@@ -10965,7 +10965,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1817950261}
         m_TargetAssemblyTypeName: GUIManager, Assembly-CSharp
-        m_MethodName: UpdateMorseCodeUI
+        m_MethodName: OpenMorseCode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12482,7 +12482,7 @@ PrefabInstance:
       objectReference: {fileID: 1817950261}
     - target: {fileID: 9003131934080544946, guid: 72de0042284ec01448e56d62a3e9c8f9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UpdateMorseCodeUI
+      value: CloseMorseCode
       objectReference: {fileID: 0}
     - target: {fileID: 9149048736278886910, guid: 72de0042284ec01448e56d62a3e9c8f9, type: 3}
       propertyPath: m_AnchorMax.y
@@ -13687,7 +13687,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &1659386622
 RectTransform:
@@ -15280,6 +15280,7 @@ MonoBehaviour:
   itemFrame: {fileID: 276980743}
   bagSprite: {fileID: 21300000, guid: f3f85d1de5b895245b3bebbff665db6e, type: 3}
   morseCodeUI: {fileID: 1368285711}
+  gameOverUI: {fileID: 0}
   maineMenu: {fileID: 1909352033}
   gameName: {fileID: 1080425537}
   morseCodeTop: {fileID: 1696312066}

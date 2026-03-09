@@ -10,6 +10,7 @@ public class MorseCodeController : MonoBehaviour
 {
     public Action<string> OnMorseCodeSymbolRegistered;      // ./-
     public Action<string> OnMorseCodeCharacterRegistered;   // alphabet/numbers
+    public Action<string> OnMessageFinished;
     
     [Title("Timing Settings")]
     [Range(0.2f, 2f)]
@@ -29,7 +30,6 @@ public class MorseCodeController : MonoBehaviour
     [ShowInInspector, ReadOnly]
     private string currentMessage = "";
 
-    public event Action<string> OnMessageFinished;
 
     public bool isActive = false;
     

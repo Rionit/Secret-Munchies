@@ -126,6 +126,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    [Button]
     private void EndTutorial()
     {
         Debug.Log("Tutorial Finished");
