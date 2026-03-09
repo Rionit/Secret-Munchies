@@ -12,6 +12,7 @@ public class GUIManager : MonoBehaviour
     
     public GameObject morseCodeUI;
     public GameObject gameOverUI;
+    public GameObject phoneControlsUI;
     
     public GameObject maineMenu;
     public GameObject gameName;
@@ -49,6 +50,11 @@ public class GUIManager : MonoBehaviour
     
     private void Start()
     {
+        
+#if UNITY_ANDROID
+        phoneControlsUI.SetActive(true);
+#endif
+        
         GameManager.Instance.onItemGrabbed += OnItemGrabbed;
         GameManager.Instance.onItemDropped += OnItemDropped;
         GameManager.Instance.onMenuSwitched += OneMenuSwitched;

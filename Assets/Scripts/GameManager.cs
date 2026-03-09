@@ -173,6 +173,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PerformW()
+    {
+        currentVirtualCamera.W();
+    }
+    
+    public void PerformA()
+    {
+        currentVirtualCamera.A();
+    }
+    
+    public void PerformS()
+    {
+        currentVirtualCamera.S();
+    }
+    
+    public void PerformD()
+    {
+        currentVirtualCamera.D();
+    }
+    
     private void OnEnable()
     {
         var actions = playerInput.actions;
