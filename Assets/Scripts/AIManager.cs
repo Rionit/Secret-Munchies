@@ -105,7 +105,7 @@ public class AIManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(Random.Range(10f, 50f));
             TryAssignNPCToOrderQueue();
         }
     }
