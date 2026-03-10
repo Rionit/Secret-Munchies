@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
 public class NPC : MonoBehaviour
 {
-    public enum States { NULL, IDLE, PATROL, ORDER_QUEUE, WAIT_QUEUE, WAIT_PATROL, COLLECT_ORDER }
+    public enum States { NULL, IDLE, PATROL, ORDER_QUEUE, WAIT_QUEUE, WAIT_PATROL, COLLECT_ORDER, LEAVE_COLLECTION }
 
     [Title("Events")]
     [HideInInspector] public Action<int, bool> onOrderCollected;
@@ -124,6 +124,11 @@ public class NPC : MonoBehaviour
                 agent.SetDestination(AIManager.Instance.orderCollectionPoint.position);
                 HandleOrder();
                 break;
+            
+            case States.LEAVE_COLLECTION:
+                if (!agent.pathPending && agent.remainingDistance < 0.5f)
+                    SetState(States.PATROL);
+                break;
         }
 
         if (agent.velocity.magnitude != 0f)
@@ -160,7 +165,8 @@ public class NPC : MonoBehaviour
                 onOrderCollected?.Invoke(orderId, result);
                 isPickingBag = false;
                 bag = null;
-                SetState(States.PATROL);
+                agent.SetDestination(AIManager.Instance.collectionExitPoint.position);
+                SetState(States.LEAVE_COLLECTION);
             });
         }
     }

@@ -48,6 +48,9 @@ public class AIManager : MonoBehaviour
     [Tooltip("Where NPCs collect their finished order")]
     public Transform orderCollectionPoint;
 
+    [Tooltip("Where NPCs go after collecting order")]
+    public Transform collectionExitPoint;
+    
     [Title("Runtime State")]
     [ReadOnly, ShowInInspector]
     private List<NPC> allNPCs = new();
