@@ -74,6 +74,10 @@ public class NPC : MonoBehaviour
     [ReadOnly, ShowInInspector]
     private bool isPickingBag;
 
+    private string[] talkingAnimations = { "Talk1", "Talk2", "Talk3", "Talk4", "Talk5", "TalkSecret" };
+    private string[] idleAnimations = { "Bored", "MaleStand", "StandingBriefcase", "StandingBriefcase2", "Texting", "Texting2" };
+    private float idleTriggerTimer;
+    
     private void Start()
     {
         voicePitch = Random.Range(0.8f, 1.2f);
@@ -118,6 +122,13 @@ public class NPC : MonoBehaviour
                 {
                     hasArrivedAtQueue = false;
                 }
+
+                idleTriggerTimer += Time.deltaTime;
+                if (idleTriggerTimer >= 20f && animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Idle")
+                {
+                    idleTriggerTimer = 0f;
+                    animator.SetTrigger(idleAnimations[Random.Range(0, idleAnimations.Length)]);
+                }
                 break;
 
             case States.COLLECT_ORDER:
@@ -146,14 +157,10 @@ public class NPC : MonoBehaviour
         if (agent.remainingDistance <= 0.1f && !isPickingBag)
         {
             isPickingBag = true;
+            animator.SetTrigger("PickUp");
             GameManager.Instance.counterController.PickItem(bag.gameObject);
             
             bool result = FoodManager.Compare(bag.foods, wantedFoods);
-            if (!result)
-            {
-                AIManager.Instance.dialogueController.MessedUpOrderResponse(this);
-                GameManager.Instance.DecreaseOrderHearts();
-            }
             
             AudioManager.Instance.PlayOneShot("paper_place");
             Sequence sequence = DOTween.Sequence();
@@ -162,6 +169,11 @@ public class NPC : MonoBehaviour
                 .OnComplete(() => Destroy(bag.gameObject)));
             sequence.AppendInterval(1.0f).OnComplete(() =>
             {
+                if (!result)
+                {
+                    AIManager.Instance.dialogueController.MessedUpOrderResponse(this);
+                    GameManager.Instance.DecreaseOrderHearts();
+                }
                 onOrderCollected?.Invoke(orderId, result);
                 isPickingBag = false;
                 bag = null;
@@ -203,5 +215,10 @@ public class NPC : MonoBehaviour
             (state == States.PATROL || state == States.WAIT_PATROL)
                 ? Random.Range(queuePriority + 1, patrolPriority)
                 : queuePriority;
+    }
+
+    public void Speak()
+    {
+        animator.SetTrigger(talkingAnimations[Random.Range(0, talkingAnimations.Length)]);
     }
 }

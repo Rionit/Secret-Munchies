@@ -167,6 +167,7 @@ public class DialogueController : MonoBehaviour
         var nextMessage = messageQueue.Dequeue();
         isCurrentMessageFromOrder = (nextMessage.type == DialogueMessageSO.MessageType.ORDER);
         bubbleInstance.ShowText(nextMessage.text);
+        currentNPC.Speak();
     }
 
     private void OnMessageFinished(String message)
