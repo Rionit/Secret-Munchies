@@ -23,6 +23,7 @@ public class MorseCodePaperController : MonoBehaviour,
         morseCodeController.OnMorseCodeSymbolRegistered += OnMorseCodeSymbolRegistered;
         morseCodeController.OnMorseCodeCharacterRegistered += OnMorseCodeCharacterRegistered;
         morseCodePaper = Instantiate(morseCodePaperPrefab, transform.parent).GetComponent<MorseCodePaper>();
+        morseCodePaper.transform.SetSiblingIndex(0);
     }
 
     private void OnMorseCodeSymbolRegistered(string symbol)
@@ -58,10 +59,20 @@ public class MorseCodePaperController : MonoBehaviour,
         {
             MorseCodePaper previous = morseCodePaper; 
             morseCodePaper = Instantiate(morseCodePaperPrefab, transform.parent).GetComponent<MorseCodePaper>();
+            morseCodePaper.transform.SetSiblingIndex(0);
             morseCodeController.FinishMessage();
             previous.transform.DOMove(previous.transform.position + Vector3.down * 700f + Vector3.right * Random.Range(50f, 350f), 2.0f);
             previous.transform.DORotate(new Vector3(0f, 0f, Random.Range(-10f, -90f)), 2.0f).OnComplete((() => Destroy(previous.gameObject)));
             AudioManager.Instance.PlayOneShot("paper_tear");
         }
+    }
+
+    public void Reset()
+    {
+        MorseCodePaper previous = morseCodePaper; 
+        morseCodePaper = Instantiate(morseCodePaperPrefab, transform.parent).GetComponent<MorseCodePaper>();
+        morseCodePaper.transform.SetSiblingIndex(0);
+        previous.transform.DOScaleX(0f, 1.0f);
+        previous.transform.DOMoveX(previous.transform.position.x - 200f, 1.0f).OnComplete((() => Destroy(previous.gameObject)));
     }
 }
