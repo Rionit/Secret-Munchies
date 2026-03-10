@@ -13,7 +13,7 @@ public class MorseCodeController : MonoBehaviour
     public Action<string> OnMessageFinished;
     
     [Title("Timing Settings")]
-    [Range(0.2f, 2f)]
+    [Range(0.2f, 1f)]
     public float characterGapThreshold = 1.0f;
 
     [Title("UI")]
@@ -136,4 +136,8 @@ public class MorseCodeController : MonoBehaviour
             timeSlider.value = 0f;
     }
 
+    public void SetCharacterGapThreshold(float value)
+    {
+        characterGapThreshold = value;
+    }
 }

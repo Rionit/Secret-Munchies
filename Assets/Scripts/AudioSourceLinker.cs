@@ -49,6 +49,7 @@ public class AudioSourceLinker : MonoBehaviour
         source.loop = s.loop;
         source.playOnAwake = s.playOnAwake;
         source.spatialBlend = s.is3D ? 1f : 0f;
+        source.outputAudioMixerGroup = AudioManager.Instance.mixer.FindMatchingGroups("Master")[0];
         
         if (s.playOnAwake) { source.Play(); }
     }

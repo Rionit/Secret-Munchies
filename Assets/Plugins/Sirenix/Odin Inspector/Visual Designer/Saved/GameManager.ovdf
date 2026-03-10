@@ -23,7 +23,7 @@ Position: $Q9rdnsEY6pdmHVuXToD2Dr:1
 	CenterLabel = True
 
 # $5K4g5WFWoJRq8U7hcVJRfr
-Position: $root:69
+Position: $root:67
 + [Sirenix.OdinInspector.BoxGroupAttribute]
 	GroupName = "Secrets"
 	CenterLabel = True
@@ -57,7 +57,7 @@ Position: $Q9rdnsEY6pdmHVuXToD2Dr:0
 Position: $BStm6xNKbgQHA12SqpqQgv:5
 
 # overrideCamera
-Position: $Q9rdnsEY6pdmHVuXToD2Dr:2
+Position: $Q9rdnsEY6pdmHVuXToD2Dr:3
 
 # holdingItem
 Position: $BStm6xNKbgQHA12SqpqQgv:4
@@ -69,7 +69,7 @@ Position: $Q9rdnsEY6pdmHVuXToD2Dr:3
 Position: $Q9rdnsEY6pdmHVuXToD2Dr:4
 
 # pentagonCamera
-Position: $PcbYDSVmdN7gczhPbbpxAG:3
+Position: $PcbYDSVmdN7gczhPbbpxAG:2
 
 # notepadApp
 Position: $BStm6xNKbgQHA12SqpqQgv:3
@@ -78,4 +78,10 @@ Position: $BStm6xNKbgQHA12SqpqQgv:3
 Position: $5K4g5WFWoJRq8U7hcVJRfr:0
 
 # blankViewCamera
+Position: $PcbYDSVmdN7gczhPbbpxAG:3
+
+# settingsCamera
 Position: $PcbYDSVmdN7gczhPbbpxAG:4
+
+# currentVirtualCamera
+Position: $Q9rdnsEY6pdmHVuXToD2Dr:2

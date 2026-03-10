@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
     
     [Required, Tooltip("Camera looking into blank space, used for Start of the game")]
     public CinemachineCamera blankViewCamera;
+    
+    [Required, Tooltip("Camera looking at settings on top of the Pentagon roof")]
+    public CinemachineCamera settingsCamera;
 
     [Required]
     public Camera mainCamera;

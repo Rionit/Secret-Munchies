@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class GUIManager : MonoBehaviour
     public GameObject morseCodeUI;
     public GameObject gameOverUI;
     public GameObject phoneControlsUI;
+    public GameObject settingsUI;
     
     public GameObject maineMenu;
     public GameObject gameName;
@@ -61,6 +63,13 @@ public class GUIManager : MonoBehaviour
         GameManager.Instance.onCameraChanged += _ => CloseMorseCode();
         GameManager.Instance.onGameOver += CloseMorseCode;
         GameManager.Instance.onGameOver += OnGameOver;
+        GameManager.Instance.onCameraBlendFinished += OnCameraBlendFinished;
+    }
+
+    private void OnCameraBlendFinished(CinemachineCamera camera)
+    {
+        if (camera == GameManager.Instance.settingsCamera)
+            settingsUI.SetActive(true);
     }
 
     private void OnGameOver()
@@ -82,6 +91,7 @@ public class GUIManager : MonoBehaviour
         GameManager.Instance.onCameraChanged -= _ => CloseMorseCode();
         GameManager.Instance.onGameOver -= CloseMorseCode;
         GameManager.Instance.onGameOver -= OnGameOver;
+        GameManager.Instance.onCameraBlendFinished -= OnCameraBlendFinished;
     }
 
     private void OnItemGrabbed(GameObject obj)
@@ -136,6 +146,18 @@ public class GUIManager : MonoBehaviour
                 .Join(topRT.DOAnchorPos(topFinalPos + Vector2.up * offsetY, duration / 2f).SetEase(Ease.InCubic))
                 .Join(bottomRT.DOAnchorPos(bottomFinalPos + Vector2.down * offsetY, duration / 2f).SetEase(Ease.InCubic));
         }
+    }
+
+    public void ShowSettings()
+    {
+        Debug.Log("Showing settings");
+        GameManager.Instance.OverrideActiveCamera(GameManager.Instance.settingsCamera);
+    }
+
+    public void HideSettings()
+    {
+        settingsUI.SetActive(false);
+        GameManager.Instance.OverrideActiveCamera(GameManager.Instance.pentagonCamera);
     }
 
     public void CloseMorseCode()

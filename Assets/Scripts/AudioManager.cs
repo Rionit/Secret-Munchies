@@ -10,6 +10,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
     
+    public AudioMixer mixer;    
+    
     [SerializeField] private Sound[] sounds;
     public Sound[] GetSounds() => sounds;
 
@@ -48,6 +50,7 @@ public class AudioManager : MonoBehaviour
             sound.source.loop = sound.loop;
             sound.source.playOnAwake = sound.playOnAwake;
             sound.source.spatialBlend = sound.is3D ? 1f : 0f;
+            sound.source.outputAudioMixerGroup = mixer.FindMatchingGroups("Master")[0];
             if (sound.playOnAwake) Play(sound.name);
         }
     }
@@ -178,5 +181,11 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound " + name + " not found!");
         }
         return s;
+    }
+
+    public void SetVolume(float volume)
+    {
+        float db = Mathf.Lerp(-50f, 5f, volume);
+        mixer.SetFloat("Volume", db);
     }
 }
