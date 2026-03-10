@@ -178,6 +178,7 @@ public class TutorialManager : MonoBehaviour
     {
         if (CurrentStep == null) return;
 
+        Debug.Log("Triggering custom event: " + eventId);
         if (CurrentStep.triggerType == TutorialTriggerType.OnCustomEvent &&
             CurrentStep.customEventId == eventId)
         {

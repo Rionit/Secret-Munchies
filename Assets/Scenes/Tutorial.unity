@@ -5011,6 +5011,7 @@ MonoBehaviour:
   - {fileID: 666691558}
   pentagonCamera: {fileID: 0}
   blankViewCamera: {fileID: 0}
+  settingsCamera: {fileID: 0}
   mainCamera: {fileID: 2111472695}
   currentCustomerId: 0
   hand: {fileID: 1133640776}
@@ -15162,6 +15163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c9fed0a455e804c980ae1cbe349552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  mixer: {fileID: 24100000, guid: e0492647cec2d9c449437f5f00b75b34, type: 2}
   sounds:
   - name: music_menu
     clip: {fileID: 8300000, guid: bf7b71368e055ce4ca182d8ea52687a0, type: 3}
@@ -16264,6 +16266,7 @@ MonoBehaviour:
   morseCodeUI: {fileID: 1368285711}
   gameOverUI: {fileID: 0}
   phoneControlsUI: {fileID: 1748513596}
+  settingsUI: {fileID: 0}
   maineMenu: {fileID: 1909352033}
   gameName: {fileID: 1080425537}
   morseCodeTop: {fileID: 1696312066}
