@@ -86,12 +86,17 @@ public class SpeechBubble : MonoBehaviour
         
         OnTextTyped?.Invoke(message);
     }
-    
-    private void OnSpacePressed(InputAction.CallbackContext ctx)
+
+    public void Skip()
     {
         if (typingRoutine != null)
             StopCoroutine(typingRoutine);
         OnTextSkipped?.Invoke();
+    }
+    
+    private void OnSpacePressed(InputAction.CallbackContext ctx)
+    {
+        Skip();
     }
     
     public IEnumerator WaitBeforeClosing(float time)

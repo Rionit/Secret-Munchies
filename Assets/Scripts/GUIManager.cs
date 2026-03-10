@@ -108,7 +108,7 @@ public class GUIManager : MonoBehaviour
         bottomRT.anchoredPosition = bottomFinalPos + Vector2.down * offsetY;
     }
 
-    public void OneMenuSwitched(bool isMenuActive)
+    private void OneMenuSwitched(bool isMenuActive)
     {
         // Kill active tween
         menuSequence?.Kill();
@@ -118,6 +118,9 @@ public class GUIManager : MonoBehaviour
 
         if (isMenuActive)
         {
+#if UNITY_ANDROID
+            phoneControlsUI.SetActive(false);
+#endif
             menuSequence
                 .Join(gameNameRT.DOAnchorPos(gameNameFinalPos, duration).SetEase(Ease.OutCubic))
                 .Join(topRT.DOAnchorPos(topFinalPos, duration).SetEase(Ease.OutCubic))
@@ -125,6 +128,9 @@ public class GUIManager : MonoBehaviour
         }
         else
         {
+#if UNITY_ANDROID
+            phoneControlsUI.SetActive(true);
+#endif
             menuSequence
                 .Join(gameNameRT.DOAnchorPos(gameNameFinalPos + Vector2.right * offsetX, duration / 2f).SetEase(Ease.InCubic))
                 .Join(topRT.DOAnchorPos(topFinalPos + Vector2.up * offsetY, duration / 2f).SetEase(Ease.InCubic))
